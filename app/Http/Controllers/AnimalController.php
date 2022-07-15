@@ -98,7 +98,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        $razas = DB::table('raza')->get();
+        $razas = Raza::where('raza_id','!=',0)->get();
 
         return view("animal.create", ["razas" => $razas]);
     }
@@ -151,7 +151,7 @@ class AnimalController extends Controller
 
     public function edit($id)
     {
-        $razas = DB::table('raza')->get();
+        $razas = Raza::where('raza_id','!=',0)->get();
         return view("animal.edit", ["animal" => Animal::findOrFail($id), "razas" => $razas]);
     }
 

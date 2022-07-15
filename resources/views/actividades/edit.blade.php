@@ -69,7 +69,7 @@ SRB - Actividades
                     <label>Seleccione Actividad</label>
                     <select id="select-actividad" name="actividad" class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Código del animal">
-                        <option value="" disabled="" selected="">Seleccione Actividad: </option>
+                        <option value="{{ $nombrea->actividades_id}}" selected> {{ $nombrea->actividades_nombre }}</option>
                     </select>
                 </div>
             </div>

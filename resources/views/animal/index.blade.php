@@ -23,20 +23,23 @@ SRB - Animales
         </div>
         <div class="card-body">
             <div class="row f input-daterange">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <label>Filtrar por año de nacimiento</label>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Desde"
                         readonly />
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                <div class="col-md-2">
-                    <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
-                    <button type="button" name="refresh" id="refresh" class="btn btn-default">Limpiar</button>
+                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                    <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
+                     
                 </div>
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+        </div>
 
             </div>
             <br>

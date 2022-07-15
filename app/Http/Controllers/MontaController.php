@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Animal;
 use App\Http\Requests\MontaFormRequest;
 use App\Monta;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Auth;
 use Carbon\Carbon;
 use DB;
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MontaController extends Controller
 {
@@ -53,7 +53,8 @@ class MontaController extends Controller
                     }
                 })
                 ->addColumn('pdf', function ($pdf) {
-                    return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
+                    if ($pdf->monta_exitosa == null) {
+                        return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                 </button></a>
@@ -62,6 +63,17 @@ class MontaController extends Controller
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
                 ';
+                    } else {
+                        return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
+                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                    title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
+                </button></a>
+                <a>
+                <button class="btn btn-info btn-sm" disabled data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                ';
+                    }
                 }
                 )
                 ->rawColumns(['exito', 'fin', 'pdf'])
@@ -123,10 +135,10 @@ class MontaController extends Controller
         $madre = Animal::findOrFail($request->get('código_madre'));
         $madre->animal_estado = 5;
         $madre->update();
-        $monta2= Monta::get()->last();
+        $monta2 = Monta::get()->last();
         $fecha = Carbon::parse($request->get('fecha'));
         $fecha->addDays(10);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,monta_id) values (?,?,?,?,?,?)',["verificación de inseminación", 'verificación de inseminación de la monta numero: '.$monta2->monta_id,$fecha,$fecha,Auth::user()->id,$monta2->monta_id]);
+        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,monta_id) values (?,?,?,?,?,?)', ["verificación de inseminación", 'verificación de inseminación de la monta numero: ' . $monta2->monta_id, $fecha, $fecha, Auth::user()->id, $monta2->monta_id]);
         return redirect('monta');
     }
 
@@ -152,6 +164,9 @@ class MontaController extends Controller
         $monta->monta_fecha = $request->get('fecha');
         $monta->monta_madre = $request->get('código_madre');
         $monta->update();
+        $fecha = Carbon::parse($request->get('fecha'));
+        $fecha->addDays(10);
+        DB::update('update eventos set title =  ? , descripcion= ? , "start" = ? , "end" = ? ,id_user = ? where monta_id = ?', ["verificación de inseminación", 'verificación de inseminación de la monta numero: ' . $monta->monta_id, $fecha, $fecha, Auth::user()->id, $monta->monta_id]);
         $madre = Animal::findOrFail($request->get('código_madre'));
         $madre->animal_estado = 5;
         $madre->update();

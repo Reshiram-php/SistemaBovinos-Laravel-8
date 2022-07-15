@@ -140,7 +140,9 @@ class ActividadesController extends Controller
     public function edit($id)
     {
         $animales=Animal::where('animal_estado','<',2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
-        return view('actividades.edit',["animales"=>$animales,'actividad'=>Actividades::findOrFail($id)]);
+        $actividad=Actividades::findOrFail($id);
+        $nombre=ListaActividades::findOrFail($actividad->actividades_id);
+        return view('actividades.edit',["animales"=>$animales,'actividad'=>$actividad, 'nombrea'=>$nombre]);
     }
 
     /**

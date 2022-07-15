@@ -22,20 +22,23 @@ SRB - Ventas
         </div>
         <div class="card-body">
             <div class="row input-daterange">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <label>Filtrar por fecha de Ventas</label>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Desde"
                         readonly />
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                <div class="col-md-2">
-                    <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
-                    <button type="button" name="refresh" id="refresh" class="btn btn-default">Limpiar</button>
+                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                    <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
+                     
                 </div>
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+        </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
@@ -45,7 +48,7 @@ SRB - Ventas
                         <th> Valor</th>
                         <th>Fecha de venta</th>
                         <th>Nombre del Cliente</th>
-                        <th>Informe Individual</th>
+                        <th class="inv">Informe Individual</th>
                         <th class="inv">Opciones</th>
                     </tfoot>
                     <thead>

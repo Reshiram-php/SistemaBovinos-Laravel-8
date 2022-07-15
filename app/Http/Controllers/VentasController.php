@@ -50,7 +50,7 @@ class VentasController extends Controller
                     </button></a>';}
                 })
                 ->addColumn('pdf', function ($pdf) {
-                    return '<a href="' . route('muerte.individual', $pdf->ventas_id) . '">
+                    return '<a href="' . route('ventas.individual', $pdf->ventas_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe de venta"><i class="mdi mdi-file-pdf"></i>
                 </button></a>

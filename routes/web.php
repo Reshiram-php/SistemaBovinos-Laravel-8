@@ -44,6 +44,8 @@ Route::get('peso/individual/{id}', 'ReportesController@pesoindividual')->name('p
 Route::get('enfermedades/individual/{id}', 'ReportesController@enfermedadesindividual')->name('enfermedades.individual');
 Route::get('vacunas/individual/{id}', 'ReportesController@vacunasindividual')->name('vacunas.individual');
 Route::get('actividades/individual/{id}', 'ReportesController@actividadesindividual')->name('actividades.individual');
+Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
+//Rutas get data
 Route::get('razas/datos','RazaController@datos')->name('razas.datos');
 Route::get('peso/data','PesoController@data')->name('peso.data');
 Route::get('ordeno/data','OrdeñoController@data')->name('ordeno.data');

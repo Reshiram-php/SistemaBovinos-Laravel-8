@@ -25,7 +25,7 @@
                 </div>
                 <div class="box-body">
                     <div class="col-lg-12">
-                        <h3 class="card-title">Muertes</h3>
+                        <h3 class="card-title">Monta</h3>
 
                         <div class="card-body">
                             <div class="table-responsive">

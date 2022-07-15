@@ -14,6 +14,7 @@ use App\Partos;
 use App\Peso;
 use App\Vacunas;
 use Carbon\Carbon;
+use App\Ventas;
 use DB;
 use PDF;
 
@@ -188,6 +189,14 @@ class ReportesController extends Controller
         $fecha = Carbon::now()->toDateString();
         $pdf = PDF::loadView('actividades.individual', ["monta" => $actividades]);
         return $pdf->stream('reporte-actividades-codigo-' . $id . '--' . $fecha . '.pdf');
+    }
+
+    public function ventasindividual($id)
+    {
+        $ventas = Ventas::join('cliente', 'cliente.cedula', '=', 'ventas.cedula_cliente')->where('ventas_id', '=', $id)->first();
+        $fecha = Carbon::now()->toDateString();
+        $pdf = PDF::loadView('ventas.individual', ["monta" => $ventas]);
+        return $pdf->stream('reporte-ventas-codigo-' . $id . '--' . $fecha . '.pdf');
     }
 
 }

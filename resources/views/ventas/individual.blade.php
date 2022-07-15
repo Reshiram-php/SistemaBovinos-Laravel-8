@@ -25,7 +25,7 @@
                 </div>
                 <div class="box-body">
                     <div class="col-lg-12">
-                        <h3 class="card-title">Muertes</h3>
+                        <h3 class="card-title">Ventas</h3>
 
                         <div class="card-body">
                             <div class="table-responsive">
@@ -33,25 +33,20 @@
                                     <tbody>
                                         <tr>
                                             <th>Código del animal</th>
-                                            <td>{{ $muerte->animal_id }}</td>
+                                            <td>{{ $monta->animal_id }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Fecha de Nacimiento</th>
-                                            <td>{{ $muerte->animal_nacimiento }}</td>
+                                            <th>Fecha de Venta</th>
+                                            <td>{{ $monta->ventas_fecha}}</td>
                                         </tr>
                                         <tr>
-                                            <th>Fecha de muerte</th>
-                                            <td>{{ $muerte->registro_muertes_fecha }}</td>
+                                            <th>Valor de Venta</th>
+                                            <td>{{ $monta->ventas_valor }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Edad</th>
-                                            <td>{{ $edad }}</td>
+                                            <th>Cédula Cliente</th>
+                                            <td>{{ $monta->cedula_cliente }}</td>
                                         </tr>
-                                        <tr>
-                                            <th>Causa de muerte</th>
-                                            <td>{{ $muerte->registro_muertes_causa}}</td>
-                                        </tr>
-
                                     </tbody>
                                     </table>
                             </div>

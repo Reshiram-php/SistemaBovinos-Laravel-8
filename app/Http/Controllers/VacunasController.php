@@ -134,7 +134,9 @@ class VacunasController extends Controller
     public function edit($id)
     {
         $animales=Animal::where('animal_estado','<',2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
-        return view('vacunas.edit',["animales"=>$animales,"vacuna"=>Vacunas::findOrFail($id)]);
+        $vacunas = Vacunas::findOrFail($id);
+        $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
+        return view('vacunas.edit',["animales"=>$animales,"vacuna"=>$vacunas,"nombrev"=>$nombre]);
     }
 
     /**
@@ -152,6 +154,8 @@ class VacunasController extends Controller
         $vacunas->registro_vacunas_fecha=$request->get('fecha');
         $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'),$request->get('vacuna'));
         $vacunas->update();
+        $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
+        DB::update('update eventos set title =  ? , descripcion= ? , "start" = ? , "end" = ? ,id_user = ? where vacunas_id = ?',[$nombre->vacuna_nombre, 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),$vacunas->registro_vacunas_proxima,$vacunas->registro_vacunas_proxima,Auth::user()->id,$vacunas->registro_vacunas_id]);
         return redirect('vacunas');
     }
 

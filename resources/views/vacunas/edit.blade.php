@@ -69,7 +69,7 @@ SRB - Vacunas
                     <label>Seleccione Vacuna</label>
                     <select id="select-vacuna" name="vacuna" class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Código del animal">
-                        <option value="" disabled="" selected="">Seleccione Vacuna: </option>
+                        <option value="{{ $nombrev->vacuna_id}}" selected> {{ $nombrev->vacuna_nombre }}</option>
                     </select>
                 </div>
             </div>

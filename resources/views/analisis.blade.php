@@ -70,15 +70,11 @@ SRB - Analisis
         <div class="table-responsive">
           <table class="table table-striped table-bordered" id="edit-btn">
             <thead>
-              <tr>
-              </tr>
-            </thead>
-            <tfoot>
               <th>Código Animal</th>
               <th>Peso Actual</th>
               <th>Peso Anterior</th>
               <th>Fecha Registro</th>
-            </tfoot>
+            </thead>
             <tbody></tbody>
           </table>
         </div>
@@ -128,17 +124,11 @@ SRB - Analisis
           <table class="table table-striped table-bordered" id="edit-btn2">
 
             <thead>
-              <tr>
-
-              </tr>
-            </thead>
-            <tfoot>
               <th>Código Animal</th>
               <th>Litros de Leche</th>
               <th>Cantidad</th>
               <th>Fecha Registro</th>
-
-            </tfoot>
+            </thead>
             <tbody></tbody>
           </table>
 
@@ -264,7 +254,8 @@ SRB - Analisis
               destroy: true,
               serverSide: true,
               responsive:true,
-              pageLength: 5,
+              pageLength: 7,
+              lengthChange: false,
               autoWidth:false,
               searching: false,
               ajax: {url:'{{ route('peso.data') }}',data:{from_date:from_date, to_date:to_date} },
@@ -289,7 +280,8 @@ SRB - Analisis
               destroy: true,
               serverSide: true,
               responsive:true,
-              pageLength: 5,
+              pageLength: 7,
+              lengthChange: false,
               autoWidth:false,
               searching: false,
               ajax: {url:'{{ route('ordeno.data') }}',data:{from_date:from_date, to_date:to_date} },

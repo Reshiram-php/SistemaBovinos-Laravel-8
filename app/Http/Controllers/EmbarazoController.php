@@ -54,11 +54,11 @@ class EmbarazoController extends Controller
                 if ($fin->embarazo_activo == true) {
                     return '<a href="' . route('partos.create', $fin->embarazos_id) . '"
                 class="confirmation">
-                <button class="btn btn-primary">Registrar Parto</button>
+                <button class="button btn btn-primary">Registrar Parto</button>
             </a>
             <a href="' . route('abortos.create', $fin->embarazos_id) . '"
                 class="confirmation">
-                <button class="btn btn-primary">Registrar Aborto</button>
+                <button class="button btn btn-primary">Registrar Aborto</button>
             </a>';
                 } else {
                     return '<a> <button class="button btn btn-primary" disabled >Registrar Parto</button>

@@ -1,7 +1,12 @@
 $(document).ready(function() {
 
+    if ($('#select-actividad').val() !== null) {
+        sessionStorage.setItem("val", $('#select-actividad').val());
+    }
 
-
+    if ($('#select-vacuna').val() !== null) {
+        sessionStorage.setItem("val2", $('#select-vacuna').val());
+    }
     //mostrar campos ocultos
     if ($("#Raza").val() === "other") {
         $("#raza").show();
@@ -116,8 +121,7 @@ $(document).ready(function() {
 function onSelectAnimal() {
     var animal_id = $('#select-animal').val();
     var vacuna = sessionStorage.getItem("oldvacuna");
-    console.log(vacuna);
-    console.log(animal_id);
+    var anterior = sessionStorage.getItem("val2");
     if (!animal_id) {
         $('#select-vacuna').html('<option value="" disabled="" selected="">Seleccione Vacuna: </option>');
 
@@ -126,10 +130,14 @@ function onSelectAnimal() {
     $.get('/' + animal_id + '/vacunas', function(data) {
         var html_select = '<option value="" disabled="" selected="">Seleccione Vacuna: </option>';
         for (var i = 0; i < data.length; ++i)
-            if (vacuna == data[i].vacuna_id) {
+            if (anterior == data[i].vacuna_id) {
                 html_select += '<option selected value="' + data[i].vacuna_id + '"> ' + data[i].vacuna_nombre + '</option>';
             } else {
-                html_select += '<option value="' + data[i].vacuna_id + '"> ' + data[i].vacuna_nombre + '</option>';
+                if (vacuna == data[i].vacuna_id) {
+                    html_select += '<option selected value="' + data[i].vacuna_id + '"> ' + data[i].vacuna_nombre + '</option>';
+                } else {
+                    html_select += '<option value="' + data[i].vacuna_id + '"> ' + data[i].vacuna_nombre + '</option>';
+                }
             }
         $('#select-vacuna').html(html_select);
 
@@ -155,21 +163,27 @@ function onSelectAnimal11() {
 function onSelectAnimal2() {
     var animal_id = $('#select-animal2').val();
     var actividad = sessionStorage.getItem("oldactividad");
-    console.log(actividad);
+    var anterior = sessionStorage.getItem("val");
+    sessionStorage.removeItem("oldactividad");
     if (!animal_id)
         $('#select-actividad').html('<option value="" disabled="" selected="">Seleccione Actividad: </option>');
 
     $.get('/' + animal_id + '/actividades', function(data) {
         var html_select = '<option value="" disabled="" selected="">Seleccione Actividad: </option>';
         for (var i = 0; i < data.length; ++i)
-            if (actividad == data[i].actividades_id) {
+            if (anterior == data[i].actividades_id) {
                 html_select += '<option selected  value="' + data[i].actividades_id + ' "> ' + data[i].actividades_nombre + '</option>';
             } else {
-                html_select += '<option value="' + data[i].actividades_id + '"> ' + data[i].actividades_nombre + '</option>';
+                if (actividad == data[i].actividades_id) {
+                    html_select += '<option selected  value="' + data[i].actividades_id + ' "> ' + data[i].actividades_nombre + '</option>';
+                } else {
+                    html_select += '<option value="' + data[i].actividades_id + '"> ' + data[i].actividades_nombre + '</option>';
+                }
             }
         $('#select-actividad').html(html_select);
 
     });
+
 }
 
 function onSelectAnimal22() {
@@ -201,9 +215,6 @@ function onSelectAnimal4() {
 
         input.max = max.toISOString().substring(0, 10);;
         input2.value = data.partos_id;
-        console.log("parto max" + max.toISOString().substring(0, 10));
-        console.log("parto id" + data.partos_id);
-
     });
 }
 

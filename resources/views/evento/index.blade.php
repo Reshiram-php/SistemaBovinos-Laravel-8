@@ -1,6 +1,6 @@
 @extends('index')
 @section('content2')
-<script src="{{ asset('assets/js/app.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
 <div class="container col-md-12">
        <div class="row">
               <div class="col-md-12">

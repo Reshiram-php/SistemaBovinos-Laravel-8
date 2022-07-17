@@ -99,7 +99,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{{ asset('assets/js/agenda.js') }}" defer></script>
-
+    
     @yield('script')
 
     <!-- Core JS -->

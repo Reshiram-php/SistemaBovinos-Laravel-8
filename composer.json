@@ -6,10 +6,7 @@
         "framework",
         "laravel"
     ],
-    "warmup": [
-        "php artisan config:cache",
-        "php artisan route:cache"
-    ],
+
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
@@ -63,6 +60,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -72,6 +70,13 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+
+        "warmup": [
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "@php artisan view:cache"
         ]
+
     }
 }

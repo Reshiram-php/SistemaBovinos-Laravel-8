@@ -6,6 +6,10 @@
         "framework",
         "laravel"
     ],
+    "warmup": [
+        "php artisan config:cache",
+        "php artisan route:cache"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.2.5",

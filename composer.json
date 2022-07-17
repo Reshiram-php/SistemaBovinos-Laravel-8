@@ -22,7 +22,7 @@
         "laravelcollective/html": "~6.0",
         "doctrine/dbal": "^2.12.1",
         "yajra/laravel-datatables-oracle": "^9.20",
-        "orangehill/iseed": "^3.0"
+        "orangehill/iseed": "^2.6.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -28401,6 +28401,12 @@ mark {
     box-shadow: none;
 }
 
+@media screen and (max-width:767px) {
+    .fc-toolbar.fc-header-toolbar {
+        font-size: 60%
+    }
+}
+
 .button {
     margin-right: 10px;
     margin-bottom: 10px;

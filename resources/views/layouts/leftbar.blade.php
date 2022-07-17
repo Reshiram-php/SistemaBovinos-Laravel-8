@@ -22,10 +22,7 @@
                             src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
                             data-toggle="tooltip" data-placement="top" title="VENTAS"></a>
 
-                    <a class="nav-link" id="v-pills-pages-tab" data-toggle="pill" href="#v-pills-pages" role="tab"
-                        aria-controls="v-pills-pages" aria-selected="false"><img
-                            src="{{ asset('assets/images/svg-icon/pdf.svg') }}" class="img-fluid" alt="Pages"
-                            data-toggle="tooltip" data-placement="top" title="REPORTES"></a>
+                    
                 </div>
             </div>
             <div class="vertical-menu-detail">
@@ -47,9 +44,6 @@
                                         alt="projects">Analisis</a></li>
                             <li><a href="{{url('/estado')}}"><img src="{{ asset('assets/images/svg-icon/charts.svg') }}"
                                         class="img-fluid" alt="leads">Estado</a></li>
-                            <li><a href="{{url('/informe-ventas')}}"><img
-                                        src="{{asset('assets/images/svg-icon/customers.svg')  }}" class="img-fluid"
-                                        alt="clients">Informes de ventas</a></li>
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-ecommerce" role="tabpanel"

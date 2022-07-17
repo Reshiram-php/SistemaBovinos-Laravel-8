@@ -32,7 +32,7 @@ SRB - Analisis
   <!-- Start row -->
   <div class="row">
     <!-- GRAFICO 1 -->
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <div class="card m-b-30">
         <div class="card-header">
           
@@ -62,7 +62,7 @@ SRB - Analisis
       </div>
     </div>
     <!-- INGRESAR TABLA  1-->
-    <div class="col-6">
+    <div class="col-lg-6">
       <div class="card m-b-30">
         <div class="card-header">
           <label for="select-week">TABLA DE DATOS</label>

@@ -3,15 +3,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
 <div class="container col-md-12">
        <div class="row">
-              <div class="col-md-12">
+              <div class="col-lg-12">
                      <div class="card">
                             <div class="card-header border-0">
-                                   <h3 class="card-title fw-bolder text-dark">ddddcc Digital</h3>
+                                   <h3 class="card-title fw-bolder text-dark">Calendario de eventos</h3>
                             </div>
 
                             <div class="card-body pt-2">
-                                   <div>Para agregar un evento solo debes hacer click en una fecha, para editar y/o
-                                          borrar hacer click sobre cada evento.</div><br>
+                                  
                                    <div id="agenda" name="agenda">
                                    </div>
                                    <!-- Modal -->

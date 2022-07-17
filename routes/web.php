@@ -72,20 +72,10 @@ Route::resource('custom_chart_name', 'ChartsController');
 
 /*rutas Wilson */
 
-Route::get('/informe-ventas', function () {
-    return view('informe-ventas');
-});
-
-
 
 Route::get('/estado', function () {
     return view('estado');
 });
-
-Route::get('/dashboard-hospital', function () {
-    return view('dashboard-hospital');
-});
-
 
 Route::get('/reportes', function () {    
     return view('reportes');

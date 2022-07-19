@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/DataTables/datatables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet"

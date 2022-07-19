@@ -176,7 +176,7 @@ SRB - Gestaciones
                     });
             },
             
-            language: {url: '{{asset('assets/es-Es.json')  }}'},
+            language: {url: '{{asset('assets/es-Es.json')}}'},
             destroy: true,
             serverSide: true,
             responsive: true,

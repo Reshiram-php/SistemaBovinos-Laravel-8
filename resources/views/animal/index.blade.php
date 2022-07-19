@@ -165,7 +165,7 @@ SRB - Animales
                     });
                 });
             },
-            language: { url: '{{asset('assets/es-Es.json')  }}'},
+            language: { url: '{{asset('assets/es-Es.json')}}'},
             serverside: true,
             pageLength: 5,
             responsive: true,

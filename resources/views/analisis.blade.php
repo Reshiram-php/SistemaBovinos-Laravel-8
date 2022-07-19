@@ -250,7 +250,7 @@ SRB - Analisis
           console.log("fehcha"+from_date);
           $('#edit-btn').DataTable( {
             
-              language: {url: '{{asset('assets/es-Es.json')  }}'},
+              language: {url: '{{asset('assets/es-Es.json')}}'},
               destroy: true,
               serverSide: true,
               responsive:true,
@@ -276,7 +276,7 @@ SRB - Analisis
           console.log("fehcha"+from_date);
           $('#edit-btn2').DataTable( {
             
-              language: {url: '{{asset('assets/es-Es.json')  }}'},
+              language: {url: '{{asset('assets/es-Es.json')}}'},
               destroy: true,
               serverSide: true,
               responsive:true,

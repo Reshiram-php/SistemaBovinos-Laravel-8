@@ -42,7 +42,7 @@ SRB - Animales
             </ul>
         </div>
         @endif
-        {!! Form::model($animal,['method'=>'PATCH','route'=>['animal.update',$animal->animal_id]]) !!}
+        {!! Form::model($animal,['method'=>'PATCH','route'=>['animal.update',$animal->animal_id],'files'=>'true']) !!}
         
         {{ Form::token() }}
         <div class="row">
@@ -154,6 +154,17 @@ SRB - Animales
                     </select>
                 </div>
             </div>
+
+            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" name="imagen"  class="form-control" data-toggle="tooltip" data-placement="top">
+                    @if (($animal->animal_imagen)!="")
+                        <img src="{{ asset('imagenes/animales/'.$animal->animal_imagen) }}" height="200px" width="200px">
+                    @endif
+                </div>
+            </div>
+
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div id="raza" class="form-group " style="display:none; ">
                     <label>Raza</label>

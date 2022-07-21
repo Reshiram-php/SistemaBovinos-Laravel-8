@@ -144,7 +144,14 @@ class AnimalController extends Controller
         $animales->animal_estado = 1;
         $animales->animal_produccion = 1;
         $animales->animal_abierto = false;
+        if ($request->hasFile('imagen')){
+            $file=$request->file('imagen');
+            $file->move(public_path().'/imagenes/animales/','imagen-'.$id.'.'.$file->getClientOriginalExtension());
+            $name='imagen-'.$id.'.'.$file->getClientOriginalExtension();
+            $animales->animal_imagen=$name;
+        }
         $animales->save();
+        
         return redirect('animal');
     }
 
@@ -223,7 +230,12 @@ class AnimalController extends Controller
         $animales->animal_nacimiento = $request->get('nacimiento');
         $animales->animal_imagen = $request->get('animal_imagen');
         $animales->animal_estado = 1;
-
+        if ($request->hasFile('imagen')){
+            $file=$request->file('imagen');
+            $file->move(public_path().'/imagenes/animales/','imagen-'.$id.'.'.$file->getClientOriginalExtension());
+            $name='imagen-'.$id.'.'.$file->getClientOriginalExtension();
+            $animales->animal_imagen=$name;
+        }
         $animales->update();
         return redirect('animal');
 

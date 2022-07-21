@@ -42,7 +42,7 @@ SRB - Animales
             </ul>
         </div>
         @endif
-        {!! Form::open(array('url'=>'animal','method'=>'POST','autocomplete'=>'off')) !!}
+        {!! Form::open(array('url'=>'animal','method'=>'POST','autocomplete'=>'off','files'=>'true')) !!}
         {{ Form::token() }}
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -151,6 +151,15 @@ SRB - Animales
                         @endforeach
                         <option value="other" @if (old('raza')=="other" ) {{ 'selected '}} @endif>otro</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" name="imagen"  class="form-control" data-toggle="tooltip" data-placement="top">
+
+
                 </div>
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">

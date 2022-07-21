@@ -33,6 +33,10 @@ class ChartsController extends Controller
             $pesoGroupBy = $request->peso['groupBy'];
         }
 
+        if(isset($request->peso['groupBy'])){
+            $lecheGroupBy = $request->peso['groupBy'];
+        }
+
        if(isset($request->leche['start'])){
             $lecheStart = $request->leche['start'];
         }
@@ -40,11 +44,6 @@ class ChartsController extends Controller
         if(isset($request->leche['end'])){
             $lecheEnd = $request->leche['end'];
         }
-        /*
-
-        if(isset($request->leche['groupBy'])){
-            $lecheGroupBy = $request->leche['groupBy'];
-        } */
 
         $promedioPesos = Peso::selectRaw('AVG(registro_peso_valor) as current')
         ->selectRaw('AVG(peso_anterior) as old')
@@ -60,8 +59,8 @@ class ChartsController extends Controller
             fn ($query, $end) => $query->groupByRaw("TO_CHAR(TO_DATE(registro_peso_fecha, 'YYYYDDMM'), '$pesoGroupBy')")
         )->get();
 
-        /* $promedioLeches = Ordeño::selectRaw('registro_ordeño_fecha as fecha')
-        ->selectRaw('AVG(registro_ordeño_litros) as litros')
+        $promedioleche = Ordeño::selectRaw('AVG(registro_ordeño_litros) as current')
+        ->selectRaw('AVG(registro_ordeño_cantidad) as old')
         ->selectRaw("TO_CHAR(registro_ordeño_fecha, '$lecheGroupBy') as mes")
         ->when(
             $lecheStart,
@@ -69,20 +68,18 @@ class ChartsController extends Controller
         )->when(
             $lecheEnd,
             fn ($query, $end) => $query->where('registro_ordeño_fecha', '<=', $lecheEnd)
-        )        
-        ->when(
+        )->when(
             $lecheGroupBy,
             fn ($query, $end) => $query->groupByRaw("TO_CHAR(registro_ordeño_fecha, '$lecheGroupBy')")
-        )
-        ->get();
-
-        dd($promedioLeches); */
+        )->get();
 
         return view('analisis', [
             'promedioPesos' => $promedioPesos,
             'pesoStart' => $pesoStart,
             'pesoEnd' => $pesoEnd,
             'pesoGroupBy' => $pesoGroupBy,
+            'promedioleche' => $promedioleche,
+            'lecheGroupBy' => $lecheGroupBy,
             'lecheStart' => $lecheStart,
             'lecheEnd' => $lecheEnd,
          /*    'promedioLeches' => $promedioLeches,

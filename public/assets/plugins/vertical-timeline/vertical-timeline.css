@@ -67,7 +67,7 @@
   border-radius: 3px;
   background-color: rgba(80,111,228,1);
   border: none;
-  color: #506fe4;
+  color: #00983d;
 }
 .timeline-img i {
     width: 45px;
@@ -80,7 +80,7 @@
 .timeline-img.timeline-img-primary {
     background-color: rgb(242, 246, 250);
     border: none;
-    color: #506fe4;
+    color: #00983d;
 }
 @media only screen and (min-width: 1170px) {
   .timeline-img {
@@ -176,7 +176,7 @@
   float: left;
   padding: 6px 12px;
   font-size: 16px;
-  background-color: #506fe4;
+  background-color: #00983d;
   color: #fff;
   border-radius: 3px;
   text-align: center;
@@ -189,7 +189,7 @@
     height: 0;
     width: 0;
     border: 10px solid transparent;
-    border-right: 10px solid #506fe4;
+    border-right: 10px solid #00983d;
 }
 @media only screen and (min-width: 1170px) {
   .timeline-content {
@@ -241,7 +241,7 @@
     height: 0;
     width: 0;
     border: 10px solid transparent;
-    border-left: 10px solid #506fe4;
+    border-left: 10px solid #00983d;
   }
   .timeline-content.timeline-content--bounce-in {
     visibility: visible;

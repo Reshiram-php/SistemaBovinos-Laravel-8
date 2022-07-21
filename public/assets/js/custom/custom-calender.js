@@ -64,7 +64,7 @@
                         title: 'Preñes',
                         start: new Date(y, m, d-10),
                         end: new Date(y, m, d-15),
-                        color: '#506fe4',
+                        color: '#00983d',
                     },
                     {
                         id: 999,

@@ -70,9 +70,9 @@ SRB - Estados
 
 <script>
   var options = {
-          series: [76, 67, 61, 90],
+          series: [14, 12, 11, 35, 29],
           chart: {
-          height: 390,
+          height: 490,
           type: 'radialBar',
         },
         plotOptions: {
@@ -100,8 +100,8 @@ SRB - Estados
           text: 'Estadistica Global',
           align: 'left'
         },
-        colors: ['#20EB14', '#0084ff', '#F2850C', '#DB0501'],
-        labels: ['Toros', 'Vaca', 'Lechones', 'Muertes'],
+        colors: ['#20EB14', '#0084ff', '#F2850C', '#DB0501', '#0084ff'],
+        labels: ['Ternero', 'Torete', 'Vacona', 'Toro','Vaca'],
         legend: {
           show: true,
           floating: true,
@@ -142,7 +142,7 @@ SRB - Estados
 
     
 var options = {
-          series: [44, 55, 13, 43, 22],
+          series: [17, 4, 13, 13, 22],
           chart: {
           width: 380,
           type: 'pie',
@@ -151,7 +151,7 @@ var options = {
           text: 'Estadistica Global',
           align: 'left'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        labels: ['Animales', 'Muertes', 'Vacunaciones', 'Enfermedades', 'Vitaminass'],
         responsive: [{
           breakpoint: 480,
           options: {

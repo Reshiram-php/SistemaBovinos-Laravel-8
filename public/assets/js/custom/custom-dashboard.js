@@ -29,7 +29,7 @@ $(document).ready(function() {
         yaxis: {
             min: 0
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         grid: {
             row: {
                 colors: ['transparent', 'transparent'], opacity: .2
@@ -143,11 +143,11 @@ $(document).ready(function() {
         x: 'Bananas',
         seriesIndex: 0,
         label: {
-          borderColor: '#506fe4',
+          borderColor: '#00983d',
           offsetY: 0,
           style: {
             color: '#fff',
-            background: '#506fe4',
+            background: '#00983d',
           },
           text: 'Bananas are good',
         }
@@ -166,7 +166,7 @@ $(document).ready(function() {
         endingShape: 'rounded'  
       }
     },
-    colors: ['#506fe4'],
+    colors: ['#00983d'],
     dataLabels: {
       enabled: false
     },
@@ -252,7 +252,7 @@ $(document).ready(function() {
         stroke: {
             dashArray: 4
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         series: [65],
         labels: ['Completed'],        
     }
@@ -306,7 +306,7 @@ $(document).ready(function() {
         stroke: {
             dashArray: 4
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         series: [85],
         labels: ['Completed'],        
     }
@@ -360,7 +360,7 @@ $(document).ready(function() {
         stroke: {
             dashArray: 4
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         series: [50],
         labels: ['Completed'],        
     }
@@ -414,7 +414,7 @@ $(document).ready(function() {
         stroke: {
             dashArray: 4
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         series: [35],
         labels: ['Completed'],        
     }
@@ -462,7 +462,7 @@ $(document).ready(function() {
         series: {
           regions: [{
             values: {
-                US:'#506fe4',
+                US:'#00983d',
                 RU:'#43d187',
                 IN:'#96a3b6',               
             }

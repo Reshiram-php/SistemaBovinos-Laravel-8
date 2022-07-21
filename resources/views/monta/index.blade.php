@@ -43,6 +43,18 @@ SRB - Montas
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
 
+                    
+                    <thead>
+                        <tr>
+                            <th data-priority="1">No</th>
+                            <th data-priority="7">Código Madre</th>
+                            <th data-priority="2">Código Padre</th>
+                            <th data-priority="3">Fecha de Monta</th>
+                            <th data-priority="4">Monta exitosa</th>
+                            <th data-priority="5" class="noVis">Finalizar</th>
+                            <th data-priority="1" class="noVis">Opciones</th>
+                        </tr>
+                    </thead>
                     <tfoot>
                         <th>No</th>
                         <th>Código Madre</th>
@@ -52,17 +64,6 @@ SRB - Montas
                         <th class="inv">finalizar</th>
                         <th class="inv">opciones</th>
                     </tfoot>
-                    <thead>
-                        <tr>
-                            <th data-priority="1">No</th>
-                            <th data-priority="2">Código Madre</th>
-                            <th data-priority="3">Código Padre</th>
-                            <th data-priority="4">Fecha de Monta</th>
-                            <th data-priority="5">Monta exitosa</th>
-                            <th data-priority="6" class="noVis">Finalizar</th>
-                            <th data-priority="1" class="noVis">Opciones</th>
-                        </tr>
-                    </thead>
                     <tbody></tbody>
                 </table>
             </div>

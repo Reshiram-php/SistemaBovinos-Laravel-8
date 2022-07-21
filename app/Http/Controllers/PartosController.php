@@ -57,7 +57,7 @@ class PartosController extends Controller
     
     public function create($id)
     {
-        $razas = Raza::where('raza_id','!=',0)->get();
+        $razas = Raza::where('raza_id','!=',1)->get();
         return view("partos.create", ["embarazos" => Embarazo::findOrFail($id), "razas" => $razas]);
     }
     public function edit($id)

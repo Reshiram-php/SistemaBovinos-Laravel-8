@@ -19,7 +19,7 @@ class EmbarazosTableSeeder extends Seeder
         \DB::table('embarazos')->insert(array (
             0 => 
             array (
-                'embarazos_id' => 1,
+                
                 'animal_madre' => 'MES0006',
                 'embarazos_fecha' => '2019-07-19',
                 'animal_padre' => 'inseminación',
@@ -32,7 +32,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'embarazos_id' => 2,
+                
                 'animal_madre' => 'MES0003',
                 'embarazos_fecha' => '2019-09-25',
                 'animal_padre' => 'BRA0001',
@@ -45,7 +45,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'embarazos_id' => 3,
+                
                 'animal_madre' => 'MES0008',
                 'embarazos_fecha' => '2020-06-23',
                 'animal_padre' => 'MBG0009',
@@ -58,7 +58,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'embarazos_id' => 4,
+                
                 'animal_madre' => 'MES0005',
                 'embarazos_fecha' => '2020-07-19',
                 'animal_padre' => 'MBG0009',
@@ -71,7 +71,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'embarazos_id' => 5,
+                
                 'animal_madre' => 'HOL0001',
                 'embarazos_fecha' => '2020-07-28',
                 'animal_padre' => 'MBG0009',
@@ -84,7 +84,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'embarazos_id' => 6,
+                
                 'animal_madre' => 'MES0012',
                 'embarazos_fecha' => '2021-01-31',
                 'animal_padre' => 'MBG0009',
@@ -97,7 +97,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             6 => 
             array (
-                'embarazos_id' => 7,
+                
                 'animal_madre' => 'MES0006',
                 'embarazos_fecha' => '2021-03-04',
                 'animal_padre' => 'MBG0009',
@@ -110,7 +110,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'embarazos_id' => 8,
+                
                 'animal_madre' => 'MES0009',
                 'embarazos_fecha' => '2021-03-27',
                 'animal_padre' => 'MBG0009',
@@ -123,7 +123,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'embarazos_id' => 9,
+                
                 'animal_madre' => 'MES0011',
                 'embarazos_fecha' => '2019-07-19',
                 'animal_padre' => 'inseminación',
@@ -136,7 +136,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             9 => 
             array (
-                'embarazos_id' => 10,
+                
                 'animal_madre' => 'MES0010',
                 'embarazos_fecha' => '2019-07-20',
                 'animal_padre' => 'inseminación',
@@ -149,7 +149,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'embarazos_id' => 11,
+            
                 'animal_madre' => 'MES0013',
                 'embarazos_fecha' => '2019-07-24',
                 'animal_padre' => 'inseminación',
@@ -162,7 +162,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             11 => 
             array (
-                'embarazos_id' => 12,
+                
                 'animal_madre' => 'HOL0001',
                 'embarazos_fecha' => '2019-07-26',
                 'animal_padre' => 'inseminación',
@@ -175,7 +175,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             12 => 
             array (
-                'embarazos_id' => 13,
+                
                 'animal_madre' => 'MES0012',
                 'embarazos_fecha' => '2019-09-19',
                 'animal_padre' => 'BRA0001',
@@ -188,7 +188,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             13 => 
             array (
-                'embarazos_id' => 14,
+                
                 'animal_madre' => 'GYR0002',
                 'embarazos_fecha' => '2019-10-03',
                 'animal_padre' => 'BRA0001',
@@ -201,7 +201,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             14 => 
             array (
-                'embarazos_id' => 15,
+                
                 'animal_madre' => 'GYR0001',
                 'embarazos_fecha' => '2020-06-22',
                 'animal_padre' => 'MBG0009',
@@ -214,7 +214,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             15 => 
             array (
-                'embarazos_id' => 16,
+                
                 'animal_madre' => 'MES0001',
                 'embarazos_fecha' => '2020-06-23',
                 'animal_padre' => 'MBG0009',
@@ -227,7 +227,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             16 => 
             array (
-                'embarazos_id' => 17,
+                
                 'animal_madre' => 'MES0007',
                 'embarazos_fecha' => '2020-08-07',
                 'animal_padre' => 'MBG0009',
@@ -240,7 +240,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             17 => 
             array (
-                'embarazos_id' => 18,
+                
                 'animal_madre' => 'MES0013',
                 'embarazos_fecha' => '2020-12-08',
                 'animal_padre' => 'inseminación',
@@ -253,7 +253,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             18 => 
             array (
-                'embarazos_id' => 19,
+                
                 'animal_madre' => 'MES0002',
                 'embarazos_fecha' => '2020-12-10',
                 'animal_padre' => 'MBG0009',
@@ -266,7 +266,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             19 => 
             array (
-                'embarazos_id' => 20,
+                
                 'animal_madre' => 'MES0003',
                 'embarazos_fecha' => '2021-05-17',
                 'animal_padre' => 'MBG0009',
@@ -279,7 +279,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             20 => 
             array (
-                'embarazos_id' => 21,
+                
                 'animal_madre' => 'MES0011',
                 'embarazos_fecha' => '2021-06-19',
                 'animal_padre' => 'MBG0009',
@@ -292,7 +292,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             21 => 
             array (
-                'embarazos_id' => 22,
+                
                 'animal_madre' => 'MES0010',
                 'embarazos_fecha' => '2021-06-22',
                 'animal_padre' => 'MBG0009',
@@ -305,7 +305,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             22 => 
             array (
-                'embarazos_id' => 23,
+                
                 'animal_madre' => 'MBG0001',
                 'embarazos_fecha' => '2020-10-13',
                 'animal_padre' => 'MBG0009',
@@ -318,7 +318,7 @@ class EmbarazosTableSeeder extends Seeder
             ),
             23 => 
             array (
-                'embarazos_id' => 24,
+                
                 'animal_madre' => 'MBG0004',
                 'embarazos_fecha' => '2021-03-07',
                 'animal_padre' => 'MBG0009',

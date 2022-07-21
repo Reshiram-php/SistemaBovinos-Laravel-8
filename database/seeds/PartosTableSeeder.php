@@ -19,7 +19,7 @@ class PartosTableSeeder extends Seeder
         \DB::table('partos')->insert(array (
             0 => 
             array (
-                'partos_id' => 1,
+                
                 'partos_madre' => 'MES0006',
                 'hijo_id' => 'MES0014',
                 'partos_fecha' => '2020-04-25',
@@ -32,7 +32,7 @@ class PartosTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'partos_id' => 2,
+                
                 'partos_madre' => 'MES0003',
                 'hijo_id' => 'MES0019',
                 'partos_fecha' => '2020-06-30',
@@ -45,7 +45,7 @@ class PartosTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'partos_id' => 3,
+                
                 'partos_madre' => 'MES0005',
                 'hijo_id' => 'MES0021',
                 'partos_fecha' => '2021-04-24',
@@ -58,7 +58,7 @@ class PartosTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'partos_id' => 4,
+                
                 'partos_madre' => 'MES0008',
                 'hijo_id' => 'MES0020',
                 'partos_fecha' => '2021-03-29',
@@ -71,7 +71,7 @@ class PartosTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'partos_id' => 5,
+                
                 'partos_madre' => 'HOL0001',
                 'hijo_id' => 'MES0022',
                 'partos_fecha' => '2021-05-03',
@@ -84,7 +84,7 @@ class PartosTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'partos_id' => 6,
+                
                 'partos_madre' => 'MES0012',
                 'hijo_id' => 'MES0023',
                 'partos_fecha' => '2021-11-06',
@@ -97,7 +97,7 @@ class PartosTableSeeder extends Seeder
             ),
             6 => 
             array (
-                'partos_id' => 7,
+                
                 'partos_madre' => 'MES0006',
                 'hijo_id' => 'MES0024',
                 'partos_fecha' => '2021-12-08',
@@ -110,7 +110,7 @@ class PartosTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'partos_id' => 8,
+                
                 'partos_madre' => 'MES0009',
                 'hijo_id' => 'MES0025',
                 'partos_fecha' => '2021-12-31',
@@ -123,7 +123,7 @@ class PartosTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'partos_id' => 9,
+                
                 'partos_madre' => 'MES0011',
                 'hijo_id' => 'MES0026',
                 'partos_fecha' => '2020-04-23',
@@ -136,7 +136,7 @@ class PartosTableSeeder extends Seeder
             ),
             9 => 
             array (
-                'partos_id' => 10,
+                
                 'partos_madre' => 'MES0010',
                 'hijo_id' => 'MES0027',
                 'partos_fecha' => '2020-04-24',
@@ -149,7 +149,7 @@ class PartosTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'partos_id' => 11,
+                
                 'partos_madre' => 'MES0013',
                 'hijo_id' => 'MGH0001',
                 'partos_fecha' => '2020-04-28',
@@ -162,7 +162,7 @@ class PartosTableSeeder extends Seeder
             ),
             11 => 
             array (
-                'partos_id' => 12,
+                
                 'partos_madre' => 'HOL0001',
                 'hijo_id' => 'MES0028',
                 'partos_fecha' => '2020-04-30',
@@ -175,7 +175,7 @@ class PartosTableSeeder extends Seeder
             ),
             12 => 
             array (
-                'partos_id' => 13,
+                
                 'partos_madre' => 'MES0012',
                 'hijo_id' => 'MES0029',
                 'partos_fecha' => '2020-06-24',
@@ -188,7 +188,7 @@ class PartosTableSeeder extends Seeder
             ),
             13 => 
             array (
-                'partos_id' => 14,
+                
                 'partos_madre' => 'GYR0002',
                 'hijo_id' => 'MES0030',
                 'partos_fecha' => '2020-07-08',
@@ -201,7 +201,7 @@ class PartosTableSeeder extends Seeder
             ),
             14 => 
             array (
-                'partos_id' => 15,
+                
                 'partos_madre' => 'GYR0001',
                 'hijo_id' => 'MES0031',
                 'partos_fecha' => '2021-03-29',
@@ -214,7 +214,7 @@ class PartosTableSeeder extends Seeder
             ),
             15 => 
             array (
-                'partos_id' => 16,
+                
                 'partos_madre' => 'MES0001',
                 'hijo_id' => 'MES0032',
                 'partos_fecha' => '2020-04-23',
@@ -227,7 +227,7 @@ class PartosTableSeeder extends Seeder
             ),
             16 => 
             array (
-                'partos_id' => 17,
+                
                 'partos_madre' => 'MES0007',
                 'hijo_id' => 'MES0033',
                 'partos_fecha' => '2021-05-13',
@@ -240,7 +240,7 @@ class PartosTableSeeder extends Seeder
             ),
             17 => 
             array (
-                'partos_id' => 18,
+                
                 'partos_madre' => 'MES0013',
                 'hijo_id' => 'MES0035',
                 'partos_fecha' => '2021-09-13',
@@ -253,7 +253,7 @@ class PartosTableSeeder extends Seeder
             ),
             18 => 
             array (
-                'partos_id' => 19,
+                
                 'partos_madre' => 'MES0002',
                 'hijo_id' => 'MES0036',
                 'partos_fecha' => '2021-09-15',
@@ -266,7 +266,7 @@ class PartosTableSeeder extends Seeder
             ),
             19 => 
             array (
-                'partos_id' => 20,
+                
                 'partos_madre' => 'MES0003',
                 'hijo_id' => 'MES0038',
                 'partos_fecha' => '2022-02-20',
@@ -279,7 +279,7 @@ class PartosTableSeeder extends Seeder
             ),
             20 => 
             array (
-                'partos_id' => 21,
+                
                 'partos_madre' => 'MES0011',
                 'hijo_id' => 'MES0039',
                 'partos_fecha' => '2022-03-25',
@@ -292,7 +292,7 @@ class PartosTableSeeder extends Seeder
             ),
             21 => 
             array (
-                'partos_id' => 22,
+                
                 'partos_madre' => 'MES0010',
                 'hijo_id' => 'MES0040',
                 'partos_fecha' => '2022-03-28',
@@ -305,7 +305,7 @@ class PartosTableSeeder extends Seeder
             ),
             22 => 
             array (
-                'partos_id' => 23,
+                
                 'partos_madre' => 'MBG0001',
                 'hijo_id' => 'MES0034',
                 'partos_fecha' => '2021-05-19',
@@ -318,7 +318,7 @@ class PartosTableSeeder extends Seeder
             ),
             23 => 
             array (
-                'partos_id' => 24,
+                
                 'partos_madre' => 'MBG0004',
                 'hijo_id' => 'MES0037',
                 'partos_fecha' => '2021-12-11',

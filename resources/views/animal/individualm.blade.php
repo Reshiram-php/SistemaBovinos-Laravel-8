@@ -278,6 +278,18 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <table class="table table-bordered table-show">
+                                    <caption style="text-align:center; font-size:120%; color: #0b0b0b;">Imagen
+                                    </caption>
+
+                                    <tbody>
+
+                                        @if (($animales->animal_imagen)!="")
+                                        <img src="{{ public_path('imagenes/animales/'.$animales->animal_imagen) }}"
+                                            height="200px" width="200px">
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

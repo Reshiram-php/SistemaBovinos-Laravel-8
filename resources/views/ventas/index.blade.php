@@ -1,5 +1,5 @@
 @section('title')
-SRB - Ventas
+SGB - Ventas
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -10,7 +10,7 @@ SRB - Ventas
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        
+
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -32,13 +32,13 @@ SRB - Ventas
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
-                     
+
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
-            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
-        </div>
+                    <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
@@ -58,7 +58,7 @@ SRB - Ventas
                             <th data-priority="7">Valor</th>
                             <th data-priority="3">Fecha de Venta</th>
                             <th data-priority="4">Nombre del cliente</th>
-                            <th data-priority="5" class="noVis">Informe Individual</th>
+                            <th data-priority="5" class="noVis">Informe Animal</th>
                             <th data-priority="1" class="noVis">Opciones</th>
                         </tr>
                     </thead>
@@ -78,7 +78,6 @@ SRB - Ventas
 <!-- eCommerce Shop Page js -->
 
 <script>
-    
     $(document).ready(function () {
         $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
@@ -152,7 +151,7 @@ SRB - Ventas
             },
             language: {url: '{{asset('assets/es-Es.json')}}'},
             destroy: true,
-            serverSide: true,
+            serverside:true,
             responsive:true,
             pageLength: 5,
             autoWidth:false,
@@ -169,6 +168,10 @@ SRB - Ventas
         {data: 'pdf'}
         
     ],
+    "columnDefs": [
+{ "width": "8%", "targets": 0 },
+{ "width": "13%", "targets": 5 }
+],
         buttons: [
             {
                     extend: 'colvis',

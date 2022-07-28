@@ -1,5 +1,5 @@
 @section('title')
-SRB - Analisis
+SGB - Analisis
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -16,7 +16,7 @@ SRB - Analisis
       <div class="breadcrumb-list">
         <ol class="breadcrumb">
 
-          <li class="breadcrumb-item"><a href="#">SRB</a></li>
+          <li class="breadcrumb-item"><a href="#">SGB</a></li>
           <li class="breadcrumb-item active" aria-current="page">Analisis</li>
         </ol>
       </div>
@@ -252,7 +252,7 @@ SRB - Analisis
             
               language: {url: '{{asset('assets/es-Es.json')}}'},
               destroy: true,
-              serverSide: true,
+              serverside:true,
               responsive:true,
               pageLength: 7,
               lengthChange: false,
@@ -278,7 +278,7 @@ SRB - Analisis
             
               language: {url: '{{asset('assets/es-Es.json')}}'},
               destroy: true,
-              serverSide: true,
+              serverside:true,
               responsive:true,
               pageLength: 7,
               lengthChange: false,

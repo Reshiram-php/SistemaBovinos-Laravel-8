@@ -1,5 +1,5 @@
 @section('title')
-SRB - Actividades
+SGB - Actividades
 @endsection
 @extends('layouts.main')
 @section('style')

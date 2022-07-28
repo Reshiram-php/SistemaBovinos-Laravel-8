@@ -13,6 +13,7 @@ class MuerteController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:muertes.index');
     }
     /**
      * Display a listing of the resource.
@@ -53,12 +54,16 @@ class MuerteController extends Controller
             ->addColumn('pdf', function($pdf){
                 return '<a href="' . route('muerte.individual', $pdf->registro_muertes_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                    title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
+                    title="Informe de la muerte"><i class="mdi mdi-file-pdf"></i>
                 </button></a>
                 <a href="' . route('muertes.edit', $pdf->registro_muertes_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
-                    </button></a>';
+                    </button></a>
+                    <a href="' . route('muertes.delete', $pdf->registro_muertes_id) . '">
+                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                    title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti ti-trash"></i>
+                </button></a>';
             })
             ->rawColumns(['btn','pdf'])
             ->make(true);
@@ -157,8 +162,13 @@ class MuerteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $muertes=Muertes::findOrFail($id);
+        $animal2=Animal::findOrFail($muertes->animal_id);
+        $animal2->animal_estado=$muertes->estado_anterior;
+        $animal2->update();
+        $muertes->delete();
+        return redirect('muertes');
     }
 }

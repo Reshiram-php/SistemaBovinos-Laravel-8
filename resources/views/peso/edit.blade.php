@@ -1,5 +1,5 @@
 @section('title')
-SRB - Peso
+SGB - Peso
 @endsection
 @extends('layouts.main')
 @section('style')

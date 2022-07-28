@@ -27,7 +27,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:29:13',
                 'updated_at' => '2022-06-20 16:29:13',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             1 => 
             array (
@@ -39,7 +39,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:29:56',
                 'updated_at' => '2022-06-20 16:29:56',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             2 => 
             array (
@@ -51,7 +51,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:30:53',
                 'updated_at' => '2022-06-20 16:30:53',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             3 => 
             array (
@@ -63,7 +63,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:32:02',
                 'updated_at' => '2022-06-20 16:32:02',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             4 => 
             array (
@@ -75,7 +75,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:33:08',
                 'updated_at' => '2022-06-20 16:33:08',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             5 => 
             array (
@@ -87,7 +87,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:33:40',
                 'updated_at' => '2022-06-20 16:33:40',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             6 => 
             array (
@@ -99,7 +99,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:26:41',
                 'updated_at' => '2022-06-20 16:26:41',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             7 => 
             array (
@@ -111,7 +111,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:27:50',
                 'updated_at' => '2022-06-20 16:27:50',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
             8 => 
             array (
@@ -123,7 +123,7 @@ class VentasTableSeeder extends Seeder
                 'created_at' => '2022-06-20 16:28:24',
                 'updated_at' => '2022-06-20 16:28:24',
                 'cedula_cliente' => '1111111113',
-                'estado_anterior' => NULL,
+                'estado_anterior' => 1,
             ),
         ));
         

@@ -1,5 +1,5 @@
 @section('title')
-SRB - Actividades
+SGB - Actividades
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -152,7 +152,7 @@ SRB - Actividades
     
                 language: {url: '{{asset('assets/es-Es.json')}}'},
                 destroy: true,
-                serverSide: true,
+                serverside:true,
                 responsive:true,
                 pageLength: 5,
                 autoWidth:false,

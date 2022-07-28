@@ -16,11 +16,14 @@
                     <a class="nav-link" id="v-pills-ecommerce-tab" data-toggle="pill" href="#v-pills-ecommerce"
                         role="tab" aria-controls="v-pills-ecommerce" aria-selected="false"><img
                             src="{{ asset('assets/images/svg-icon/insertar.svg') }}" class="img-fluid" alt="eCommerce"
-                            data-toggle="tooltip" data-placement="top" title="INGRESOS"></a>
-                    <a class="nav-link" id="v-pills-hospital-tab" data-toggle="pill" href="#v-pills-hospital" role="tab"
-                        aria-controls="v-pills-hospital" aria-selected="false"><img
-                            src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
-                            data-toggle="tooltip" data-placement="top" title="VENTAS"></a>
+                            data-toggle="tooltip" data-placement="top" title="Gestión del Ganado"></a>
+                            @can('usuarios.index')
+                            <a class="nav-link" id="v-pills-hospital-tab" data-toggle="pill" href="#v-pills-hospital" role="tab"
+                            aria-controls="v-pills-hospital" aria-selected="false"><img
+                                src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
+                                data-toggle="tooltip" data-placement="top" title="Administración"></a>  
+                            @endcan
+                  
 
                     
                 </div>
@@ -35,7 +38,7 @@
                         aria-labelledby="v-pills-crm-tab">
                         <ul class="vertical-menu">
                             <li>
-                                <h5 class="menu-title">Sistema Registro de Bovinos</h5>
+                                <h5 class="menu-title">Sistema de Gestión Bovina</h5>
                             </li>
                             <li><a href="{{url('/home')}}"><img src="{{asset('assets/images/svg-icon/dashboard.svg') }}"
                                         class="img-fluid" alt="dashboard">Inicio</a></li>
@@ -115,12 +118,15 @@
 
                                 </ul>
                             </li>
+                            @can('muertes.index')
                             <li>
                                 <a href="{{url('/muertes')}}"><img
                                         src="{{ asset('assets/images/svg-icon/muertes.svg') }}" class="img-fluid"
                                         alt="frontend"><span> Muertes</span>
                                 </a>
                             </li>
+                            @endcan
+                            
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-hospital" role="tabpanel"

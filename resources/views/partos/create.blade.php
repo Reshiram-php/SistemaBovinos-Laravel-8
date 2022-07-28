@@ -1,5 +1,5 @@
 @section('title')
-SRB - Partos
+SGB - Partos
 @endsection
 @extends('layouts.main')
 @section('style')

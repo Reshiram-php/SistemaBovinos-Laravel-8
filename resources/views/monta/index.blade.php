@@ -1,5 +1,5 @@
 @section('title')
-SRB - Montas
+SGB - Montas
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -43,15 +43,6 @@ SRB - Montas
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
 
-                    <tfoot>
-                        <th>No</th>
-                        <th>Código Madre</th>
-                        <th>Código Padre</th>
-                        <th>Fecha de Monta</th>
-                        <th>Monta exitosa</th>
-                        <th class="inv">finalizar</th>
-                        <th class="inv">opciones</th>
-                    </tfoot>
                     <thead>
                         <tr>
                             <th data-priority="1">No</th>
@@ -63,6 +54,15 @@ SRB - Montas
                             <th data-priority="1" class="noVis">Opciones</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <th>No</th>
+                        <th>Código Madre</th>
+                        <th>Código Padre</th>
+                        <th>Fecha de Monta</th>
+                        <th>Monta exitosa</th>
+                        <th class="inv">finalizar</th>
+                        <th class="inv">opciones</th>
+                    </tfoot>
                     <tbody></tbody>
                 </table>
             </div>
@@ -78,7 +78,7 @@ SRB - Montas
 <!-- eCommerce Shop Page js -->
 
 <script>
-$(document).ready(function () {
+ $(document).ready(function () {
     $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
@@ -86,13 +86,13 @@ $(document).ready(function () {
     $('.input-daterange').datepicker({
         language: 'es',
         changeYear: true,
-        todayBtn:'linked',
-        format:'yyyy-mm-dd',
-        autoclose:true
+        todayBtn: 'linked',
+        format: 'yyyy-mm-dd',
+        autoclose: true
     });
 
-
     load_data();
+
     function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -134,34 +134,32 @@ $(document).ready(function () {
     // Requery the server with the new one-time export settings
     dt.ajax.reload();
 };
-    function load_data(from_date = '', to_date = ''){
 
-        $('#edit-btn').DataTable( {
+    function load_data(from_date = '', to_date = '') {
         
+        var table= $('#edit-btn').DataTable({
             initComplete: function () {
-                // Apply the search
-                this.api()
-                    .columns()
-                    .every(function () {
-                        var that = this;
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
 
-                        $('input', this.footer()).on('keyup change clear', function () {
-                            if (that.search() !== this.value) {
-                                that.search(this.value).draw();
-                            }
-                        });
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
                     });
+                });
             },
-            language: {url: '{{asset('assets/es-Es.json')}}'},
-        
-            destroy: true,
-            serverSide: true,
-            responsive:true,
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
             pageLength: 5,
-            autoWidth:false,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
             order: [[0, 'desc']],
-            
-            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
             ajax: {url:'{{ route('monta.index') }}',data:{from_date:from_date, to_date:to_date} } ,
             columns: [
                 {data: 'monta_id'},
@@ -172,10 +170,10 @@ $(document).ready(function () {
                 {data: 'fin'},
                 {data: 'pdf'}
             ],
-            buttons: [   
+            buttons: [
                 {
                     extend: 'excelHtml5',
-                    text:  ' excel  <i class="mdi mdi-file-excel"></i> ',
+                    text: ' excel  <i class="mdi mdi-file-excel"></i> ',
                     className: 'btn btn-success',
                     action: newexportaction,
                     exportOptions: {
@@ -191,7 +189,6 @@ $(document).ready(function () {
                     extend: 'colvis',
                     columns: [':not(.noVis)'],
                 },
-                
                 {
                     text: ' nuevo registro  <i class="fa fa-plus"></i> ',
                     className: 'btn btn-info',
@@ -204,19 +201,19 @@ $(document).ready(function () {
         });
     }
     
-    $('#filter').click(function(){
+    $('#filter').click(function () {
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
-        if(from_date != '' &&  to_date != ''){
+        if (from_date != '' && to_date != '') {
             $('#edit_btn').DataTable().destroy();
             load_data(from_date, to_date);
         }
-        else{
+        else {
             alert('Both Date is required');
         }
     });
 
-    $('#refresh').click(function(){
+    $('#refresh').click(function () {
         $('#from_date').val('');
         $('#to_date').val('');
         $('#edit_btn').DataTable().destroy();

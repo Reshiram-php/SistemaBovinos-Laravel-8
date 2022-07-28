@@ -1,5 +1,5 @@
 @section('title')
-SRB - Gestaciones
+SGB - Gestaciones
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -61,16 +61,7 @@ SRB - Gestaciones
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
-                    <tfoot>
-                        <th>Código</th>
-                        <th>Código Madre </th>
-                        <th>Código Padre</th>
-                        <th>Fecha de Preñez</th>
-                        <th>Fecha proxima de parto</th>
-                        <th>Embarazo Activo</th>
-                        <th class="inv"> Finalizar</th>
-                        <th class="inv">Opciones</th>
-                    </tfoot>
+                    
                     <thead>
                         <tr>
                             <th data-priority="1">Código</th>
@@ -83,6 +74,16 @@ SRB - Gestaciones
                             <th data-priority="8" class="noVis">Opciones</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <th>Código</th>
+                        <th>Código Madre </th>
+                        <th>Código Padre</th>
+                        <th>Fecha de Preñez</th>
+                        <th>Fecha proxima de parto</th>
+                        <th>Embarazo Activo</th>
+                        <th class="inv"> Finalizar</th>
+                        <th class="inv">Opciones</th>
+                    </tfoot>
                     <tbody></tbody>
                 </table>
 
@@ -101,22 +102,20 @@ SRB - Gestaciones
 <!-- eCommerce Shop Page js -->
 <script>
     $(document).ready(function () {
-        $('#edit-btn tfoot th').each(function () {
+    $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
-        });
-
-        $('.input-daterange').datepicker({
-            language: 'es',
-            changeYear: true,
-            todayBtn:'linked',
-            format:'yyyy-mm-dd',
-            autoclose:true
-        });
- 
-
+    });
+    $('.input-daterange').datepicker({
+        language: 'es',
+        changeYear: true,
+        todayBtn: 'linked',
+        format: 'yyyy-mm-dd',
+        autoclose: true
+    });
 
     load_data();
+
     function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -160,30 +159,30 @@ SRB - Gestaciones
 };
     function load_data(from_date = '', to_date = '',from_date2 = '', to_date2 = '')
     {
-        $('#edit-btn').DataTable( {
+        var table= $('#edit-btn').DataTable({
             initComplete: function () {
-                // Apply the search
-                this.api()
-                    .columns()
-                    .every(function () {
-                        var that = this;
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
 
-                        $('input', this.footer()).on('keyup change clear', function () {
-                            if (that.search() !== this.value) {
-                                that.search(this.value).draw();
-                            }
-                        });
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
                     });
+                });
             },
             
-            language: {url: '{{asset('assets/es-Es.json')}}'},
-            destroy: true,
-            serverSide: true,
-            responsive: true,
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
             pageLength: 5,
-            autoWidth:false,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
             order: [[0, 'desc']],
-            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
             ajax: {
                 url: '{{ route('embarazo.index') }}', data:{from_date:from_date, to_date:to_date,from_date2:from_date2, to_date2:to_date2}
             },

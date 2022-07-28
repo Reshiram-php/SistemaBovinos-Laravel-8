@@ -1,5 +1,5 @@
 @section('title')
-SRB - Enfermedades
+SGB - Enfermedades
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -149,7 +149,7 @@ SRB - Enfermedades
     
                 language: {url: '{{asset('assets/es-Es.json')}}'},
                 destroy: true,
-                serverSide: true,
+                serverside:true,
                 responsive:true,
                 pageLength: 5,
                 autoWidth:false,

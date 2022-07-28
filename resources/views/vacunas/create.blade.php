@@ -1,5 +1,5 @@
 @section('title')
-SRB - Vacunas
+SGB - Vacunas
 @endsection
 @extends('layouts.main')
 @section('style')

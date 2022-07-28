@@ -45,7 +45,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"><i class="feather icon-plus mr-2"></i>Añadir</button>
+                                <button type="submit" class="btn btn-primary">Editar</button>
                             </div>
                             {!! Form::close() !!}
                         </div>

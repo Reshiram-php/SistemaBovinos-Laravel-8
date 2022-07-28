@@ -22,6 +22,10 @@ Route::get('/', function () {
     }
 });
 
+/*rutas eliminación */
+Route::get('muertes/delete/{id}', 'MuerteController@delete')->name('muertes.delete');
+Route::get('ventas/delete/{id}', 'VentasController@delete')->name('ventas.delete');
+Route::get('usuarios/delete/{id}', 'UserController@delete')->name('usuarios.delete');
 /*rutas ciclica reproducción*/
 
 Route::get('{id}/embarazo', 'EmbarazoController@create')->name('embarazo.create');

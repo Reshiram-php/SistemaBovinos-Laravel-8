@@ -24,12 +24,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('update:torete')->daily();
-        $schedule->command('update:toro')->daily();
-        $schedule->command('update:vacona')->daily();
-        $schedule->command('start:periodoseco')->daily();
-        $schedule->command('end:periodoseco')->daily();
-        $schedule->command('end:diasabiertos')->daily();
+        $schedule->command('update:torete')->everyMinute();
+        $schedule->command('update:toro')->everyMinute();
+        $schedule->command('update:vacona')->everyMinute();
+        $schedule->command('start:periodoseco')->everyMinute();
+        $schedule->command('end:periodoseco')->everyMinute();
+        $schedule->command('end:diasabiertos')->everyMinute();
     }
 
     /**

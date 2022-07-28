@@ -1336,32 +1336,32 @@ INSERT INTO public.registro_muertes
 VALUES('MBG0010', '2017-04-13', NULL, '2022-06-20 13:32:27.000', '2022-06-20 13:32:27.000', 'PROCESO HEMORRAGICO INTESTINAL', 1);
 
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MES0043', 300, '2018-05-15', NULL, '2022-06-20 16:29:13.000', '2022-06-20 16:29:13.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MES0043', 300, '2018-05-15', NULL, '2022-06-20 16:29:13.000', '2022-06-20 16:29:13.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MES0044', 250, '2018-05-15', NULL, '2022-06-20 16:29:56.000', '2022-06-20 16:29:56.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MES0044', 250, '2018-05-15', NULL, '2022-06-20 16:29:56.000', '2022-06-20 16:29:56.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MES0045', 300, '2018-05-15', NULL, '2022-06-20 16:30:53.000', '2022-06-20 16:30:53.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MES0045', 300, '2018-05-15', NULL, '2022-06-20 16:30:53.000', '2022-06-20 16:30:53.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MES0046', 150, '2018-05-15', NULL, '2022-06-20 16:32:02.000', '2022-06-20 16:32:02.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MES0046', 150, '2018-05-15', NULL, '2022-06-20 16:32:02.000', '2022-06-20 16:32:02.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MES0047', 200, '2016-08-29', NULL, '2022-06-20 16:33:08.000', '2022-06-20 16:33:08.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MES0047', 200, '2016-08-29', NULL, '2022-06-20 16:33:08.000', '2022-06-20 16:33:08.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('BRA0001', 1010, '2020-02-28', NULL, '2022-06-20 16:33:40.000', '2022-06-20 16:33:40.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('BRA0001', 1010, '2020-02-28', NULL, '2022-06-20 16:33:40.000', '2022-06-20 16:33:40.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MBG0011', 200, '2018-09-10', NULL, '2022-06-20 16:26:41.000', '2022-06-20 16:26:41.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MBG0011', 200, '2018-09-10', NULL, '2022-06-20 16:26:41.000', '2022-06-20 16:26:41.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MBG0012', 100, '2018-09-10', NULL, '2022-06-20 16:27:50.000', '2022-06-20 16:27:50.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MBG0012', 100, '2018-09-10', NULL, '2022-06-20 16:27:50.000', '2022-06-20 16:27:50.000', '1111111113',1);
 INSERT INTO public.ventas
-(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente)
-VALUES('MBG0013', 100, '2018-09-10', NULL, '2022-06-20 16:28:24.000', '2022-06-20 16:28:24.000', '1111111113');
+(animal_id, ventas_valor, ventas_fecha, deleted_at, created_at, updated_at, cedula_cliente,estado_anterior)
+VALUES('MBG0013', 100, '2018-09-10', NULL, '2022-06-20 16:28:24.000', '2022-06-20 16:28:24.000', '1111111113',1);
 
 INSERT INTO public.monta
 (monta_madre, monta_padre, monta_fecha, monta_exitosa, deleted_at, created_at, updated_at)

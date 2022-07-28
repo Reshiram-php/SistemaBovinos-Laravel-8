@@ -1,5 +1,5 @@
 @section('title')
-SRB - Nutrición
+SGB - Nutrición
 @endsection
 @extends('layouts.main')
 @section('style')

@@ -1,5 +1,5 @@
 @section('title')
-SRB - Montas
+SGB - Montas
 @endsection
 @extends('layouts.main')
 @section('style')

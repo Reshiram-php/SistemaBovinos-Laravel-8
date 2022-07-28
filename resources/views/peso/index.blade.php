@@ -1,5 +1,5 @@
 @section('title')
-SRB - Peso
+SGB - Peso
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -148,11 +148,11 @@ SRB - Peso
                 },
     
                 language: {url: '{{asset('assets/es-Es.json')}}'},
-                destroy: true,
-                serverSide: true,
+                serverside:true,
                 responsive:true,
                 pageLength: 5,
                 autoWidth:false,
+                destroy: true,
                 order: [[0, 'desc']],
                 dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
                 ajax: {url:'{{ route('peso.index') }}',data:{from_date:from_date, to_date:to_date} },

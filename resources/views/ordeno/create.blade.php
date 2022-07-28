@@ -1,5 +1,5 @@
 @section('title')
-SRB - Ordeño
+SGB - Ordeño
 @endsection
 @extends('layouts.main')
 @section('style')

@@ -1,5 +1,5 @@
 @section('title')
-SRB - Animales
+SGB - Animales
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -54,7 +54,7 @@ SRB - Animales
                             <th data-priority="3">Fecha de nacimiento</th>
                             <th data-priority="4">Raza</th>
                             <th data-priority="5">Categoría</th>
-                            <th data-priority="5">Peso</th>
+                            <th data-priority="5">Peso(KG)</th>
                             <th data-priority="6">Estado del animal</th>
                             <th data-priority="7">Estado productivo</th>
                             <th data-priority="8">Días abiertos</th>

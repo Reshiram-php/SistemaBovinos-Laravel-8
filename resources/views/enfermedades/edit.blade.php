@@ -1,5 +1,5 @@
 @section('title')
-SRB - Enfermedades
+SGB - Enfermedades
 @endsection
 @extends('layouts.main')
 @section('style')

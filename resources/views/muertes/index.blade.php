@@ -1,5 +1,5 @@
 @section('title')
-SRB - Muertes
+SGB - Muertes
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -78,19 +78,20 @@ SRB - Muertes
 <script>
     
     $(document).ready(function () {
-        $('#edit-btn tfoot th').each(function () {
+    $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
     });
     $('.input-daterange').datepicker({
         language: 'es',
         changeYear: true,
-        todayBtn:'linked',
-        format:'yyyy-mm-dd',
-        autoclose:true
+        todayBtn: 'linked',
+        format: 'yyyy-mm-dd',
+        autoclose: true
     });
 
     load_data();
+
     function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -132,31 +133,33 @@ SRB - Muertes
     // Requery the server with the new one-time export settings
     dt.ajax.reload();
 };
-    function load_data(from_date = '', to_date = ''){
-        $('#edit-btn').DataTable( {
-            initComplete: function () {
-                // Apply the search
-                this.api()
-                    .columns()
-                    .every(function () {
-                        var that = this;
 
-                        $('input', this.footer()).on('keyup change clear', function () {
-                            if (that.search() !== this.value) {
-                                that.search(this.value).draw();
-                            }
-                        });
+    function load_data(from_date = '', to_date = '') {
+        
+        var table= $('#edit-btn').DataTable({
+            initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
                     });
+                });
             },
-            language: {url: '{{asset('assets/es-Es.json')}}'},
-            destroy: true,
-            serverSide: true,
-            responsive:true,
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
             pageLength: 5,
-            autoWidth:false,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
             order: [[0, 'desc']],
-            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
-        ajax:{url:'{{ route('muertes.index') }}', data:{from_date:from_date, to_date:to_date}  } ,
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
+            ajax:{url:'{{ route('muertes.index') }}', data:{from_date:from_date, to_date:to_date}  } ,
         columns: [{data: 'registro_muertes_id'},
         {data: 'animal_id'},
         {data: 'registro_muertes_fecha'},

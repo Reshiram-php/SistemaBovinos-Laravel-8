@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
-use App\Http\Requests\VentasFormRequest;
-use App\Http\Requests\ClienteFormRequest;
-use App\Ventas;
 use App\Cliente;
+use App\Http\Requests\ClienteFormRequest;
+use App\Http\Requests\VentasFormRequest;
+use App\Ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -20,14 +20,15 @@ class VentasController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:ventas.index');
     }
-     public function index(Request $request)
+    public function index(Request $request)
     {
         if (request()->ajax()) {
             if (!empty($request->from_date)) {
                 $ventas = Ventas::join('cliente', 'cliente.cedula', '=', 'ventas.cedula_cliente')
                     ->join('animal', 'animal.animal_id', '=', 'ventas.animal_id')
-                    ->whereBetween('registro_muertes_fecha', array($request->from_date, $request->to_date))
+                    ->whereBetween('ventas_fecha', array($request->from_date, $request->to_date))
                     ->get();
 
             } else {
@@ -57,6 +58,10 @@ class VentasController extends Controller
                 <a href="' . route('ventas.edit', $pdf->ventas_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="' . route('ventas.delete', $pdf->ventas_id) . '">
+                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti ti-trash"></i>
                     </button></a>';
                 })
                 ->rawColumns(['btn', 'pdf'])
@@ -72,10 +77,10 @@ class VentasController extends Controller
      */
     public function create()
     {
-        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
-        $clientes=Cliente::get();
+        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->orWhere('animal_estado', '>', 3)->get();
+        $clientes = Cliente::get();
 
-        return view('ventas.create', ["animales" => $animales,"clientes"=>$clientes]);
+        return view('ventas.create', ["animales" => $animales, "clientes" => $clientes]);
     }
 
     /**
@@ -84,26 +89,24 @@ class VentasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VentasFormRequest $request, ClienteFormRequest $rrquest )
+    public function store(VentasFormRequest $request, ClienteFormRequest $rrquest)
     {
-        $cliente= new Cliente;
+        $cliente = new Cliente;
         $ventas = new Ventas;
-        if($request->get('cliente')=="nuevo")
-        {
-            $cliente->cedula=$request->get('cedula');
-            $cliente->nombre=$request->get('nombre');
-            $cliente->teléfono=$request->get('telefono');
+        if ($request->get('cliente') == "nuevo") {
+            $cliente->cedula = $request->get('cedula');
+            $cliente->nombre = $request->get('nombre');
+            $cliente->teléfono = $request->get('telefono');
             $cliente->save();
             $ventas->cedula_cliente = $request->get('cedula');
+        } else {
+            $ventas->cedula_cliente = $request->get('cliente');
         }
-      else{
-        $ventas->cedula_cliente = $request->get('cliente');
-      }
-      $animal = Animal::findOrFail($request->get('animal'));
+        $animal = Animal::findOrFail($request->get('animal'));
         $ventas->animal_id = $request->get('animal');
         $ventas->ventas_fecha = $request->get('fecha');
         $ventas->ventas_valor = $request->get('valor');
-        $ventas->estado_anterior= $animal->animal_estado;
+        $ventas->estado_anterior = $animal->animal_estado;
         $ventas->save();
         $animal = Animal::findOrFail($request->get('animal'));
         $animal->animal_estado = 3;
@@ -130,9 +133,9 @@ class VentasController extends Controller
      */
     public function edit($id)
     {
-        $animales = Animal::where('animal_estado', '<', 2)->Where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
-        $clientes=Cliente::get();
-        return view('ventas.edit', ["animales" => $animales,"venta"=>Ventas::findOrFail($id),"clientes"=>$clientes]);
+        $animales = Animal::where('animal_estado', '<', 2)->Where('animal_id', '!=', "inseminación")->orWhere('animal_estado', '>', 3)->get();
+        $clientes = Cliente::get();
+        return view('ventas.edit', ["animales" => $animales, "venta" => Ventas::findOrFail($id), "clientes" => $clientes]);
     }
 
     /**
@@ -144,31 +147,28 @@ class VentasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cliente= new Cliente;
+        $cliente = new Cliente;
         $ventas = Ventas::findOrFail($id);
 
-        if($request->get('cliente')=="nuevo")
-        {
-            $cliente->cedula=$request->get('cedula');
-            $cliente->nombre=$request->get('nombre');
-            $cliente->teléfono=$request->get('telefono');
+        if ($request->get('cliente') == "nuevo") {
+            $cliente->cedula = $request->get('cedula');
+            $cliente->nombre = $request->get('nombre');
+            $cliente->teléfono = $request->get('telefono');
             $cliente->save();
             $ventas->cedula_cliente = $request->get('cedula');
+        } else {
+            $ventas->cedula_cliente = $request->get('cliente');
         }
-      else{
-        $ventas->cedula_cliente = $request->get('cliente');
-      }
-      $animal = Animal::findOrFail($request->get('animal'));
-      if($ventas->animal_id!=$animal->animal_id)
-        {
-            $animal2=Animal::findOrFail($ventas->animal_id);
-            $animal2->animal_estado=$ventas->estado_anterior;
+        $animal = Animal::findOrFail($request->get('animal'));
+        if ($ventas->animal_id != $animal->animal_id) {
+            $animal2 = Animal::findOrFail($ventas->animal_id);
+            $animal2->animal_estado = $ventas->estado_anterior;
             $animal2->update();
         }
         $ventas->animal_id = $request->get('animal');
         $ventas->ventas_fecha = $request->get('fecha');
         $ventas->ventas_valor = $request->get('valor');
-        $ventas->estado_anterior= $animal->animal_estado;
+        $ventas->estado_anterior = $animal->animal_estado;
         $ventas->save();
         $animal = Animal::findOrFail($request->get('animal'));
         $animal->animal_estado = 3;
@@ -182,8 +182,14 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $ventas = Ventas::findOrFail($id);
+        $animal2 = Animal::findOrFail($ventas->animal_id);
+        $animal2->animal_estado = $ventas->estado_anterior;
+        $animal2->update();
+        $ventas->delete();
+        return redirect('ventas');
+
     }
 }

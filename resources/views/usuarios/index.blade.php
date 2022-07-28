@@ -1,5 +1,5 @@
 @section('title')
-SRB - Usuarios
+SGB - Usuarios
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -123,7 +123,7 @@ SRB - Usuarios
     
                 language: {url: '{{asset('assets/es-Es.json')}}'},
                 destroy: true,
-                serverSide: true,
+                serverside:true,
                 responsive:true,
                 pageLength: 5,
                 autoWidth:false,

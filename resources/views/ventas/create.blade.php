@@ -1,5 +1,5 @@
 @section('title')
-SRB - Ventas
+SGB - Ventas
 @endsection
 @extends('layouts.main')
 @section('style')

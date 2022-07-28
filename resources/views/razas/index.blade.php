@@ -1,5 +1,5 @@
 @section('title')
-SRB - Razas
+SGB - Razas
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -53,13 +53,13 @@ SRB - Razas
 <script src="{{ asset('assets/plugins/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <!-- eCommerce Shop Page js -->
 <script>
-    $(document).ready(function () {
-        $('#edit-btn tfoot th').each(function () {
-            var title = $(this).text();
-            $(this).html('<input type="text" placeholder="buscar" />');
-        });
+     $(document).ready(function () {
+    $('#edit-btn tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="buscar" />');
+    });
        
-        function newexportaction(e, dt, button, config) {
+    function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
     dt.one('preXhr', function (e, s, data) {
@@ -100,31 +100,30 @@ SRB - Razas
     // Requery the server with the new one-time export settings
     dt.ajax.reload();
 };
-            $('#edit-btn').DataTable( {
-                initComplete: function () {
-                    // Apply the search
-                    this.api()
-                        .columns()
-                        .every(function () {
-                            var that = this;
-    
-                            $('input', this.footer()).on('keyup change clear', function () {
-                                if (that.search() !== this.value) {
-                                    that.search(this.value).draw();
-                                }
-                            });
-                        });
-                },
-    
-                language: {url: '{{asset('assets/es-Es.json')}}'},
-                destroy: true,
-                serverSide: true,
-                responsive:true,
-                pageLength: 5,
-                autoWidth:false,
-                order: [[0, 'desc']],
-                dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
-                ajax:'{{ route('razas.datos') }}',
+var table= $('#edit-btn').DataTable({
+            initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+            },
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
+            pageLength: 5,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
+            order: [[0, 'desc']],
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
+            ajax:'{{ route('razas.datos') }}',
                 columns: [
                     {data: 'raza_id'},
                     {data: 'raza_nombre'},

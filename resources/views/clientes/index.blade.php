@@ -1,5 +1,5 @@
 @section('title')
-SRB - Clientes
+SGB - Clientes
 @endsection
 @extends('layouts.main')
 @section('style')

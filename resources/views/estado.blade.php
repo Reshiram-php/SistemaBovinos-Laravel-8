@@ -1,5 +1,5 @@
 @section('title') 
-SRB - Estados
+SGB - Estados
 @endsection 
 @extends('layouts.main')
 @section('style')
@@ -16,7 +16,7 @@ SRB - Estados
             <div class="breadcrumb-list">
                 <ol class="breadcrumb">
 
-                    <li class="breadcrumb-item"><a href="#">SRB</a></li>
+                    <li class="breadcrumb-item"><a href="#">SGB</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Estado</li>
                 </ol>
             </div>

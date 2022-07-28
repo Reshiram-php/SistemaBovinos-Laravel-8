@@ -1,5 +1,5 @@
 @section('title')
-SRB - Partos
+SGB - Partos
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -156,15 +156,15 @@ $(document).ready(function () {
                     });
             },
 
-            language: {url: '{{asset('assets/es-Es.json')}}'},
-            destroy: true,
-            serverSide: true,
-            responsive:true,
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
             pageLength: 5,
-            autoWidth:false,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
             order: [[0, 'desc']],
-            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
-            ajax: {url:'{{ route('partos.index') }}',data:{from_date:from_date, to_date:to_date} },
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
+           ajax: {url:'{{ route('partos.index') }}',data:{from_date:from_date, to_date:to_date} },
             columns: [
                 {data: 'partos_id'},
                 {data: 'partos_madre'},

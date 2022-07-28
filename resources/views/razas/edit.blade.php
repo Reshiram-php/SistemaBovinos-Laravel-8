@@ -1,5 +1,5 @@
 @section('title')
-SRB - Razas
+SGB - Razas
 @endsection
 @extends('layouts.main')
 @section('style')

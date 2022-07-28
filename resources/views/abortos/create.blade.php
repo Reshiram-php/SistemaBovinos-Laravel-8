@@ -1,5 +1,5 @@
 @section('title')
-SRB - Abortos
+SGB - Abortos
 @endsection
 @extends('layouts.main')
 @section('style')

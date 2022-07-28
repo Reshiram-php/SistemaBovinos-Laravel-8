@@ -19,7 +19,7 @@ class VentasTableSeeder extends Seeder
         \DB::table('ventas')->insert(array (
             0 => 
             array (
-                'ventas_id' => 1,
+                
                 'animal_id' => 'MES0043',
                 'ventas_valor' => '300',
                 'ventas_fecha' => '2018-05-15',
@@ -31,7 +31,7 @@ class VentasTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'ventas_id' => 2,
+                
                 'animal_id' => 'MES0044',
                 'ventas_valor' => '250',
                 'ventas_fecha' => '2018-05-15',
@@ -43,7 +43,7 @@ class VentasTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'ventas_id' => 3,
+                
                 'animal_id' => 'MES0045',
                 'ventas_valor' => '300',
                 'ventas_fecha' => '2018-05-15',
@@ -55,7 +55,7 @@ class VentasTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'ventas_id' => 4,
+                
                 'animal_id' => 'MES0046',
                 'ventas_valor' => '150',
                 'ventas_fecha' => '2018-05-15',
@@ -67,7 +67,7 @@ class VentasTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'ventas_id' => 5,
+                
                 'animal_id' => 'MES0047',
                 'ventas_valor' => '200',
                 'ventas_fecha' => '2016-08-29',
@@ -79,7 +79,7 @@ class VentasTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'ventas_id' => 6,
+                
                 'animal_id' => 'BRA0001',
                 'ventas_valor' => '1010',
                 'ventas_fecha' => '2020-02-28',
@@ -91,7 +91,7 @@ class VentasTableSeeder extends Seeder
             ),
             6 => 
             array (
-                'ventas_id' => 7,
+                
                 'animal_id' => 'MBG0011',
                 'ventas_valor' => '200',
                 'ventas_fecha' => '2018-09-10',
@@ -103,7 +103,7 @@ class VentasTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'ventas_id' => 8,
+                
                 'animal_id' => 'MBG0012',
                 'ventas_valor' => '100',
                 'ventas_fecha' => '2018-09-10',
@@ -115,7 +115,7 @@ class VentasTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'ventas_id' => 9,
+                
                 'animal_id' => 'MBG0013',
                 'ventas_valor' => '100',
                 'ventas_fecha' => '2018-09-10',

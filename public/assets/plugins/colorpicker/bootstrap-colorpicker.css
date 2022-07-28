@@ -163,8 +163,8 @@
   /* Chrome10+,Safari5.1+ */
   /* Opera 11.10+ */
   /* IE10+ */
-  background: -webkit-gradient(linear, left bottom, left top, from(red), color-stop(8%, #ff8000), color-stop(17%, yellow), color-stop(25%, #80ff00), color-stop(33%, lime), color-stop(42%, #00ff80), color-stop(50%, cyan), color-stop(58%, #506fe4), color-stop(67%, blue), color-stop(75%, #8000ff), color-stop(83%, magenta), color-stop(92%, #ff0080), to(red));
-  background: linear-gradient(to top, red 0%, #ff8000 8%, yellow 17%, #80ff00 25%, lime 33%, #00ff80 42%, cyan 50%, #506fe4 58%, blue 67%, #8000ff 75%, magenta 83%, #ff0080 92%, red 100%);
+  background: -webkit-gradient(linear, left bottom, left top, from(red), color-stop(8%, #ff8000), color-stop(17%, yellow), color-stop(25%, #80ff00), color-stop(33%, lime), color-stop(42%, #00ff80), color-stop(50%, cyan), color-stop(58%, #00983d), color-stop(67%, blue), color-stop(75%, #8000ff), color-stop(83%, magenta), color-stop(92%, #ff0080), to(red));
+  background: linear-gradient(to top, red 0%, #ff8000 8%, yellow 17%, #80ff00 25%, lime 33%, #00ff80 42%, cyan 50%, #00983d 58%, blue 67%, #8000ff 75%, magenta 83%, #ff0080 92%, red 100%);
   /* W3C */ }
 
 .colorpicker-alpha {
@@ -260,8 +260,8 @@
   /* Chrome10+,Safari5.1+ */
   /* Opera 11.10+ */
   /* IE10+ */
-  background: -webkit-gradient(linear, right top, left top, from(red), color-stop(8%, #ff8000), color-stop(17%, yellow), color-stop(25%, #80ff00), color-stop(33%, lime), color-stop(42%, #00ff80), color-stop(50%, cyan), color-stop(58%, #506fe4), color-stop(67%, blue), color-stop(75%, #8000ff), color-stop(83%, magenta), color-stop(92%, #ff0080), to(red));
-  background: linear-gradient(to left, red 0%, #ff8000 8%, yellow 17%, #80ff00 25%, lime 33%, #00ff80 42%, cyan 50%, #506fe4 58%, blue 67%, #8000ff 75%, magenta 83%, #ff0080 92%, red 100%);
+  background: -webkit-gradient(linear, right top, left top, from(red), color-stop(8%, #ff8000), color-stop(17%, yellow), color-stop(25%, #80ff00), color-stop(33%, lime), color-stop(42%, #00ff80), color-stop(50%, cyan), color-stop(58%, #00983d), color-stop(67%, blue), color-stop(75%, #8000ff), color-stop(83%, magenta), color-stop(92%, #ff0080), to(red));
+  background: linear-gradient(to left, red 0%, #ff8000 8%, yellow 17%, #80ff00 25%, lime 33%, #00ff80 42%, cyan 50%, #00983d 58%, blue 67%, #8000ff 75%, magenta 83%, #ff0080 92%, red 100%);
   /* W3C */ }
 
 .colorpicker.colorpicker-horizontal .colorpicker-alpha {

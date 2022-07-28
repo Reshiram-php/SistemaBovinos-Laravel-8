@@ -17,7 +17,7 @@ $(document).ready(function() {
                 enabled: false
             }
         },
-        colors: ['#506fe4'],
+        colors: ['#00983d'],
         series: [{
             name: "Desktops",
             data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
@@ -71,7 +71,7 @@ $(document).ready(function() {
         stroke: {
             curve: 'smooth',
         },
-        colors: ['#506fe4', '#43d187'],
+        colors: ['#00983d', '#43d187'],
         series: [{
             name: 'Inward',
             data: [31, 40, 28, 51, 42, 109, 100]
@@ -136,7 +136,7 @@ $(document).ready(function() {
             width: 2,
             colors: ['transparent']
         },
-        colors: ['#506fe4', '#43d187'],
+        colors: ['#00983d', '#43d187'],
         series: [{
             name: 'Net Profit',
             data: [44, 55, 57, 56, 61, 58]
@@ -200,7 +200,7 @@ $(document).ready(function() {
                 columnWidth: '20%',
             },
         },
-        colors: ['#506fe4','#43d187'],
+        colors: ['#00983d','#43d187'],
         series: [{
             name: 'Earning',
             data: [5, 7, 8, 6, 7, 5, 6, 6, 7, 4]
@@ -250,11 +250,11 @@ $(document).ready(function() {
         x: 'Bananas',
         seriesIndex: 0,
         label: {
-          borderColor: '#506fe4',
+          borderColor: '#00983d',
           offsetY: 0,
           style: {
             color: '#fff',
-            background: '#506fe4',
+            background: '#00983d',
           },
           text: 'Bananas are good',
         }
@@ -273,7 +273,7 @@ $(document).ready(function() {
         endingShape: 'rounded'  
       }
     },
-    colors: ['#506fe4'],
+    colors: ['#00983d'],
     dataLabels: {
       enabled: false
     },
@@ -358,7 +358,7 @@ $(document).ready(function() {
         horizontal: false
       }
     },
-    colors: ['#506fe4','#43d187'],
+    colors: ['#00983d','#43d187'],
     dataLabels: {
       enabled: true
     }
@@ -399,7 +399,7 @@ $(document).ready(function() {
         columnWidth: '50%'
       }
     },
-    colors: ['#506fe4','#43d187','#f7bb4d'],
+    colors: ['#00983d','#43d187','#f7bb4d'],
     fill: {
       opacity: [0.85, 0.25, 1],
       gradient: {
@@ -699,7 +699,7 @@ $(document).ready(function() {
     plotOptions: {
       candlestick: {
         colors: {
-          upward: '#506fe4',
+          upward: '#00983d',
           downward: '#43d187'
         }
       }
@@ -737,7 +737,7 @@ $(document).ready(function() {
         dataLabels: {
             enabled: false
         },
-        colors: ['#506fe4', '#43d187','#96a3b6'], 
+        colors: ['#00983d', '#43d187','#96a3b6'], 
         series: [60, 45, 25],
         labels: ['Electronics', 'Fashion', 'Food'],
         legend: {
@@ -786,7 +786,7 @@ $(document).ready(function() {
                 }
             }
         },
-        colors: ['#506fe4', '#43d187','#f7bb4d', '#f2f3f7'],
+        colors: ['#00983d', '#43d187','#f7bb4d', '#f2f3f7'],
         series: [44, 55, 67, 83],
         labels: ['News', 'Media', 'Ads', 'Others'], 
     }
@@ -840,7 +840,7 @@ $(document).ready(function() {
         stroke: {
             dashArray: 4
         },
-        colors:["#506fe4"],
+        colors:["#00983d"],
         series: [65],
         labels: ['Completed'],        
     }
@@ -878,7 +878,7 @@ $(document).ready(function() {
         }
       }
     },
-    colors: ['#506fe4', '#43d187', '#f7bb4d', '#96a3b6'],
+    colors: ['#00983d', '#43d187', '#f7bb4d', '#96a3b6'],
     labels: ['Website', 'Mobile', 'Offline', 'Direct'],
     legend: {
       show: true,

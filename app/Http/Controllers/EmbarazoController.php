@@ -86,11 +86,6 @@ class EmbarazoController extends Controller
         return view("embarazo.create", ["animales" => $monta]);
     }
 
-    public function show($id)
-    {
-        return view("embarazo.show", ["embarazo" => Embarazo::findOrFail($id)]);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,7 +103,10 @@ class EmbarazoController extends Controller
         $embarazos->embarazos_fecha = $request->get('fecha');
         $embarazos->monta_id = $monta->monta_id;
         $fecha = Carbon::parse($request->get('fecha'));
+        $fecha2=Carbon::parse($request->get('fecha'));
+        $fecha2->addDays(60);
         $fecha->addDays(279);
+       
         $embarazos->fecha_aproximada = $fecha;
         $embarazos->embarazo_activo = 1;
         $embarazos->save();
@@ -118,6 +116,7 @@ class EmbarazoController extends Controller
         $monta->monta_exitosa = "Si";
         $monta->update();
         $embarazos2 = Embarazo::get()->last();
+        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,embarazo_id) values (?,?,?,?,?,?)',["revisión ginecológica", 'revisión ginecológica de : '.$embarazos2->animal_madre,$fecha2,$fecha2,Auth::user()->id,$embarazos2->embarazos_id]);
         DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,embarazo_id) values (?,?,?,?,?,?)',["proximo parto", 'parto de la gestación número : '.$embarazos2->embarazos_id,$fecha,$fecha,Auth::user()->id,$embarazos2->embarazos_id]);
         return redirect('embarazo');
     }

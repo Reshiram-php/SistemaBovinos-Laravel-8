@@ -87,7 +87,9 @@ class VacunasController extends Controller
         $vacunas->save();
         $vacunas2 = Vacunas::get()->last();
         $nombre=ListaVacunas::findOrFail($vacunas2->vacuna_id);
+        if($vacunas2->registro_vacunas_proxima!=null){
         DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,vacunas_id) values (?,?,?,?,?,?)',[$nombre->vacuna_nombre, 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),$vacunas2->registro_vacunas_proxima,$vacunas2->registro_vacunas_proxima,Auth::user()->id,$vacunas2->registro_vacunas_id]);
+        }
         return redirect('vacunas'); 
     }
 
@@ -146,7 +148,9 @@ class VacunasController extends Controller
         $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'),$request->get('vacuna'));
         $vacunas->update();
         $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
+        if($vacunas->registro_vacunas_proxima!=null){
         DB::update('update eventos set title =  ? , descripcion= ? , "start" = ? , "end" = ? ,id_user = ? where vacunas_id = ?',[$nombre->vacuna_nombre, 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),$vacunas->registro_vacunas_proxima,$vacunas->registro_vacunas_proxima,Auth::user()->id,$vacunas->registro_vacunas_id]);
+        }
         return redirect('vacunas');
     }
 

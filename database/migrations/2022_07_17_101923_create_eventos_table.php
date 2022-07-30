@@ -25,6 +25,7 @@ class CreateEventosTable extends Migration
             $table->integer('embarazo_id')->nullable();
             $table->integer('actividades_id')->nullable();
             $table->integer('vacunas_id')->nullable();
+            $table->integer('partos_id')->nullable();
         });
     }
 

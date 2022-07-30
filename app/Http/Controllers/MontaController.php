@@ -137,7 +137,7 @@ class MontaController extends Controller
         $madre->update();
         $monta2 = Monta::get()->last();
         $fecha = Carbon::parse($request->get('fecha'));
-        $fecha->addDays(10);
+        $fecha->addDays(21);
         DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,monta_id) values (?,?,?,?,?,?)', ["verificación de inseminación", 'verificación de inseminación de la monta numero: ' . $monta2->monta_id, $fecha, $fecha, Auth::user()->id, $monta2->monta_id]);
         return redirect('monta');
     }

@@ -92,7 +92,9 @@ class ActividadesController extends Controller
         $actividades->save();
         $actividades2 = Actividades::get()->last();
         $nombre=ListaActividades::findOrFail($actividades2->actividades_id);
+        if($actividades2->registro_actividades_proxima!=null){
         DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,actividades_id) values (?,?,?,?,?,?)',['vacunacion '.$nombre->actividades_nombre, $nombre->actividades_nombre.' de '.$request->get('animal'),$this->CalcFecha($request->get('fecha'),$request->get('actividad')),$this->CalcFecha($request->get('fecha'),$request->get('actividad')),Auth::user()->id,$actividades2->registro_actividades_id]);
+        }
         return redirect('actividades'); 
     }
 

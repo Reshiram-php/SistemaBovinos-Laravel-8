@@ -1,5 +1,5 @@
 @section('title')
-SGB - Razas
+SGB - Enfermedades
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -29,7 +29,7 @@ SGB - Razas
 <div class="col-lg-12">
     <div class="card m-b-30">
         <div class="card-header">
-            <h5 class="card-title">Razas</h5>
+            <h5 class="card-title">Enfermedades</h5>
         </div>
         @if (count($errors)>0)
         <div class="alert alert-danger">
@@ -42,24 +42,16 @@ SGB - Razas
             </ul>
         </div>
         @endif
-        {!! Form::open(array('url'=>'razas','method'=>'POST','autocomplete'=>'off')) !!}
+        {!! Form::open(array('url'=>'listadoen','method'=>'POST','autocomplete'=>'off')) !!}
         {{ Form::token() }}
         <div class="row">
             
 
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
-                    <label>Nombre de la Raza</label>
-                    <input type="text" name="raza_nombre" value="{{ old('raza_nombre') }}" class="form-control" data-toggle="tooltip" data-placement="top"
-                        placeholder="nombre" title="Ingrese nombre de la raza">
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="form-group">
-                    <label>Acronimo</label>
-                    <input type="text" name="acronimo" value="{{ old('acronimo') }}" class="form-control" placeholder="acronimo"
-                        data-toggle="tooltip" data-placement="top" title="Acrónimo de la raza">
+                    <label>Nombre de la Enfermedad</label>
+                    <input type="text" name="enfermedades_nombre" value="{{ old('enfermedades_nombre') }}" class="form-control" data-toggle="tooltip" data-placement="top"
+                        placeholder="nombre" title="Ingrese nombre de la enfermedad">
                 </div>
             </div>
 

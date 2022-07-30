@@ -158,7 +158,7 @@ SGB - Enfermedades
                 columns: [
                     {data: 'registro_enfermedades_id'},
                     {data: 'animal_id'},
-                    {data: 'enfermedad_nombre'},
+                    {data: 'enfermedades_nombre'},
                     {data: 'enfermedad_fecha'},
                     {data: 'enfermedad_estado'},
                     {data: 'pdf'}

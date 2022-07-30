@@ -112,7 +112,9 @@
                                         alt="backend"><span>Sanidad</span>
                                 </a>
                                 <ul class="vertical-submenu">
+                                    <li><a href="{{url('/listadoen')}}">Listado de Enfermedades</a></li>
                                     <li><a href="{{url('/enfermedades')}}">Registro de Enfermedades</a></li>
+                                    <li><a href="{{url('/listadova')}}">Listado de Vacunas</a></li>
                                     <li><a href="{{url('/vacunas')}}">Vacunación</a></li>
                                     <li><a href="{{url('/actividades')}}">Actividades</a></li>
 

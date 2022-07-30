@@ -59,7 +59,7 @@ SGB - Razas
                 <div class="form-group">
                     <label>Acronimo</label>
                     <input type="text" name="acronimo" value="{{ old('acronimo',$razas->acr) }}" class="form-control" placeholder="acronimo"
-                        data-toggle="tooltip" data-placement="top" title="Peso del animal">
+                        data-toggle="tooltip" data-placement="top" title="Acrónimo de la raza">
                 </div>
             </div>
 

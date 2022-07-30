@@ -64,12 +64,30 @@ SGB - Enfermedades
 
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
-                    <label>Nombre de la enfermedad</label>
-                    <input type="text" name="enfermedad" value="{{ old('enfermedad',$enfermedad->enfermedad_nombre) }}" class="form-control" data-toggle="tooltip" data-placement="top"
-                        title="Ingrese Nombre">
+                    <label>Enfermedad</label>
+                    <select id="Enfermedad" name="enfermedad" class="form-control selectpicker" data-live-search="true" data-toggle="tooltip" data-placement="top"
+                        title="Seleccione enfermedad">
+                        <option value="" disabled="" selected="">Seleccione Enfermedad: </option>
+                        @foreach ($listado as $r)
+                        @if (old('enfermedad',$enfermedad->enfermedades_id)==$r->enfermedades_id )
+                        <option selected value="{{ $r->enfermedades_id }}">{{ $r->enfermedades_nombre}}</option>
+                        @else
+                        <option value="{{ $r->enfermedades_id }}">{{ $r->enfermedades_nombre}}</option>
+                        @endif
+                        @endforeach
+                        <option value="nueva"> nueva enfermedad</option>
+                    </select>
                 </div>
             </div>
-
+            <div id="nueva_enfermedad" class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none;">
+                <div class="form-group">
+                    <label>Nombre de la Enfermedad</label>
+                    <input type="text" name="enfermedades_nombre" value="{{ old('enfermedades_nombre') }}"
+                        class="form-control" data-toggle="tooltip" data-placement="top" placeholder="nombre"
+                        title="Ingrese nombre de la enfermedad">
+                </div>
+            </div>
+            
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Fecha de Detección</label>
@@ -88,15 +106,15 @@ SGB - Enfermedades
                     </select>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="Fecha2" class="form-group" style="display:none;">
+            <div id="Fecha2" class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none;">
+                <div  class="form-group" >
                     <label>Fecha de Tratamiento</label>
                     <input type="date" name="fecha_tratamiento" value="{{ old('fecha_tratamiento',$enfermedad->enfermedad_fecha_tratamiento) }}" class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Fecha de tratamiento">
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="tratamiento" class="form-group" style="display:none;">
+            <div id="tratamiento" class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none;">
+                <div  class="form-group" >
                     <label>Ingrese el tratamiento</label>
                     <input type="text" name="tratamiento" value="{{ old('tratamiento',$enfermedad->enfermedad_tratamiento) }}" class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Ingrese tratamiento">

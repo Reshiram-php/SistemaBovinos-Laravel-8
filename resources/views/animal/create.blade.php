@@ -99,8 +99,8 @@ SGB - Animales
                     <select class="form-control" id="Sex" name="sexo" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Sexo del animal">
                         <option value="" disabled="" selected="">Seleccione sexo: </option>
-                        <option value="Macho" @if (old('sexo')=="Macho" ) {{ 'selected '}} @endif>Macho</option>
-                        <option value="Hembra" @if (old('sexo')=="Hembra" ) {{ 'selected '}} @endif >Hembra</option>
+                        <option value="Macho" @if (old('sexo')=="Macho" ) {{ 'selected ' }} @endif>Macho</option>
+                        <option value="Hembra" @if (old('sexo')=="Hembra" ) {{ 'selected ' }} @endif>Hembra</option>
                     </select>
                 </div>
             </div>
@@ -121,8 +121,8 @@ SGB - Animales
                         data-placement="top" title="Seleccione Si o No">
                         <option value="" disabled="" selected="">¿Su Animal ya tuvo su primer parto o primera monta?
                         </option>
-                        <option value=1 @if (old('nivel')==1 ) {{ 'selected '}} @endif>Si</option>
-                        <option value=2 @if (old('nivel')==2 ) {{ 'selected '}} @endif>No</option>
+                        <option value=1 @if (old('nivel')==1 ) {{ 'selected ' }} @endif>Si</option>
+                        <option value=2 @if (old('nivel')==2 ) {{ 'selected ' }} @endif>No</option>
                     </select>
                 </div>
             </div>
@@ -139,7 +139,7 @@ SGB - Animales
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Raza</label>
-                    <select id="Raza" name="raza" class="form-control" data-toggle="tooltip" data-placement="top"
+                    <select id="Raza" name="raza" class="form-control selectpicker" data-live-search="true" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Raza del animal">
                         <option value="" disabled="" selected="">Seleccione raza: </option>
                         @foreach ($razas as $r)
@@ -149,35 +149,33 @@ SGB - Animales
                         <option value="{{ $r->raza_id }}"> {{ $r->raza_nombre }} </option>
                         @endif
                         @endforeach
-                        <option value="other" @if (old('raza')=="other" ) {{ 'selected '}} @endif>otro</option>
+                        <option value="other" @if (old('raza')=="other" ) {{ 'selected ' }} @endif>otro</option>
                     </select>
                 </div>
             </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="form-group">
-                    <label>Imagen</label>
-                    <input type="file" name="imagen"  class="form-control" data-toggle="tooltip" data-placement="top">
-
-
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="raza" class="form-group " style="display:none; ">
+            <div id="raza" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group ">
                     <label>Raza</label>
                     <input type="text" name="nueva_raza" class="form-control" value="{{ old('nueva_raza') }}"
                         placeholder="Nueva Raza" data-toggle="tooltip" data-placement="top"
                         title="Escribe el nombre de la raza">
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="razacr" class="form-group " style="display:none; ">
+            <div id="razacr" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group ">
                     <label>Acrónimo de Raza</label>
                     <input type="text" name="acr" class="form-control" value="{{ old('acr') }}"
                         placeholder="Acronimo de identificacion 3 digitos" data-toggle="tooltip" data-placement="top"
                         title="Escribe el acronimo">
                 </div>
             </div>
+            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" name="imagen" class="form-control" data-toggle="tooltip" data-placement="top">
+                </div>
+            </div>
+
         </div>
         <div>
             <p class="text-center">

@@ -101,23 +101,23 @@ SGB - Ventas
             </div>
 
             
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="cedula" class="form-group " style="display:none; ">
+            <div id="cedula" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div  class="form-group " >
                     <label>Cédula del nuevo cliente</label>
                     <input type="number" name="cedula" class="form-control" value="{{ old('cedula') }}"
                         placeholder="10 dígitos, solo números" data-toggle="tooltip" data-placement="top"
                         title="10 dígitos, solo números">
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="nombre" class="form-group " style="display:none; ">
+            <div id="nombre" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group " >
                     <label>Nombre del nuevo cliente</label>
                     <input type="text" name="nombre" class="form-control" value="{{ old('nombre') }}"
                         placeholder="nombre" data-toggle="tooltip" data-placement="top" title="nombre del cliente">
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="telefono" class="form-group " style="display:none; ">
+            <div id="telefono" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div  class="form-group " >
                     <label>Teléfono del nuevo cliente (opcional)</label>
                     <input type="text" name="telefono" class="form-control" value="{{ old('telefono') }}"
                         placeholder="telefono del cliente" data-toggle="tooltip" data-placement="top"

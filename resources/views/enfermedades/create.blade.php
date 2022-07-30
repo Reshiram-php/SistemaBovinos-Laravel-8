@@ -48,8 +48,8 @@ SGB - Enfermedades
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Código del animal</label>
-                    <select name="animal" class="form-control selectpicker" data-live-search="true" data-toggle="tooltip" data-placement="top"
-                        title="Seleccione Código del animal">
+                    <select name="animal" class="form-control selectpicker" data-live-search="true"
+                        data-toggle="tooltip" data-placement="top" title="Seleccione Código del animal">
                         <option value="" disabled="" selected="">Seleccione Código: </option>
                         @foreach ($animales as $r)
                         @if (old('animal')==$r->animal_id )
@@ -64,17 +64,34 @@ SGB - Enfermedades
 
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
-                    <label>Nombre de la enfermedad</label>
-                    <input type="text" name="enfermedad" value="{{ old('enfermedad') }}" class="form-control" data-toggle="tooltip" data-placement="top"
-                        title="Ingrese Nombre">
+                    <label>Enfermedad</label>
+                    <select id="Enfermedad" name="enfermedad" class="form-control selectpicker" data-live-search="true"
+                        data-toggle="tooltip" data-placement="top" title="Seleccione enfermedad">
+                        <option value="" disabled="" selected="">Seleccione Enfermedad: </option>
+                        @foreach ($listado as $r)
+                        @if (old('enfermedad')==$r->enfermedades_id )
+                        <option selected value="{{ $r->enfermedades_id }}">{{ $r->enfermedades_nombre}}</option>
+                        @else
+                        <option value="{{ $r->enfermedades_id }}">{{ $r->enfermedades_nombre}}</option>
+                        @endif
+                        @endforeach
+                        <option value="nueva" @if (old('enfermedad')=="nueva" ) {{ 'selected ' }} @endif> nueva enfermedad</option>
+                    </select>
                 </div>
             </div>
-
+            <div id="nueva_enfermedad" class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none;">
+                <div class="form-group">
+                    <label>Nombre de la Enfermedad</label>
+                    <input type="text" name="enfermedades_nombre" value="{{ old('enfermedades_nombre') }}"
+                        class="form-control" data-toggle="tooltip" data-placement="top" placeholder="nombre"
+                        title="Ingrese nombre de la enfermedad">
+                </div>
+            </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Fecha de Detección</label>
-                    <input type="date" name="fecha" value="{{ old('fecha') }}" class="form-control" data-toggle="tooltip" data-placement="top"
-                        title="Seleccione fecha de detección">
+                    <input type="date" name="fecha" value="{{ old('fecha') }}" class="form-control"
+                        data-toggle="tooltip" data-placement="top" title="Seleccione fecha de detección">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -83,22 +100,27 @@ SGB - Enfermedades
                     <select id="Estado" name="estado" class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Código del animal">
                         <option value="" disabled="" selected="">Seleccione: </option>
-                        <option value="Tratado" @if (old('estado')=="Tratado") {{ 'selected '}} @endif>Tratado </option>
-                        <option value="No Tratado" @if (old('estado')=="No Tratado" ) {{ 'selected '}} @endif>No Tratado </option>
+                        <option value="Tratado" @if (old('estado')=="Tratado" ) {{ 'selected ' }} @endif>Tratado
+                        </option>
+                        <option value="No Tratado" @if (old('estado')=="No Tratado" ) {{ 'selected ' }} @endif>No
+                            Tratado </option>
                     </select>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="Fecha2" class="form-group" style="display:none;">
+
+            <div id="Fecha2" style="display:none;" class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
                     <label>Fecha de Tratamiento</label>
-                    <input type="date" name="fecha_tratamiento" value="{{ old('fecha_tratamiento') }}" class="form-control" data-toggle="tooltip" data-placement="top"
+                    <input type="date" name="fecha_tratamiento" value="{{ old('fecha_tratamiento') }}"
+                        class="form-control" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Fecha de tratamiento">
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="tratamiento" class="form-group" style="display:none;">
+            <div id="tratamiento" style="display:none;" class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="form-group">
                     <label>Ingrese el tratamiento</label>
-                    <input type="text" name="tratamiento" value="{{ old('tratamiento') }}" class="form-control" data-toggle="tooltip" data-placement="top"
+                    <input type="text" name="tratamiento" value="{{ old('tratamiento') }}" class="form-control"
+                        data-toggle="tooltip" data-placement="top" placeholder="tratamiento"
                         title="Ingrese tratamiento">
                 </div>
             </div>

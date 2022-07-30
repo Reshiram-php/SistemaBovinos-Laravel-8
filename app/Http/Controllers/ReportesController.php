@@ -170,7 +170,7 @@ class ReportesController extends Controller
 
     public function enfermedadesindividual($id)
     {
-        $enfermedades = Enfermedades::where('registro_enfermedades_id', '=', $id)->first();
+        $enfermedades = Enfermedades::join('enfermedades','registro_enfermedades.enfermedades_id','=','enfermedades.enfermedades_id')->where('registro_enfermedades_id', '=', $id)->first();
         $fecha = Carbon::now()->toDateString();
         $pdf = PDF::loadView('enfermedades.individual', ["monta" => $enfermedades]);
         return $pdf->stream('reporte-enfermedad-codigo-' . $id . '--' . $fecha . '.pdf');

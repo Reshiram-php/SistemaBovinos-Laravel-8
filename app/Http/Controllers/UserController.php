@@ -22,6 +22,11 @@ class UserController extends Controller
             $user = User::get();
             return datatables()
                 ->of($user)
+                ->addColumn('rol',function($rol)
+                {
+                    $roles2 = $rol->roles->first()->name;
+                    return $roles2;
+                })
                 ->addColumn('pdf', function ($pdf) {
                     return '<a href="' . route('usuarios.edit', $pdf->id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
@@ -64,7 +69,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view("usuarios.edit", ["user" => $user]);
+        $roles2 = $user->roles->first()->id;
+        $roles =Role::all();
+        return view("usuarios.edit", ["user" => $user,"roles"=>$roles,"nombre"=>$roles2]);
     }
 
     public function update(Request $request, $id)
@@ -79,6 +86,7 @@ class UserController extends Controller
         $user->email = $request->get('email');
         $user->password = Hash::make($request->get('password'));
         $user->update();
+        $user->roles()->sync($request->get('rol'));
         return redirect('usuarios');
 
     }

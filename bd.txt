@@ -708,7 +708,7 @@ CREATE TABLE public.users (
 CREATE TABLE public.vacunas (
 	vacuna_id serial4 NOT NULL,
 	vacuna_nombre varchar(255) NOT NULL,
-	vacuna_nivel int4 NULL,
+	vacuna_descripcion int4 NULL,
 	CONSTRAINT vacunas_pkey PRIMARY KEY (vacuna_id)
 );
 
@@ -1099,25 +1099,25 @@ INSERT INTO public.raza
 VALUES('Mestizo(GRY HOLAND)', 'MGH');
 
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Triple dosis única', 1);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Neumoentritis', 1);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Brucelosis', 1);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Aftosa', NULL);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Triple', 2);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Sindrome Respiratorio', 3);
 INSERT INTO public.vacunas
-(vacuna_nombre, vacuna_nivel)
+(vacuna_nombre, vacuna_descripcion)
 VALUES('Triple', 3);
 
 INSERT INTO public.animal

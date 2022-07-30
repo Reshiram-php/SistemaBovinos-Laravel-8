@@ -1,5 +1,5 @@
 @section('title')
-SGB - Usuarios
+SGB - Enfermedades
 @endsection
 @extends('layouts.main')
 @section('style')
@@ -10,7 +10,6 @@ SGB - Usuarios
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -18,35 +17,29 @@ SGB - Usuarios
 <div class="col-lg-12">
     <div class="card m-b-30">
         <div class="card-header">
-            <h5 class="card-title">Usuarios</h5>
+            <h5 class="card-title">Enfermedades</h5>
         </div>
         <div class="card-body">
+            
             
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
                     <tfoot>
-                        <th>Id</th>
-                        <th>Nombre </th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th class="inv"> Opciones</th>
+                        <th>Código</th>
+                        <th>Nombre de Enfermedad </th>
+                        <th class="inv">Opciones</th> 
                     </tfoot>
                     <thead>
                         <tr>
-                            <th data-priority="1">Id</th>
-                            <th data-priority="2">Nombre </th>
-                            <th data-priority="3">Correo</th>
-                            <th>Rol</th>
+                            <th data-priority="1">Código</th>
+                            <th data-priority="2">Nombre de Enfermedad </th>
                             <th data-priority="1" class="noVis"> Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
                     </tbody>
                 </table>
-
             </div>
-
         </div>
     </div>
 </div>
@@ -58,14 +51,13 @@ SGB - Usuarios
 <script src="{{ asset('assets/plugins/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <!-- eCommerce Shop Page js -->
 <script>
-    $(document).ready(function () {
-        $('#edit-btn tfoot th').each(function () {
-            var title = $(this).text();
-            $(this).html('<input type="text" placeholder="buscar" />');
-        });
-        
-    
-        function newexportaction(e, dt, button, config) {
+     $(document).ready(function () {
+    $('#edit-btn tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="buscar" />');
+    });
+       
+    function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
     dt.one('preXhr', function (e, s, data) {
@@ -106,36 +98,33 @@ SGB - Usuarios
     // Requery the server with the new one-time export settings
     dt.ajax.reload();
 };
+var table= $('#edit-btn').DataTable({
+            initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
 
-            $('#edit-btn').DataTable( {
-                initComplete: function () {
-                    // Apply the search
-                    this.api()
-                        .columns()
-                        .every(function () {
-                            var that = this;
-    
-                            $('input', this.footer()).on('keyup change clear', function () {
-                                if (that.search() !== this.value) {
-                                    that.search(this.value).draw();
-                                }
-                            });
-                        });
-                },
-    
-                language: {url: '{{asset('assets/es-Es.json')}}'},
-                destroy: true,
-                serverside:true,
-                responsive:true,
-                pageLength: 5,
-                autoWidth:false,
-                dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-6'><'col-sm-6'p>><'row'<'col-sm-12 text-right'i>>",
-                ajax: '{{ route('usuarios.index') }}',
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+            },
+            language: { url: '{{asset('assets/es-Es.json')}}'},
+            serverside: true,
+            pageLength: 5,
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
+            order: [[0, 'desc']],
+            dom: "<'row'<'col-sm-6'l><'col-sm-6 right-col'B>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 text-right'p>><'row'<'col-sm-12 text-right'i>>",
+            ajax:'{{ route('listadoen.datos') }}',
                 columns: [
-                    {data: 'id'},
-                    {data: 'name'},
-                    {data: 'email'},
-                    {data: 'rol'},
+                    {data: 'enfermedades_id'},
+                    {data: 'enfermedades_nombre'},
                     {data: 'pdf'}
                 ],
                 buttons: [
@@ -161,7 +150,7 @@ SGB - Usuarios
                         text: ' nuevo registro  <i class="fa fa-plus"></i> ',
                         className: 'btn btn-info',
                         action: function (e,dt, node, config) {
-                            window.location= 'usuarios/create';
+                            window.location= 'listadoen/create';
                         } 
                     }
                     

@@ -11,7 +11,7 @@ class Enfermedades extends Model
     public $timestamps=true;
     protected $fillable=[
         'animal_id',
-        'enfermedad_nombre',
+        'enfermedades_id',
         'enfermedad_estado',
         'enfermedad_fecha',
         'enfermedad_fecha_tratamiento',

@@ -28,61 +28,39 @@ class RazaTableSeeder extends Seeder
                 
                 'acr' => 'MES',
             ),
+           
             2 => 
-            array (
-                'raza_nombre' => 'Pardo Suizo',
-                
-                'acr' => 'PRS',
-            ),
-            3 => 
             array (
                 'raza_nombre' => 'Holstein',
                 
                 'acr' => 'HOL',
             ),
-            4 => 
-            array (
-                'raza_nombre' => 'Jersey',
-                
-                'acr' => 'JER',
-            ),
-            5 => 
-            array (
-                'raza_nombre' => 'Hereford',
-                
-                'acr' => 'HER',
-            ),
-            6 => 
-            array (
-                'raza_nombre' => 'Angus Rojo',
-                
-                'acr' => 'ANR',
-            ),
-            7 => 
+            
+            3 => 
             array (
                 'raza_nombre' => 'Brahaman',
                 
                 'acr' => 'BRA',
             ),
-            8 => 
+            4 => 
             array (
                 'raza_nombre' => 'Gyr',
                 
                 'acr' => 'GYR',
             ),
-            9 => 
+            5 => 
             array (
             'raza_nombre' => 'Mestizo(Brown Suis y GYR)',
                 
                 'acr' => 'MBG',
             ),
-            10 => 
+            6 => 
             array (
             'raza_nombre' => 'Mestizo(Brown Suis y Holstein)',
                 
                 'acr' => 'MBH',
             ),
-            11 => 
+            7 => 
             array (
             'raza_nombre' => 'Mestizo(GRY HOLAND)',
                 

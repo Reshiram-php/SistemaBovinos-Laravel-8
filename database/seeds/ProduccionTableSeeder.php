@@ -30,7 +30,7 @@ class ProduccionTableSeeder extends Seeder
             2 => 
             array (
                 
-                'produccion_nombre' => 'período seco',
+                'produccion_nombre' => 'periodo seco',
             ),
         ));
         

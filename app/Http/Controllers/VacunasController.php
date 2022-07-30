@@ -95,24 +95,15 @@ class VacunasController extends Controller
     {
         $fecha=Carbon::parse($fecha);
     
-        if($vacuna==4)
+        $data= ListaVacunas::findOrFail($vacuna);
+        if($data->vacuna_dias==null)
         {
-           return $fecha->addMonths(6);
+           return $fecha=null;
         }
         else{
-            if($vacuna==5 || $vacuna==7 ){
-               return $fecha->addMonths(6); 
+               return $fecha->addDays($data->vacuna_dias); 
             }
-            else{
-                if($vacuna==6){
-                    return $fecha->addYear();
-                }
-                else
-                {
-                    return $fecha=null;
-                }
-            }
-        }
+            
     }
     /**
      * Display the specified resource.
@@ -176,15 +167,15 @@ class VacunasController extends Controller
         $cat=$animales->animal_categoria;
         if($cat==1)
         {
-            return ListaVacunas::where('vacuna_nivel','=',1)->orWhere('vacuna_nivel','=',null)->get();
+            return ListaVacunas::where('vacuna_descripcion','=',1)->orWhere('vacuna_descripcion','=',2)->orWhere('vacuna_descripcion','=',5)->orWhere('vacuna_descripcion','=',6)->get();
         }
         else{
             if($cat<4)
             {
-                return ListaVacunas::where('vacuna_nivel',2)->orWhere('vacuna_nivel','=',null)->get();
+                return ListaVacunas::where('vacuna_descripcion',1)->orWhere('vacuna_descripcion','=',3)->orWhere('vacuna_descripcion','=',5)->orWhere('vacuna_descripcion','=',7)->get();
             }
             else{
-                return ListaVacunas::where('vacuna_nivel',3)->orWhere('vacuna_nivel','=',null)->get();
+                return ListaVacunas::where('vacuna_descripcion',1)->orWhere('vacuna_descripcion','=',4)->orWhere('vacuna_descripcion','=',6)->orWhere('vacuna_descripcion','=',7)->get();
             }
         }
         

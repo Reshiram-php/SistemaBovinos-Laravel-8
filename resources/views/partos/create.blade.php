@@ -47,7 +47,7 @@ SGB - Partos
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
-                    <label>Código o numeración del animal</label>
+                    <label>Código de bien</label>
                     <input type="text" name="código" value="{{ old('código') }}" class="form-control" placeholder="Código Animal"
                         data-toggle="tooltip" data-placement="top" title="Escribe el código de bien del animal">
     
@@ -147,8 +147,8 @@ SGB - Partos
                     
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="razacr" class="form-group " style="display:none; ">
+            <div id="razacr" class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none; ">
+                <div  class="form-group " >
                     <label>Acrónimo de Raza</label>
                     <input type="text" name="acr" class="form-control" value="{{ old('acr') }}"
                         placeholder="Acronimo de identificacion 3 digitos" data-toggle="tooltip" data-placement="top"

@@ -20,7 +20,31 @@ $(document).ready(function() {
     }
 
 
+    $("#Enfermedad").on('change', function() {
 
+        if ($(this).val() === "nueva") {
+            $("#nueva_enfermedad").show();
+
+        } else {
+            $("#nueva_enfermedad").hide();
+        }
+    });
+    if ($("#Enfermedad").val() === "nueva") {
+        $("#nueva_enfermedad").show();
+    }
+
+    $("#dosis").on('change', function() {
+
+        if ($(this).val() === "cada_cierto_tiempo") {
+            $("#Periodicidad").show();
+
+        } else {
+            $("#Periodicidad").hide();
+        }
+    });
+    if ($("#dosis").val() === "cada_cierto_tiempo") {
+        $("#Periodicidad").show();
+    }
 
     $("#Raza").on('change', function() {
 

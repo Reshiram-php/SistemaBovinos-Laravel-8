@@ -140,7 +140,7 @@ SGB - Animales
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Raza</label>
-                    <select id="Raza" name="raza" class="form-control" data-toggle="tooltip" data-placement="top"
+                    <select id="Raza" name="raza" class="form-control selectpicker" data-live-search="true" data-toggle="tooltip" data-placement="top"
                         title="Seleccione Raza del animal">
                         <option value="" disabled="" selected="">Seleccione raza: </option>
                         @foreach ($razas as $r)
@@ -155,6 +155,23 @@ SGB - Animales
                 </div>
             </div>
 
+            <div id="raza" style="display:none; " class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div  class="form-group " >
+                    <label>Raza</label>
+                    <input type="text" name="nueva_raza" class="form-control" value="{{ old('nueva_raza') }}"
+                        placeholder="Nueva Raza" data-toggle="tooltip" data-placement="top"
+                        title="Escribe el nombre de la raza">
+                </div>
+            </div>
+            <div id="razacr"  class="col-lg-6 col-sm-6 col-md-6 col-xs-12" style="display:none; ">
+                <div class="form-group " >
+                    <label>Acrónimo de Raza</label>
+                    <input type="text" name="acr" class="form-control" value="{{ old('acr') }}"
+                        placeholder="Acronimo de identificacion 3 digitos" data-toggle="tooltip" data-placement="top"
+                        title="Escribe el acronimo">
+                </div>
+            </div>
+
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Imagen</label>
@@ -165,22 +182,7 @@ SGB - Animales
                 </div>
             </div>
 
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="raza" class="form-group " style="display:none; ">
-                    <label>Raza</label>
-                    <input type="text" name="nueva_raza" class="form-control" value="{{ old('nueva_raza') }}"
-                        placeholder="Nueva Raza" data-toggle="tooltip" data-placement="top"
-                        title="Escribe el nombre de la raza">
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div id="razacr" class="form-group " style="display:none; ">
-                    <label>Acrónimo de Raza</label>
-                    <input type="text" name="acr" class="form-control" value="{{ old('acr') }}"
-                        placeholder="Acronimo de identificacion 3 digitos" data-toggle="tooltip" data-placement="top"
-                        title="Escribe el acronimo">
-                </div>
-            </div>
+            
         </div>
         <div>
             <p class="text-center">

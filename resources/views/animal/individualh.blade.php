@@ -10,9 +10,13 @@
 </head>
 
 <body>
+    
+    
+   
     <div class="content-wrapper">
-        <img src="{{ public_path('assets/images/logo2.svg')}}"
-                            class="img-fluid" alt="logo">
+        <img  src="{{ public_path('assets/images/logo_fcv.png')}}" class="img-fluid" alt="logo">
+       
+        <img align="right" src="{{ public_path('assets/images/logo_utm.png')}}" class="img-fluid" alt="logo">
         <section class="content-header">
             <h1 style='text-align:center; vertical-align:middle'>INFORME INDIVIDUAL</h1>
         </section>

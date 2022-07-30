@@ -51,6 +51,8 @@ Route::get('actividades/individual/{id}', 'ReportesController@actividadesindivid
 Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
 //Rutas get data
 Route::get('razas/datos','RazaController@datos')->name('razas.datos');
+Route::get('listadoen/datos','ListaEnfermedadesController@datos')->name('listadoen.datos');
+Route::get('listadova/datos','ListaVacunasController@datos')->name('listadova.datos');
 Route::get('peso/data','PesoController@data')->name('peso.data');
 Route::get('ordeno/data','OrdeñoController@data')->name('ordeno.data');
 
@@ -71,6 +73,8 @@ Route::resource('ventas', 'VentasController');
 Route::resource('clientes', 'ClienteController');
 Route::resource('razas', 'RazaController');
 Route::resource('usuarios', 'UserController');
+Route::resource('listadoen', 'ListaEnfermedadesController');
+Route::resource('listadova', 'ListaVacunasController');
 Route::resource('custom_chart_name', 'ChartsController');
 
 

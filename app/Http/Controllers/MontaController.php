@@ -38,10 +38,10 @@ class MontaController extends Controller
                 ->addColumn('fin', function ($fin) {
                     {
                         if ($fin->monta_exitosa == null) {
-                            return '<a href="' . route('embarazo.create', $fin->monta_id) . '" class="confirmation2">
-                    <button class="button btn btn-primary">Exito</button> </a>
-                    <a href="' . route('monta.fracaso', $fin->monta_id) . '" class="confirmation2">
-                    <button class="button btn btn-primary">Fracaso</button> </a>
+                            return '<a href="' . route('embarazo.create', $fin->monta_id) . '" >
+                    <button class="button btn btn-primary " onclick="return confirm(\'¿Seguro desea finalizar la monta numero '.$fin->monta_id.'? esta opción es irreversible\')">Exito</button> </a>
+                    <a href="' . route('monta.fracaso', $fin->monta_id) . '">
+                    <button class="button btn btn-primary " onclick="return confirm(\'¿Seguro desea finalizar la monta numero '.$fin->monta_id.'? esta opción es irreversible\')">Fracaso</button> </a>
                     ';
                         } else {
                             return '<a>

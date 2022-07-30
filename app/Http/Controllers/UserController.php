@@ -56,6 +56,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
+            'rol' => 'required',
         ]);
         $user = new User;
         $user->name = $request->get('name');
@@ -80,6 +81,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id . ',id',
             'password' => 'required|string|min:8|confirmed',
+            'rol' => 'required',
         ]);
         $user = User::findOrFail($id);
         $user->name = $request->get('name');

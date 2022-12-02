@@ -55,31 +55,35 @@ SGB - Clientes
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="doctorid">Cedula</label>
-                                        <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}">
+                                        <input type="text" class="form-control" name="cedula"
+                                            value="{{ old('cedula') }}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="doctorname">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}">
+                                        <input type="text" class="form-control" name="nombre"
+                                            value="{{ old('nombre') }}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="doctordegree">teléfono (opcional)</label>
-                                        <input type="text" class="form-control" name="telefono" value="{{ old('telefono') }}">
+                                        <input type="text" class="form-control" name="telefono"
+                                            value="{{ old('telefono') }}">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"><i class="feather icon-plus mr-2"></i>Añadir</button>
+                                <button type="submit" class="btn btn-primary"><i
+                                        class="feather icon-plus mr-2"></i>Añadir</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -107,8 +111,8 @@ SGB - Clientes
                         <div class="col-6 border-right">
                             <h4><i class="ti-pencil"></i></h4>
                             <button type="button" class="btn btn-primary-rgba" data-toggle="modal"
-                    data-target="#exampleModalCenter2-{{ $cliente->cedula }}">Editar</button>
-                    
+                                data-target="#exampleModalCenter2-{{ $cliente->cedula }}">Editar</button>
+
                         </div>
                         <div class="col-6">
                             <h4><i class="ti-trash"></i></h4>

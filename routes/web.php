@@ -81,9 +81,7 @@ Route::resource('custom_chart_name', 'ChartsController');
 /*rutas Wilson */
 
 
-Route::get('/estado', function () {
-    return view('estado');
-});
+Route::get('/estado', [ChartsController::class, 'charts2'])->name('charts');
 
 Route::get('/reportes', function () {    
     return view('reportes');

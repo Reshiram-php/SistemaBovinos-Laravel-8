@@ -10,7 +10,7 @@
                             </div>
 
                             <div class="card-body pt-2">
-                                  
+
                                    <div id="agenda" name="agenda">
                                    </div>
                                    <!-- Modal -->

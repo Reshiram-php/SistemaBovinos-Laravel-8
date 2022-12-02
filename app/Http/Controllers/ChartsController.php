@@ -7,6 +7,12 @@ use App\Peso;
 use App\RegistroOrdeño;
 use Illuminate\Http\Request;
 use DB;
+use App\Animal;
+use App\Abortos;
+use App\Enfermedades;
+use App\Partos;
+use App\Vacunas;
+use App\Muertes;
 
 class ChartsController extends Controller
 {
@@ -86,5 +92,52 @@ class ChartsController extends Controller
             
             'lecheGroupBy' => $lecheGroupBy */
         ]);
+    }
+
+    public function charts2(Request $request){
+
+        $ternero= Animal::where('animal_categoria',1)
+        ->where('animal_estado', '!=', 2)
+        ->where('animal_estado', '!=', 3)
+        ->where('animal_id','!=',"inseminación")
+        ->get()->count();
+        $torete= Animal::where('animal_categoria',2)
+        ->where('animal_estado', '!=', 2)
+        ->where('animal_estado', '!=', 3)
+        ->where('animal_id','!=',"inseminación")
+        ->get()->count();
+        $vacona= Animal::where('animal_categoria',3)
+        ->where('animal_estado', '!=', 2)
+        ->where('animal_estado', '!=', 3)
+        ->where('animal_id','!=',"inseminación")
+        ->get()->count();
+        $toro= Animal::where('animal_categoria',4)
+        ->where('animal_estado', '!=', 2)
+        ->where('animal_estado', '!=', 3)
+        ->where('animal_id','!=',"inseminación")
+        ->get()->count();
+        $vaca= Animal::where('animal_categoria',5)
+        ->where('animal_estado', '!=', 2)
+        ->where('animal_estado', '!=', 3)
+        ->where('animal_id','!=',"inseminación")
+        ->get()->count();
+        $vacunas=Vacunas::get()->count();
+    
+        $partos=Partos::get()->count();
+        $enfermedades=Enfermedades::get()->count();
+        $abortos=Abortos::get()->count();
+        $muertes=Muertes::get()->count();
+        return view('estado',[
+            'ternero'=>$ternero,
+            'torete'=>$torete,
+            'vacona'=>$vacona,
+            'toro'=>$toro,
+            'vaca'=>$vaca,
+            'vacunas'=>$vacunas,
+            'partos'=>$partos,
+            'enfermedades'=>$enfermedades,
+            'abortos'=>$abortos,
+            'muertes'=>$muertes  ]);
+
     }
 }

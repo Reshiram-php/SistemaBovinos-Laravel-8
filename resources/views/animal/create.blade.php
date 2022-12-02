@@ -139,8 +139,8 @@ SGB - Animales
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Raza</label>
-                    <select id="Raza" name="raza" class="form-control selectpicker" data-live-search="true" data-toggle="tooltip" data-placement="top"
-                        title="Seleccione Raza del animal">
+                    <select id="Raza" name="raza" class="form-control selectpicker" data-live-search="true"
+                        data-toggle="tooltip" data-placement="top" title="Seleccione Raza del animal">
                         <option value="" disabled="" selected="">Seleccione raza: </option>
                         @foreach ($razas as $r)
                         @if(old('raza')==$r->raza_id)

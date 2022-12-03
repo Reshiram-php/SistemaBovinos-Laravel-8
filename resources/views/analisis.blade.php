@@ -37,7 +37,7 @@ SGB - Analisis
           <div class="card-header">
 
             <label for="select-week">Agrupar resultados por</label>
-            <select name="peso[groupBy]" id="select-week" class="form-control">
+            <select name="pesogroupBy" id="select-week" class="form-control">
               <option @if ($pesoGroupBy==='Month' ) selected @endif value="Month">Mes</option>
               <option @if ($pesoGroupBy==='WW' ) selected @endif value="WW">Semana</option>
               <option @if ($pesoGroupBy==='YYYY' ) selected @endif value="YYYY">Año</option>
@@ -46,11 +46,11 @@ SGB - Analisis
             <div class="row f input-daterange mt-3">
 
               <div class="col-md-4">
-                <input type="date" name="peso[start]" id="from_date1" class="form-control" placeholder="Desde"
+                <input type="date" name="pesostart" id="from_date1" class="form-control" placeholder="Desde"
                   @if($pesoStart) value="{{$pesoStart}}" @endif />
               </div>
               <div class="col-md-4">
-                <input type="date" name="peso[end]" id="to_date1" class="form-control" placeholder="Hasta" @if($pesoEnd)
+                <input type="date" name="pesoend" id="to_date1" class="form-control" placeholder="Hasta" @if($pesoEnd)
                   value="{{$pesoEnd}}" @endif />
               </div>
               <div class="col-md-4">
@@ -88,21 +88,21 @@ SGB - Analisis
           <div class="card-header">
 
             <label for="select-week">Agrupar resultados por</label>
-            <select name="peso[groupBy]" id="select-week" class="form-control">
-              <option @if ($pesoGroupBy==='Month' ) selected @endif value="Month">Dia</option>
-              <option @if ($pesoGroupBy==='WW' ) selected @endif value="WW">Semana</option>
-              <option @if ($pesoGroupBy==='YYYY' ) selected @endif value="YYYY">Año</option>
+            <select name="lechegroupBy" id="select-week" class="form-control">
+              <option @if ($lecheGroupBy==='Month' ) selected @endif value="Month">Dia</option>
+              <option @if ($lecheGroupBy==='WW' ) selected @endif value="WW">Semana</option>
+              <option @if ($lecheGroupBy==='YYYY' ) selected @endif value="YYYY">Año</option>
             </select>
             <!-- Filtro 1 -->
             <div class="row f input-daterange mt-3">
 
               <div class="col-md-4">
-                <input type="date" name="peso[start]" id="from_date1" class="form-control" placeholder="Desde"
-                  @if($pesoStart) value="{{$pesoStart}}" @endif />
+                <input type="date" name="lechestart" id="from_date1" class="form-control" placeholder="Desde"
+                  @if($lecheStart) value="{{$lecheStart}}" @endif />
               </div>
               <div class="col-md-4">
-                <input type="date" name="peso[end]" id="to_date1" class="form-control" placeholder="Hasta" @if($pesoEnd)
-                  value="{{$pesoEnd}}" @endif />
+                <input type="date" name="lecheend" id="to_date1" class="form-control" placeholder="Hasta" @if($pesoEnd)
+                  value="{{$lecheEnd}}" @endif />
               </div>
               <div class="col-md-4">
                 <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
@@ -160,10 +160,11 @@ SGB - Analisis
   console.log(promedioPesos);
   var options = {
     series: [{
-      name: 'Peso Anterior',
-      data: promedioPesos?.map(promedio => promedio?.current)
-    }, {
       name: 'Peso Actual',
+      data: promedioPesos?.map(promedio => promedio?.current)
+      
+    }, {
+      name: 'Peso Anterior',
       data: promedioPesos?.map(promedio => promedio?.old)
     }],
     chart: {

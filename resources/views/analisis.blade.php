@@ -25,7 +25,7 @@ SGB - Analisis
 </div>
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->
-<form action="{{route('charts')}}">
+<form action="{{route('charts2')}}">
 
 
   <div class="contentbar">

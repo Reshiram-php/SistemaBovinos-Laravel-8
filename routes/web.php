@@ -87,7 +87,7 @@ Route::get('/reportes', function () {
     return view('reportes');
 });
 
-Route::get('/analisis', [ChartsController::class, 'charts'])->name('charts');
+Route::get('/analisis', [ChartsController::class, 'charts'])->name('charts2');
 
 
 /*Rutas ciclicas exepciones*/

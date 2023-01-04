@@ -23,7 +23,6 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "~6.0",
-        "orangehill/iseed": "^2.6.3",
         "spatie/laravel-permission": "^5.5",
         "yajra/laravel-datatables-oracle": "^9.7"
     },

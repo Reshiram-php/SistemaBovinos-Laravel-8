@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use\Carbon\Carbon;
+use Carbon\Carbon;
 
 class Actividades extends Model
 {

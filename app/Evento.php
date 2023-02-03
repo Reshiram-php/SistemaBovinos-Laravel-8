@@ -16,5 +16,5 @@ class Evento extends Model
         'end'=>'required'
     ];
 
-    protected $fillable=['title', 'descripcion','start','end'];
+    protected $fillable=['title', 'descripcion','start','end','id_user','monta_id','embarazo_id','actividades_id','vacunas_id','partos_id'];
 }

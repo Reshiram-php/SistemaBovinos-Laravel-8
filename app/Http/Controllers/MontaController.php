@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Animal;
 use App\Http\Requests\MontaFormRequest;
 use App\Monta;
+use App\Evento;
+use App\Events\PostEvent;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -138,12 +140,24 @@ class MontaController extends Controller
         $monta2 = Monta::get()->last();
         $fecha = Carbon::parse($request->get('fecha'));
         $fecha->addDays(21);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,monta_id) values (?,?,?,?,?,?)', ["verificación de inseminación", 'verificación de inseminación de la monta numero: ' . $monta2->monta_id, $fecha, $fecha, Auth::user()->id, $monta2->monta_id]);
+        
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "verificación de inseminación",
+            'descripcion' => 'verificación de inseminación de la monta numero: ' . $monta2->monta_id,
+            'start' => $fecha,
+            'end' =>$fecha,
+            'monta_id'=> $monta2->monta_id,
+        ]);
+        event(new PostEvent($post));
         return redirect('monta');
     }
 
     public function update(MontaFormRequest $request, $id)
     {
+        $eventoid=Evento::where('monta_id',$id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento',$eventoid->id)->delete();
+        $eventoid->delete();
         $monta = Monta::findOrFail($id);
         if ($monta->monta_madre == $request->get('código_madre')) {
             $monta->monta_madre = $request->get('código_madre');
@@ -165,8 +179,16 @@ class MontaController extends Controller
         $monta->monta_madre = $request->get('código_madre');
         $monta->update();
         $fecha = Carbon::parse($request->get('fecha'));
-        $fecha->addDays(10);
-        DB::update('update eventos set title =  ? , descripcion= ? , "start" = ? , "end" = ? ,id_user = ? where monta_id = ?', ["verificación de inseminación", 'verificación de inseminación de la monta numero: ' . $monta->monta_id, $fecha, $fecha, Auth::user()->id, $monta->monta_id]);
+        $fecha->addDays(21);
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "verificación de inseminación",
+            'descripcion' => 'verificación de inseminación de la monta numero: ' . $monta->monta_id,
+            'start' => $fecha,
+            'end' =>$fecha,
+            'monta_id'=> $monta->monta_id,
+        ]);
+        event(new PostEvent($post));
         $madre = Animal::findOrFail($request->get('código_madre'));
         $madre->animal_estado = 5;
         $madre->update();

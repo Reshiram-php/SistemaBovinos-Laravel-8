@@ -73,42 +73,30 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
                                             src="{{ asset('assets/images/svg-icon/notifications.svg') }}"
                                             class="img-fluid" alt="notifications">
-                                        <span class="live-icon">2</span></a>
+                                        @if(count(auth()->user()->unreadNotifications))
+                                        <span class="live-icon">
+                                            {{ count(auth()->user()->unreadNotifications) }}
+                                        </span>
+                                        @endif
+                                    </a>
+
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notoficationlink">
                                         <div class="notification-dropdown-title">
-                                            <h4>Notifications</h4>
+                                            <h4>Notificaciones</h4>
                                         </div>
                                         <ul class="list-unstyled">
+                                            @foreach (auth()->user()->unreadNotifications as $notification )
                                             <li class="media dropdown-item">
                                                 <span class="action-icon badge badge-success-inverse">N</span>
                                                 <div class="media-body">
-                                                    <h5 class="action-title">Tarea #1</h5>
-                                                    <p><span class="timing">10 min ago</span></p>
+                                                    <h5 class="action-title">{{ $notification->data['description'] }}
+                                                    </h5>
+                                                    <p><span class="timing">fecha {{
+                                                            date("Y-m-d", strtotime( $notification->data['start']));
+                                                            }}</span></p>
                                                 </div>
                                             </li>
-                                            <li class="media dropdown-item">
-                                                <span class="action-icon badge badge-danger-inverse"><i
-                                                        class="feather icon-thumbs-up"></i></span>
-                                                <div class="media-body">
-                                                    <h5 class="action-title">Tarea #2</h5>
-                                                    <p><span class="timing">Lunes, 12:00 AM</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media dropdown-item">
-                                                <span class="action-icon badge badge-warning-inverse">T</span>
-                                                <div class="media-body">
-                                                    <h5 class="action-title">Tarea #3</h5>
-                                                    <p><span class="timing">Martes, 12:00 AM</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media dropdown-item">
-                                                <span class="action-icon badge badge-danger-inverse"><i
-                                                        class="feather icon-thumbs-up"></i></span>
-                                                <div class="media-body">
-                                                    <h5 class="action-title">Tarea #4</h5>
-                                                    <p><span class="timing">Miercoles, 12:00 AM</span></p>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -130,13 +118,6 @@
                                         </div>
                                         <div class="userbox">
                                             <ul class="list-unstyled mb-0">
-                                                <li class="media dropdown-item">
-                                                    <a href="#" class="profile-icon"><img
-                                                            src="{{ asset('assets/images/svg-icon/crm.svg') }}"
-                                                            class="img-fluid" alt="user">Perfil</a>
-                                                </li>
-                                                <li class="media dropdown-item">
-                                                </li>
                                                 <li class="media dropdown-item">
                                                     <a class="profile-icon" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                               document.getElementById('logout-form').submit();"><img

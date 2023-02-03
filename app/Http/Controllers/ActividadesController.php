@@ -9,6 +9,8 @@ use App\Actividades;
 use Carbon\Carbon;
 use App\Http\Requests\ActividadesFormRequest;
 use App\ListaActividades;
+use App\Evento;
+use App\Events\PostEvent;
 use App\Animal;
 use DB;
 use Auth;
@@ -93,7 +95,16 @@ class ActividadesController extends Controller
         $actividades2 = Actividades::get()->last();
         $nombre=ListaActividades::findOrFail($actividades2->actividades_id);
         if($actividades2->registro_actividades_proxima!=null){
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,actividades_id) values (?,?,?,?,?,?)',['vacunacion '.$nombre->actividades_nombre, $nombre->actividades_nombre.' de '.$request->get('animal'),$this->CalcFecha($request->get('fecha'),$request->get('actividad')),$this->CalcFecha($request->get('fecha'),$request->get('actividad')),Auth::user()->id,$actividades2->registro_actividades_id]);
+            $post=Evento::create([
+                'id_user' => Auth::user()->id,
+                'title' => $nombre->actividades_nombre,
+                'descripcion' =>  $nombre->actividades_nombre.' de '.$request->get('animal'),
+                'start' => $this->CalcFecha($request->get('fecha'),$request->get('actividad')),
+                'end' =>$this->CalcFecha($request->get('fecha'),$request->get('actividad')),
+                'actividades_id'=> $actividades2->registro_actividades_id,
+            ]);
+            event(new PostEvent($post));
+  
         }
         return redirect('actividades'); 
     }
@@ -156,13 +167,29 @@ class ActividadesController extends Controller
      */
     public function update(ActividadesFormRequest $request, $id)
     {
+        $eventoid=Evento::where('actividades_id',$id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento',$eventoid->id)->delete();
+        $eventoid->delete();
         $actividades = Actividades::findOrFail($id);
         $actividades->animal_id = $request->get('animal');
         $actividades->actividades_id=$request->get('actividad');
         $actividades->registro_actividades_fecha=$request->get('fecha');
         $actividades->registro_actividades_proxima=$this->CalcFecha($request->get('fecha'),$request->get('actividad'));
         $actividades->update();
-        
+        $nombre=ListaActividades::findOrFail($actividades->actividades_id);
+        if($actividades->registro_actividades_proxima!=null){
+           
+            $post=Evento::create([
+                'id_user' => Auth::user()->id,
+                'title' => $nombre->actividades_nombre,
+                'descripcion' =>  $nombre->actividades_nombre.' de '.$request->get('animal'),
+                'start' => $this->CalcFecha($request->get('fecha'),$request->get('actividad')),
+                'end' =>$this->CalcFecha($request->get('fecha'),$request->get('actividad')),
+                'actividades_id'=> $actividades->registro_actividades_id,
+            ]);
+            event(new PostEvent($post));
+          
+        }
         return redirect('actividades'); 
     }
 

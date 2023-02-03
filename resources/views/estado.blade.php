@@ -139,7 +139,7 @@ SGB - Estados
 
   <script>
     var options = {
-          series: [{{ $vacunas }}, {{ $partos }}, {{ $abortos }}, {{ $enfermedades }}, {{$vacunas  }}],
+          series: [{{ $vacunas }}, {{ $partos }}, {{ $abortos }}, {{ $enfermedades }}, {{$muertes }}],
           chart: {
           height: 490,
           type: 'radialBar',

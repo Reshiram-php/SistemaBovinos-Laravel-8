@@ -9,6 +9,8 @@ use App\Http\Requests\PartosFormRequest;
 use App\Http\Requests\RazaFormRequest;
 use App\Partos;
 use App\Raza;
+use App\Evento;
+use App\Events\PostEvent;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -105,7 +107,12 @@ class PartosController extends Controller
         $partos->hijo_id = $id;
         $partos->partos_fecha = $request3->get('nacimiento');
         $partos->partos_complicaciones = $request3->get('complicaciones');
+        if($request3->get('complicaciones')=="SI"){
         $partos->partos_descripción = $request3->get('descripción');
+        }
+        else{
+            $partos->partos_descripción = "Ninguno";
+        }
         $partos->embarazo_id = $request3->get('embarazo_id');
         $partos->save();
 
@@ -128,29 +135,67 @@ class PartosController extends Controller
         $fecha3->addDays(300);
         $fecha4->addDays(360);
 
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,partos_id) values (?,?,?,?,?,?)', ["Inicio días abiertos", 'inicio dias abiertos de : ' . $partos2->partos_madre, $fecha, $fecha, Auth::user()->id, $partos2->partos_id]);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,partos_id) values (?,?,?,?,?,?)', ["Fin días abiertos", 'final dias abiertos de : ' . $partos2->partos_madre, $fecha2, $fecha2, Auth::user()->id, $partos2->partos_id]);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,partos_id) values (?,?,?,?,?,?)', ["Inicio periodo seco", 'inicio periodo seco de : ' . $partos2->partos_madre, $fecha3, $fecha3, Auth::user()->id, $partos2->partos_id]);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,partos_id) values (?,?,?,?,?,?)', ["Fin periodo seco", 'final periodo seco de : ' . $partos2->partos_madre, $fecha4, $fecha4, Auth::user()->id, $partos2->partos_id]);
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Inicio días abiertos",  
+            'descripcion' => 'inicio dias abiertos de : ' . $partos2->partos_madre,
+            'start' => $fecha,
+            'end' =>$fecha,
+            'partos_id'=>  $partos2->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Fin días abiertos", 
+            'descripcion' => 'final dias abiertos de : ' . $partos2->partos_madre,
+            'start' => $fecha2,
+            'end' =>$fecha2,
+            'partos_id'=>  $partos2->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Inicio periodo seco", 
+            'descripcion' => 'inicio periodo seco de : ' . $partos2->partos_madre,
+            'start' => $fecha3,
+            'end' =>$fecha3,
+            'partos_id'=> $partos2->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Fin periodo seco",  
+            'descripcion' => 'final periodo seco de : ' . $partos2->partos_madre,
+            'start' => $fecha4,
+            'end' =>$fecha4,
+            'partos_id'=> $partos2->partos_id,
+        ]);
+        event(new PostEvent($post));
+
         return redirect('partos');
     }
-    public function destroy($id)
-    {
-        $delete = Partos::findOrFail($id);
-        $delete->delete();
-        return redirect('partos');
-    }
+    
 
     public function update(PartosFormRequest $request3, $id1)
     {
-
+        $eventosdelete= Evento::where('partos_id',$id1)->get();
+       
+        foreach($eventosdelete as $eventazo){
+        $notificaciones= DB::table('notifications')->where('data->evento',$eventazo->id)->delete();
+        $eventazo->delete();
+        }
         $partos = Partos::findOrFail($id1);
         $animales = Animal::findOrFail($partos->hijo_id);
         $animales->animal_nacimiento = $request3->get('nacimiento');
         $animales->update();
         $partos->partos_fecha = $request3->get('nacimiento');
         $partos->partos_complicaciones = $request3->get('complicaciones');
-        $partos->partos_descripción = $request3->get('descripción');
+        if($request3->get('complicaciones')=="SI"){
+            $partos->partos_descripción = $request3->get('descripción');
+            }
+            else{
+            $partos->partos_descripción = "Ninguno";
+            }
         $partos->embarazo_id = $request3->get('embarazo_id');
         $partos->update();
         $fecha = Carbon::parse($request3->get('nacimiento'));
@@ -160,10 +205,42 @@ class PartosController extends Controller
         $fecha2->addDays(100);
         $fecha3->addDays(300);
         $fecha4->addDays(360);
-        DB::update('update eventos set title = ?, descripcion = ?, "start" = ?, "end" = ? ,id_user = ?  where partos_id = ? and title = ?', ["Fin días abiertos", 'final dias abiertos de : ' .$partos->partos_madre, $fecha2, $fecha2, Auth::user()->id, $partos->partos_id,"Fin días abiertos"]);
-        DB::update('update eventos set title = ?, descripcion = ?, "start" = ?, "end" = ? ,id_user = ?  where partos_id = ? and title = ? ', ["Inicio periodo seco", 'inicio periodo seco de : ' . $partos->partos_madre, $fecha3, $fecha3, Auth::user()->id, $partos->partos_id,"Inicio periodo seco"]);
-        DB::update('update eventos set title = ?, descripcion = ?, "start" = ?, "end" = ? ,id_user = ?  where partos_id = ? and title = ? ', ["Inicio días abiertos", 'inicio dias abiertos de : ' . $partos->partos_madre, $fecha, $fecha, Auth::user()->id, $partos->partos_id,"Inicio días abiertos"]);
-        DB::update('update eventos set title = ?, descripcion = ?, "start" = ?, "end" = ? ,id_user = ?  where partos_id = ? and title = ? ', ["Fin periodo seco", 'final periodo seco de : ' . $partos->partos_madre, $fecha4, $fecha4, Auth::user()->id, $partos->partos_id,"Fin periodo seco"]);
-        return redirect('partos');
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Inicio días abiertos",  
+            'descripcion' => 'inicio dias abiertos de : ' . $partos->partos_madre,
+            'start' => $fecha,
+            'end' =>$fecha,
+            'partos_id'=>  $partos->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Fin días abiertos", 
+            'descripcion' => 'final dias abiertos de : ' . $partos->partos_madre,
+            'start' => $fecha2,
+            'end' =>$fecha2,
+            'partos_id'=>  $partos->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Inicio periodo seco", 
+            'descripcion' => 'inicio periodo seco de : ' . $partos->partos_madre,
+            'start' => $fecha3,
+            'end' =>$fecha3,
+            'partos_id'=> $partos->partos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "Fin periodo seco",  
+            'descripcion' => 'final periodo seco de : ' . $partos->partos_madre,
+            'start' => $fecha4,
+            'end' =>$fecha4,
+            'partos_id'=> $partos->partos_id,
+        ]);
+        event(new PostEvent($post));
+       return redirect('partos');
     }
 }

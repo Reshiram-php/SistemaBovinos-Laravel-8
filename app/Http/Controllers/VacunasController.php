@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\ListaVacunas;
 use App\Http\Requests\VacunasFormRequest;
 use App\Animal;
+use App\Evento;
+use App\Events\PostEvent;
 use DB;
 use Auth;
 use DateTime;
@@ -88,7 +90,15 @@ class VacunasController extends Controller
         $vacunas2 = Vacunas::get()->last();
         $nombre=ListaVacunas::findOrFail($vacunas2->vacuna_id);
         if($vacunas2->registro_vacunas_proxima!=null){
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,vacunas_id) values (?,?,?,?,?,?)',[$nombre->vacuna_nombre, 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),$vacunas2->registro_vacunas_proxima,$vacunas2->registro_vacunas_proxima,Auth::user()->id,$vacunas2->registro_vacunas_id]);
+            $post=Evento::create([
+                'id_user' => Auth::user()->id,
+                'title' => 'vacunación '.$nombre->vacuna_nombre,
+                'descripcion' => 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),
+                'start' => $vacunas2->registro_vacunas_proxima,
+                'end' =>$vacunas2->registro_vacunas_proxima,
+                'vacunas_id'=> $vacunas2->registro_vacunas_id,
+            ]);
+            event(new PostEvent($post));
         }
         return redirect('vacunas'); 
     }
@@ -141,6 +151,9 @@ class VacunasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $eventoid=Evento::where('vacunas_id',$id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento',$eventoid->id)->delete();
+        $eventoid->delete();
         $vacunas = Vacunas::findOrFail($id);
         $vacunas->animal_id = $request->get('animal');
         $vacunas->vacuna_id=$request->get('vacuna');
@@ -149,7 +162,16 @@ class VacunasController extends Controller
         $vacunas->update();
         $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
         if($vacunas->registro_vacunas_proxima!=null){
-        DB::update('update eventos set title =  ? , descripcion= ? , "start" = ? , "end" = ? ,id_user = ? where vacunas_id = ?',[$nombre->vacuna_nombre, 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),$vacunas->registro_vacunas_proxima,$vacunas->registro_vacunas_proxima,Auth::user()->id,$vacunas->registro_vacunas_id]);
+            $post=Evento::create([
+                'id_user' => Auth::user()->id,
+                'title' => 'vacunación '.$nombre->vacuna_nombre, 
+                'descripcion' => 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),
+                'start' => $vacunas->registro_vacunas_proxima,
+                'end' =>$vacunas->registro_vacunas_proxima,
+                'vacunas_id'=> $vacunas->registro_vacunas_id,
+            ]);
+            event(new PostEvent($post));
+
         }
         return redirect('vacunas');
     }

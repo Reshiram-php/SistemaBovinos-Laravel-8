@@ -6,6 +6,8 @@ use App\Animal;
 use App\Embarazo;
 use App\Http\Requests\EmbarazoFormRequest;
 use App\Monta;
+use App\Evento;
+use App\Events\PostEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -114,8 +116,24 @@ class EmbarazoController extends Controller
         $monta->monta_exitosa = "Si";
         $monta->update();
         $embarazos2 = Embarazo::get()->last();
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,embarazo_id) values (?,?,?,?,?,?)',["revisión ginecológica", 'revisión ginecológica de : '.$embarazos2->animal_madre,$fecha2,$fecha2,Auth::user()->id,$embarazos2->embarazos_id]);
-        DB::insert('insert into eventos(title, descripcion, "start", "end",id_user,embarazo_id) values (?,?,?,?,?,?)',["proximo parto", 'parto de la gestación número : '.$embarazos2->embarazos_id,$fecha,$fecha,Auth::user()->id,$embarazos2->embarazos_id]);
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "revisión ginecológica",
+            'descripcion' => 'revisión ginecológica de : '.$embarazos2->animal_madre,
+            'start' => $fecha2,
+            'end' =>$fecha2,
+            'embarazo_id'=> $embarazos2->embarazos_id,
+        ]);
+        event(new PostEvent($post));
+        $post=Evento::create([
+            'id_user' => Auth::user()->id,
+            'title' => "proximo parto",
+            'descripcion' => 'parto de la gestación número : '.$embarazos2->embarazos_id,
+            'start' => $fecha,
+            'end' =>$fecha,
+            'embarazo_id'=> $embarazos2->embarazos_id,
+        ]);
+        event(new PostEvent($post));
         return redirect('embarazo');
     }
 

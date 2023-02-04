@@ -85,7 +85,8 @@
                                             <h4>Notificaciones</h4>
                                         </div>
                                         <ul class="list-unstyled">
-                                            @foreach (auth()->user()->unreadNotifications as $notification )
+                                            @foreach (auth()->user()->unreadNotifications()->take(4)->get() as
+                                            $notification )
                                             <li class="media dropdown-item">
                                                 <span class="action-icon badge badge-success-inverse">N</span>
                                                 <div class="media-body">
@@ -97,7 +98,12 @@
                                                 </div>
                                             </li>
                                             @endforeach
+
                                         </ul>
+                                        <a href="{{ route('markAsRead') }}" class="dropdown-item dropdown-footer"
+                                            style="text-align: center">
+
+                                            marcar como leidas</a>
                                     </div>
                                 </div>
                             </div>

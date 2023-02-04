@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('evento.index');
     }
+
+    public function notifications()
+    {
+        $postnotifications= auth()->user()->unreadNotifications;
+        return view('notificaciones',compact('postnotifications'));        
+    }
+    public function inotifications($id)
+    {
+        auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
+        return back();     
+    }
 }

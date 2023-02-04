@@ -83,12 +83,16 @@ Route::resource('custom_chart_name', 'ChartsController');
 
 Route::get('/estado', [ChartsController::class, 'charts2'])->name('charts');
 
-Route::get('/reportes', function () {    
-    return view('reportes');
-});
+Route::get('/notificaciones', 'HomeController@notifications')->name('notifications');
+
+Route::get('/notificaciones/{id}', 'HomeController@inotifications')->name('individualmark');
 
 Route::get('/analisis', [ChartsController::class, 'charts'])->name('charts2');
 
+Route::get('markAsRead',function(){
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markAsRead');
 
 /*Rutas ciclicas exepciones*/
 

@@ -32,7 +32,7 @@ SGB - Inicio
     </div>
     <br> </br>
     <!-- COLUMNNA ANIMALES -->
-    
+
 
 
     <!-- fin COLUMNNA ANIMALES -->

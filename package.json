@@ -26,6 +26,8 @@
     "dependencies": {
         "apexcharts": "^3.35.3",
         "chart.js": "^3.8.0",
-        "fullcalendar": "^5.11.0"
+        "fullcalendar": "^5.11.0",
+        "laravel-mix-purgecss": "^6.0.0",
+        "save-dev": "^0.0.1-security"
     }
 }

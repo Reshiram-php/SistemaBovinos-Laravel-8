@@ -15,12 +15,12 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon2.ico') }}">
     <!-- Start CSS -->
 
- 
+
     <link rel="stylesheet" href="{{ asset('assets/plugins/switchery/switchery.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/DataTables/datatables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/locales-all.js"></script>
-    
+
 
     <script type="text/javascript">
         var baseURL = {!! json_encode(url('/')) !!}
@@ -103,7 +103,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{{ asset('assets/js/agenda.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-    
+
     @yield('script')
 
     <!-- Core JS -->

@@ -17,15 +17,15 @@
                         role="tab" aria-controls="v-pills-ecommerce" aria-selected="false"><img
                             src="{{ asset('assets/images/svg-icon/insertar.svg') }}" class="img-fluid" alt="eCommerce"
                             data-toggle="tooltip" data-placement="top" title="Gestión del Ganado"></a>
-                            @can('usuarios.index')
-                            <a class="nav-link" id="v-pills-hospital-tab" data-toggle="pill" href="#v-pills-hospital" role="tab"
-                            aria-controls="v-pills-hospital" aria-selected="false"><img
-                                src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
-                                data-toggle="tooltip" data-placement="top" title="Administración"></a>  
-                            @endcan
-                  
+                    @can('usuarios.index')
+                    <a class="nav-link" id="v-pills-hospital-tab" data-toggle="pill" href="#v-pills-hospital" role="tab"
+                        aria-controls="v-pills-hospital" aria-selected="false"><img
+                            src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
+                            data-toggle="tooltip" data-placement="top" title="Administración"></a>
+                    @endcan
 
-                    
+
+
                 </div>
             </div>
             <div class="vertical-menu-detail">
@@ -47,6 +47,9 @@
                                         alt="projects">Analisis</a></li>
                             <li><a href="{{url('/estado')}}"><img src="{{ asset('assets/images/svg-icon/charts.svg') }}"
                                         class="img-fluid" alt="leads">Estado</a></li>
+                            <li><a href="{{url('/notificaciones')}}"><img
+                                        src="{{ asset('assets/images/svg-icon/notifications.svg') }}" class="img-fluid"
+                                        alt="leads">Notificaciones</a></li>
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-ecommerce" role="tabpanel"
@@ -128,7 +131,7 @@
                                 </a>
                             </li>
                             @endcan
-                            
+
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-hospital" role="tabpanel"

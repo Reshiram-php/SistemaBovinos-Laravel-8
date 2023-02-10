@@ -18,7 +18,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
@@ -83,7 +82,7 @@
         </main>
     </div>
 
-    
+
 </body>
 
 </html>

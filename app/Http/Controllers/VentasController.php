@@ -61,7 +61,7 @@ class VentasController extends Controller
                     </button></a>
                     <a href="' . route('ventas.delete', $pdf->ventas_id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                        title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti ti-trash"></i>
+                        title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti-trash"></i>
                     </button></a>';
                 })
                 ->rawColumns(['btn', 'pdf'])

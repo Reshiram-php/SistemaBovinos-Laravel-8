@@ -34,7 +34,7 @@ class UserController extends Controller
                     </button></a>
                     <a href="' . route('usuarios.delete', $pdf->id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                        title="Eliminar Usuario" onclick="return confirm(\'¿Esta seguro que desea eliminar el usuario?,los datos del usuario seleccionado no se podrán recuperar\')"><i class="ti ti-trash"></i>
+                        title="Eliminar Usuario" onclick="return confirm(\'¿Esta seguro que desea eliminar el usuario?,los datos del usuario seleccionado no se podrán recuperar\')"><i class="ti-trash"></i>
                     </button></a>';
                 })
                 ->rawColumns(['pdf'])

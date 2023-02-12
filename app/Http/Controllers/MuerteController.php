@@ -56,10 +56,10 @@ class MuerteController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="' . route('muertes.delete', $pdf->registro_muertes_id) . '">
-                <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                    title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti-trash"></i>
-                </button></a>';
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_muertes_id.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+                   ';
             })
             ->rawColumns(['btn','pdf'])
             ->make(true);
@@ -98,7 +98,7 @@ class MuerteController extends Controller
         $animal = Animal::findOrFail($request->get('animal'));
         $animal->animal_estado = 2;
         $animal->update();
-        return redirect('muertes');
+        return redirect('muertes')->with('creacion', 'ok');
     }
 
     /**
@@ -148,7 +148,7 @@ class MuerteController extends Controller
 
         $animal->animal_estado = 2;
         $animal->update();
-        return redirect('muertes');
+        return redirect('muertes')->with('actualizacion', 'ok');
     }
 
     /**
@@ -164,6 +164,6 @@ class MuerteController extends Controller
         $animal2->animal_estado=$muertes->estado_anterior;
         $animal2->update();
         $muertes->delete();
-        return redirect('muertes');
+        return redirect('muertes')->with('eliminacion', 'ok');
     }
 }

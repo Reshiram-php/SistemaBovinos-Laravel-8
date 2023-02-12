@@ -172,7 +172,7 @@ class PartosController extends Controller
         ]);
         event(new PostEvent($post));
 
-        return redirect('partos');
+        return redirect('partos')->with('creacion', 'ok');
     }
 
 
@@ -240,6 +240,6 @@ class PartosController extends Controller
             'partos_id'=> $partos->partos_id,
         ]);
         event(new PostEvent($post));
-        return redirect('partos');
+        return redirect('partos')->with('actualizacion', 'ok');
     }
 }

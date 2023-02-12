@@ -63,10 +63,10 @@ class AnimalController extends Controller
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('animal.delete', $user->animal_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$user->animal_id.'\')" data-toggle="tooltip" data-placement="top"
                         title="eliminar"><i class="ti-trash"></i>
-                    </button></a>
+                    </button>
                     ';
                         } else {
                             return '<a href="' . route('animal.individualh', $user->animal_id) . '">
@@ -77,10 +77,9 @@ class AnimalController extends Controller
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('animal.delete', $user->animal_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$user->animal_id.'\')" data-toggle="tooltip" data-placement="top"
                         title="eliminar"><i class="ti-trash"></i>
-                    </button></a>
+                    </button>
                     ';
                         }
                     } else {
@@ -185,7 +184,7 @@ class AnimalController extends Controller
         }
         $animales->save();
 
-        return redirect('animal');
+        return redirect('animal')->with('creacion', 'ok');
     }
 
 
@@ -266,7 +265,8 @@ class AnimalController extends Controller
             $animales->animal_imagen=$name;
         }
         $animales->update();
-        return redirect('animal');
+        return redirect('animal')->with('actualizacion', 'ok');
+        ;
     }
 
     /**
@@ -279,7 +279,7 @@ class AnimalController extends Controller
     {
         $delete = Animal::findOrFail($id);
         $delete->delete();
-        return redirect('animal');
+        return redirect('animal')->with('eliminacion', 'ok');
     }
 
     protected function calcategoria($sexo, $fecha, $cat)

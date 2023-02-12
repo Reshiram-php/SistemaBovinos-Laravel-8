@@ -121,10 +121,10 @@ SGB - Clientes
 
 
 
-                            <a href="{{ route('clientes.delete',$cliente->cedula) }}">
-                                <button type="button" class="btn btn-primary-rgba"
-                                    onclick="return confirm('¿Seguro desea eliminar el cliente con cédula {{ $cliente->cedula }}')">Eliminar</button>
-                            </a>
+
+                            <button type="button" class="btn btn-primary-rgba"
+                                onclick="eliminar(event,{{ $cliente->cedula }})">Eliminar</button>
+
                             @endcan
                         </div>
                     </div>
@@ -147,5 +147,56 @@ SGB - Clientes
     @if (count($errors) > 0)
     $('#exampleModalCenter').modal('show');
     @endif
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+      'Eliminación',
+      'El cliente ha sido eliminado.',
+      'success'
+    )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'El cliente ha sido creado correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'El cliente ha sido actualizado correctamente.',
+      'success'
+    )
+</script>
+@endif
+
+<script>
+    function eliminar(event,data) {
+        console.log(data);    event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea eliminar el cliente con cedula '+data,
+  text: " Las ventas a este cliente pasarán a usuario desconocido, Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, bórralo',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("clientes.delete",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+
+  }
+})
+}
+
 </script>
 @endsection

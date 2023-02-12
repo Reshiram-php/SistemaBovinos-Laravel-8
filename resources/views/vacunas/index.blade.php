@@ -10,7 +10,7 @@ SGB - Vacunas
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        
+
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -32,13 +32,13 @@ SGB - Vacunas
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
-                     
+
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
-            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
-        </div>
+                    <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
@@ -61,7 +61,7 @@ SGB - Vacunas
                         </tr>
                     </thead>
                     <tbody>
-                       
+
                     </tbody>
                 </table>
 
@@ -90,7 +90,7 @@ SGB - Vacunas
             format:'yyyy-mm-dd',
             autoclose:true
         });
-    
+
         load_data();
         function newexportaction(e, dt, button, config) {
     var self = this;
@@ -141,7 +141,7 @@ SGB - Vacunas
                         .columns()
                         .every(function () {
                             var that = this;
-    
+
                             $('input', this.footer()).on('keyup change clear', function () {
                                 if (that.search() !== this.value) {
                                     that.search(this.value).draw();
@@ -149,7 +149,7 @@ SGB - Vacunas
                             });
                         });
                 },
-    
+
                 language: {url: '{{asset('assets/es-Es.json')}}'},
                 destroy: true,
                 serverside:true,
@@ -181,7 +181,7 @@ SGB - Vacunas
                             columns: function(idx, data, node) {
                                 if ($(node).hasClass('noVis')) {
                                     return false;
-                                }           
+                                }
                                 return $('#edit-btn').DataTable().column(idx).visible();
                             }
                         }
@@ -191,11 +191,11 @@ SGB - Vacunas
                         className: 'btn btn-info',
                         action: function (e,dt, node, config) {
                             window.location= 'vacunas/create';
-                        } 
+                        }
                     }
-                    
+
                 ]
-            
+
             });
         }
         $('#filter').click(function(){
@@ -209,14 +209,68 @@ SGB - Vacunas
                 alert('Both Date is required');
             }
         });
-    
+
         $('#refresh').click(function(){
             $('#from_date').val('');
             $('#to_date').val('');
             $('#edit_btn').DataTable().destroy();
             load_data();
         });
-        
+
     });
-    </script>
+</script>
+<script>
+    function eliminar(event,data) {
+            console.log(data);    event.preventDefault();
+            Swal.fire({
+      title: 'Seguro desea eliminar el registro de vacunación '+data,
+      text: "Esta acción es irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, bórralo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let url='{{ route("vacunas.delete",":id") }}'
+        url=url.replace(':id',data)
+        window.location.href=url;
+        /*Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ) */
+      }
+    })
+    }
+
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+          'Eliminación',
+          'El registro de vacunación ha sido eliminado.',
+          'success'
+        )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+          'Creación',
+          'El registro de vacunación ha sido creado correctamente.',
+          'success'
+        )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+          'Actualización',
+          'El registro de vacunación ha sido actualizado correctamente.',
+          'success'
+        )
+</script>
+@endif
 @endsection

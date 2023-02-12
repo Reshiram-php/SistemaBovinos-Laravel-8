@@ -27,7 +27,7 @@ class ClienteController extends Controller
         $cliente->cedula=$request->get('cedula');
         $cliente->teléfono= $request->get('telefono');
         $cliente->save();
-        return redirect()->back();
+        return redirect()->back()->with('creacion', 'ok');
     }
 
     public function update(ClienteFormRequest2 $request, $id)
@@ -37,13 +37,13 @@ class ClienteController extends Controller
         $cliente->cedula=$request->get('cedula');
         $cliente->teléfono= $request->get('telefono');
         $cliente->update();
-        return redirect()->back();
+        return redirect()->back()->with('actualizacion', 'ok');
     }
 
     public function delete($id)
     {
         $cliente= Cliente::findOrFail($id);
         $cliente->delete();
-        return redirect()->back();
+        return redirect()->back()->with('eliminacion', 'ok');
     }
 }

@@ -56,10 +56,10 @@ class VacunasController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('vacunas.delete', $pdf->registro_vacunas_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de vacunación '.$pdf->registro_vacunas_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="eliminar"><i class="ti-trash"></i>
-                    </button></a>';
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_vacunas_id.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+                   ';
                      } else {
                          return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
                         <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
@@ -112,7 +112,7 @@ class VacunasController extends Controller
             ]);
             event(new PostEvent($post));
         }
-        return redirect('vacunas');
+        return redirect('vacunas')->with('creacion', 'ok');
     }
 
     protected function CalcFecha($fecha, $vacuna)
@@ -181,7 +181,7 @@ class VacunasController extends Controller
             ]);
             event(new PostEvent($post));
         }
-        return redirect('vacunas');
+        return redirect('vacunas')->with('actualizacion', 'ok');
     }
 
     /**
@@ -192,9 +192,12 @@ class VacunasController extends Controller
      */
     public function delete($id)
     {
+        $eventoid=Evento::where('vacunas_id', $id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento', $eventoid->id)->delete();
+        $eventoid->delete();
         $vacunas = Vacunas::findOrFail($id);
         $vacunas->delete();
-        return redirect('vacunas');
+        return redirect('vacunas')->with('eliminacion', 'ok');
     }
 
     public function SelectVacunas($id)

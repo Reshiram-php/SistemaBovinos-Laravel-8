@@ -166,7 +166,7 @@ SGB - Ventas
         {data: 'nombre'},
         {data: 'btn'},
         {data: 'pdf'}
-        
+
     ],
     "columnDefs": [
 { "width": "8%", "targets": 0 },
@@ -186,7 +186,7 @@ SGB - Ventas
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
@@ -196,10 +196,10 @@ SGB - Ventas
             className: 'btn btn-info',
             action: function (e,dt, node, config) {
                 window.location= 'ventas/create';
-            } 
+            }
             }
         ],
-        
+
     });
     }
     $('#filter').click(function(){
@@ -220,7 +220,61 @@ SGB - Ventas
         $('#edit_btn').DataTable().destroy();
         load_data();
     });
-    
+
 });
 </script>
+<script>
+    function eliminar(event,data) {
+        console.log(data);    event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea eliminar el registro de venta '+data,
+  text: "el animal seleccionado regresará a la lista del ganado, esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, bórralo',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("ventas.delete",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+      'Eliminación',
+      'El registro de venta ha sido eliminado, el animal ha sido regresado al listado de ganado.',
+      'success'
+    )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'El registro de venta ha sido creado correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'El registro de venta ha sido actualizado correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

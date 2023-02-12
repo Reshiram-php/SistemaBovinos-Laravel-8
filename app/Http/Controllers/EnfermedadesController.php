@@ -40,10 +40,10 @@ class EnfermedadesController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('enfermedades.delete', $pdf->registro_enfermedades_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de enfermedad '.$pdf->registro_enfermedades_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="eliminar"><i class="ti-trash"></i>
-                    </button></a>';
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_enfermedades_id.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+                    ';
                         } else {
                             return '<a href="' . route('enfermedades.individual', $pdf->registro_enfermedades_id) . '">
                             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
@@ -107,7 +107,7 @@ class EnfermedadesController extends Controller
         }
 
         $enfermedades->save();
-        return redirect('enfermedades');
+        return redirect('enfermedades')->with('creacion', 'ok');
     }
     public function update(EnfermedadesFormRequest $request, $id)
     {
@@ -137,12 +137,12 @@ class EnfermedadesController extends Controller
 
         $enfermedades->enfermedad_estado = $request->get('estado');
         $enfermedades->update();
-        return redirect('enfermedades');
+        return redirect('enfermedades')->with('actualizacion', 'ok');
     }
     public function delete($id)
     {
         $enfermedades = Enfermedades::findOrFail($id);
         $enfermedades->delete();
-        return redirect('enfermedades');
+        return redirect('enfermedades')->with('eliminacion', 'ok');
     }
 }

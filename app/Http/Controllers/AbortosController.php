@@ -29,7 +29,9 @@ class AbortosController extends Controller
                 $abortos = Abortos::get();
             }
             return datatables()->of($abortos)
-                ->addColumn('pdf', function ($pdf) {
+                ->addColumn(
+                    'pdf',
+                    function ($pdf) {
                     return '<a href="' . route('abortos.individual', $pdf->abortos_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del aborto"><i class="mdi mdi-file-pdf"></i>
@@ -51,13 +53,13 @@ class AbortosController extends Controller
     }
     public function edit($id)
     {
-        $abortos=Abortos::join('embarazos','embarazos.embarazos_id','=','abortos.embarazo_id')->where('abortos_id','=',$id)->first();
-    
+        $abortos=Abortos::join('embarazos', 'embarazos.embarazos_id', '=', 'abortos.embarazo_id')->where('abortos_id', '=', $id)->first();
+
         return view("abortos.edit", ["aborto" => $abortos]);
     }
     public function store(AbortosFormRequest $request3)
     {
-        $abortos = new Abortos;
+        $abortos = new Abortos();
         $abortos->animal_id = $request3->get('animal_madre');
         $abortos->abortos_tipo = $request3->get('tipo');
         $abortos->abortos_fecha = $request3->get('fecha');
@@ -70,16 +72,15 @@ class AbortosController extends Controller
         $embarazo = Embarazo::findOrFail($request3->embarazo_id);
         $embarazo->embarazo_activo = false;
         $embarazo->update();
-        return redirect('abortos');
+        return redirect('abortos')->with('creacion', 'ok');
     }
-    public function update(AbortosFormRequest $request3,$id)
+    public function update(AbortosFormRequest $request3, $id)
     {
         $abortos =Abortos::findOrFail($id);
- 
+
         $abortos->abortos_tipo = $request3->get('tipo');
         $abortos->abortos_fecha = $request3->get('fecha');
         $abortos->update();
-        return redirect('abortos');
+        return redirect('abortos')->with('actualizacion', 'ok');
     }
-
 }

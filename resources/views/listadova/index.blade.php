@@ -60,7 +60,7 @@ SGB - Vacunas
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
     });
-       
+
     function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -147,7 +147,7 @@ var table= $('#edit-btn').DataTable({
                             columns: function(idx, data, node) {
                                 if ($(node).hasClass('noVis')) {
                                     return false;
-                                }           
+                                }
                                 return $('#edit-btn').DataTable().column(idx).visible();
                             }
                         }
@@ -157,13 +157,67 @@ var table= $('#edit-btn').DataTable({
                         className: 'btn btn-info',
                         action: function (e,dt, node, config) {
                             window.location= 'listadova/create';
-                        } 
+                        }
                     }
-                    
+
                 ]
-            
+
             });
-        
+
     });
 </script>
+<script>
+    function eliminar(event,data,data2) {
+        console.log(data);    event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea eliminar la vacuna '+data2,
+  text: "todos los registros con esta vacuna serán borrados, esta opción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, bórralo',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("listadova.delete",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+      'Eliminación',
+      'La vacuna ha sido eliminada.',
+      'success'
+    )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'La vacuna ha sido creada correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'La vacuna ha sido actualizada correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

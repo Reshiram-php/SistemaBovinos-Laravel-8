@@ -47,10 +47,10 @@ class ListaVacunasController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('listadova.delete', $pdf->vacuna_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar la vacuna '.$pdf->vacuna_nombre.'? todos los registros con esta vacuna serán borrados, esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="eliminar"><i class="ti-trash"></i>
-                    </button></a>
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->vacuna_id.'\',\''.$pdf->vacuna_nombre.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+
                     ';
                     } else {
                         return '<a href="' . route('listadova.edit', $pdf->vacuna_id) . '">
@@ -81,7 +81,7 @@ class ListaVacunasController extends Controller
         }
         $vacuna->vacuna_descripcion= $request->get('categoria');
         $vacuna->save();
-        return redirect('listadova');
+        return redirect('listadova')->with('creacion', 'ok');
     }
 
     public function edit($id)
@@ -108,12 +108,12 @@ class ListaVacunasController extends Controller
         }
         $vacuna->vacuna_descripcion= $request->get('categoria');
         $vacuna->update();
-        return redirect('listadova');
+        return redirect('listadova')->with('actualizacion', 'ok');
     }
     public function delete($id)
     {
         $vacuna= ListaVacunas::findOrFail($id);
         $vacuna->delete();
-        return redirect('listadova');
+        return redirect('listadova')->with('eliminacion', 'ok');
     }
 }

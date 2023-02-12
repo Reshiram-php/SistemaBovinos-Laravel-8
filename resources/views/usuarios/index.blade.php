@@ -10,7 +10,7 @@ SGB - Usuarios
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        
+
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -21,7 +21,7 @@ SGB - Usuarios
             <h5 class="card-title">Usuarios</h5>
         </div>
         <div class="card-body">
-            
+
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
                     <tfoot>
@@ -41,7 +41,7 @@ SGB - Usuarios
                         </tr>
                     </thead>
                     <tbody>
-                       
+
                     </tbody>
                 </table>
 
@@ -63,8 +63,8 @@ SGB - Usuarios
             var title = $(this).text();
             $(this).html('<input type="text" placeholder="buscar" />');
         });
-        
-    
+
+
         function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -114,7 +114,7 @@ SGB - Usuarios
                         .columns()
                         .every(function () {
                             var that = this;
-    
+
                             $('input', this.footer()).on('keyup change clear', function () {
                                 if (that.search() !== this.value) {
                                     that.search(this.value).draw();
@@ -122,7 +122,7 @@ SGB - Usuarios
                             });
                         });
                 },
-    
+
                 language: {url: '{{asset('assets/es-Es.json')}}'},
                 destroy: true,
                 serverside:true,
@@ -152,7 +152,7 @@ SGB - Usuarios
                             columns: function(idx, data, node) {
                                 if ($(node).hasClass('noVis')) {
                                     return false;
-                                }           
+                                }
                                 return $('#edit-btn').DataTable().column(idx).visible();
                             }
                         }
@@ -162,13 +162,67 @@ SGB - Usuarios
                         className: 'btn btn-info',
                         action: function (e,dt, node, config) {
                             window.location= 'usuarios/create';
-                        } 
+                        }
                     }
-                    
+
                 ]
-            
+
             });
-        
+
     });
-    </script>
+</script>
+<script>
+    function eliminar(event,data,data2) {
+            console.log(data);    event.preventDefault();
+            Swal.fire({
+      title: 'Seguro desea eliminar el usuario '+data2,
+      text: "esta opción es irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, bórralo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let url='{{ route("usuarios.delete",":id") }}'
+        url=url.replace(':id',data)
+        window.location.href=url;
+        /*Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ) */
+      }
+    })
+    }
+
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+          'Eliminación',
+          'Usuario ha sido eliminado.',
+          'success'
+        )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+          'Creación',
+          'Usuario ha sido creado correctamente.',
+          'success'
+        )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+          'Actualización',
+          'Usuario ha sido actualizado correctamente.',
+          'success'
+        )
+</script>
+@endif
 @endsection

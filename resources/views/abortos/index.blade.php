@@ -32,13 +32,13 @@ SGB - Abortos
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
-                     
+
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
-            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
-        </div>
+                    <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
@@ -163,7 +163,7 @@ SGB - Abortos
             {data: 'abortos_id'},
             {data: 'animal_id'},
             {data: 'abortos_tipo'},
-            {data: 'abortos_fecha'},     
+            {data: 'abortos_fecha'},
             {data: 'pdf'},
         ],
             buttons: [
@@ -180,14 +180,14 @@ SGB - Abortos
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
                 }
-                
+
             ]
-        
+
     });
     }
     $('#filter').click(function(){
@@ -208,7 +208,25 @@ SGB - Abortos
         $('#edit_btn').DataTable().destroy();
         load_data();
     });
-    
+
 });
 </script>
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Finalización y Creación',
+      'la gestación ha sido finalizada y el aborto ha sido registrado correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'El aborto ha sido actualizado correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

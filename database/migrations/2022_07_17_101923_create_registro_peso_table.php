@@ -17,10 +17,10 @@ class CreateRegistroPesoTable extends Migration
             $table->integer('registro_peso_id', true);
             $table->string('animal_id')->default('desconocido');
             $table->date('registro_peso_fecha');
-            $table->decimal('registro_peso_valor', 10, 0);
+            $table->decimal('registro_peso_valor', 10, 2);
             $table->softDeletes();
             $table->timestamps();
-            $table->decimal('peso_anterior', 10, 0)->nullable();
+            $table->decimal('peso_anterior', 10, 2)->nullable();
         });
     }
 

@@ -39,10 +39,9 @@ class OrdeñoController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('ordeno.delete', $pdf->registro_ordeño_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el ordeño '.$pdf->registro_ordeño_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_ordeño_id.'\')" data-toggle="tooltip" data-placement="top"
                         title="eliminar"><i class="ti-trash"></i>
-                    </button></a>
+                    </button>
                     ';
                         } else {
                             return '<a href="' . route('ordeno.individual', $pdf->registro_ordeño_id) . '">
@@ -101,7 +100,7 @@ class OrdeñoController extends Controller
         $ordeño->registro_ordeño_fecha = $request->get('fecha');
         $ordeño->partos_id = $request->get('ordeño_parto');
         $ordeño->save();
-        return redirect('ordeno');
+        return redirect('ordeno')->with('creacion', 'ok');
     }
 
     public function FechaOrdeño($id)
@@ -122,13 +121,13 @@ class OrdeñoController extends Controller
         $ordeño->registro_ordeño_fecha = $request->get('fecha');
         $ordeño->partos_id = $request->get('ordeño_parto');
         $ordeño->save();
-        return redirect('ordeno');
+        return redirect('ordeno')->with('actualizacion', 'ok');
     }
 
     public function delete($id)
     {
         $delete = Ordeño::findOrFail($id);
         $delete->delete();
-        return redirect('ordeno');
+        return redirect('ordeno')->with('eliminacion', 'ok');
     }
 }

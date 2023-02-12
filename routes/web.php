@@ -31,6 +31,7 @@ Route::group(['middleware' => ['role:Admin']], function () {
     Route::get('listadova/delete/{id}', 'ListaVacunasController@delete')->name('listadova.delete');
     Route::get('enfermedades/delete/{id}', 'EnfermedadesController@delete')->name('enfermedades.delete');
     Route::get('vacunas/delete/{id}', 'VacunasController@delete')->name('vacunas.delete');
+    Route::get('actividades/delete/{id}', 'ActividadesController@delete')->name('actividades.delete');
 });
 
 Route::get('clientes/delete/{id}', 'ClienteController@delete')->name('clientes.delete');

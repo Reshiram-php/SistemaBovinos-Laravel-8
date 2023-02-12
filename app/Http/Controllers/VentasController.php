@@ -30,7 +30,6 @@ class VentasController extends Controller
                     ->join('animal', 'animal.animal_id', '=', 'ventas.animal_id')
                     ->whereBetween('ventas_fecha', array($request->from_date, $request->to_date))
                     ->get();
-
             } else {
                 $ventas = Ventas::join('cliente', 'cliente.cedula', '=', 'ventas.cedula_cliente')
                     ->join('animal', 'animal.animal_id', '=', 'ventas.animal_id')
@@ -48,7 +47,8 @@ class VentasController extends Controller
                         return '<a href="' . route('animal.individualh', $user->animal_id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                         title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
-                    </button></a>';}
+                    </button></a>';
+                    }
                 })
                 ->addColumn('pdf', function ($pdf) {
                     return '<a href="' . route('ventas.individual', $pdf->ventas_id) . '">
@@ -59,10 +59,10 @@ class VentasController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="' . route('ventas.delete', $pdf->ventas_id) . '">
-                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                        title="Eliminar Registro" onclick="return confirm(\'¿Esta seguro que desea eliminar el registro?, el animal seleccionado regresará a la lista del ganado\')"><i class="ti-trash"></i>
-                    </button></a>';
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->ventas_id.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+                    ';
                 })
                 ->rawColumns(['btn', 'pdf'])
                 ->make(true);
@@ -91,8 +91,8 @@ class VentasController extends Controller
      */
     public function store(VentasFormRequest $request, ClienteFormRequest $rrquest)
     {
-        $cliente = new Cliente;
-        $ventas = new Ventas;
+        $cliente = new Cliente();
+        $ventas = new Ventas();
         if ($request->get('cliente') == "nuevo") {
             $cliente->cedula = $request->get('cedula');
             $cliente->nombre = $request->get('nombre');
@@ -111,7 +111,7 @@ class VentasController extends Controller
         $animal = Animal::findOrFail($request->get('animal'));
         $animal->animal_estado = 3;
         $animal->update();
-        return redirect('ventas');
+        return redirect('ventas')->with('creacion', 'ok');
     }
 
     /**
@@ -147,7 +147,7 @@ class VentasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cliente = new Cliente;
+        $cliente = new Cliente();
         $ventas = Ventas::findOrFail($id);
 
         if ($request->get('cliente') == "nuevo") {
@@ -173,7 +173,7 @@ class VentasController extends Controller
         $animal = Animal::findOrFail($request->get('animal'));
         $animal->animal_estado = 3;
         $animal->update();
-        return redirect('ventas');
+        return redirect('ventas')->with('actualizacion', 'ok');
     }
 
     /**
@@ -189,7 +189,6 @@ class VentasController extends Controller
         $animal2->animal_estado = $ventas->estado_anterior;
         $animal2->update();
         $ventas->delete();
-        return redirect('ventas');
-
+        return redirect('ventas')->with('eliminacion', 'ok');
     }
 }

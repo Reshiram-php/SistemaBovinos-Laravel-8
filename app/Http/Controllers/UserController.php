@@ -22,8 +22,7 @@ class UserController extends Controller
             $user = User::get();
             return datatables()
                 ->of($user)
-                ->addColumn('rol',function($rol)
-                {
+                ->addColumn('rol', function ($rol) {
                     $roles2 = $rol->roles->first()->name;
                     return $roles2;
                 })
@@ -32,10 +31,10 @@ class UserController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="' . route('usuarios.delete', $pdf->id) . '">
-                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
-                        title="Eliminar Usuario" onclick="return confirm(\'¿Esta seguro que desea eliminar el usuario?,los datos del usuario seleccionado no se podrán recuperar\')"><i class="ti-trash"></i>
-                    </button></a>';
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->id.'\',\''.$pdf->name.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+                    ';
                 })
                 ->rawColumns(['pdf'])
                 ->make(true);
@@ -47,7 +46,7 @@ class UserController extends Controller
     public function create()
     {
         $roles =Role::all();
-        return view('usuarios.create',["roles"=>$roles]);
+        return view('usuarios.create', ["roles"=>$roles]);
     }
 
     public function store(Request $request)
@@ -58,13 +57,13 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'rol' => 'required',
         ]);
-        $user = new User;
+        $user = new User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->password = Hash::make($request->get('password'));
         $user->save();
         $user->roles()->sync($request->get('rol'));
-        return redirect('usuarios');
+        return redirect('usuarios')->with('creacion', 'ok');
     }
 
     public function edit($id)
@@ -89,14 +88,13 @@ class UserController extends Controller
         $user->password = Hash::make($request->get('password'));
         $user->update();
         $user->roles()->sync($request->get('rol'));
-        return redirect('usuarios');
-
+        return redirect('usuarios')->with('actualizacion', 'ok');
     }
 
     public function delete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect('usuarios');
+        return redirect('usuarios')->with('eliminacion', 'ok');
     }
 }

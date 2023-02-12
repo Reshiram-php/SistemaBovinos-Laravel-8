@@ -20,15 +20,15 @@ SGB - Razas
             <h5 class="card-title">Razas</h5>
         </div>
         <div class="card-body">
-            
-            
+
+
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
                     <tfoot>
                         <th>Código</th>
                         <th>Nombre de la raza </th>
                         <th>Acrónimo</th>
-                        <th class="inv">Opciones</th> 
+                        <th class="inv">Opciones</th>
                     </tfoot>
                     <thead>
                         <tr>
@@ -53,12 +53,12 @@ SGB - Razas
 <script src="{{ asset('assets/plugins/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <!-- eCommerce Shop Page js -->
 <script>
-     $(document).ready(function () {
+    $(document).ready(function () {
     $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
     });
-       
+
     function newexportaction(e, dt, button, config) {
     var self = this;
     var oldStart = dt.settings()[0]._iDisplayStart;
@@ -144,7 +144,7 @@ var table= $('#edit-btn').DataTable({
                             columns: function(idx, data, node) {
                                 if ($(node).hasClass('noVis')) {
                                     return false;
-                                }           
+                                }
                                 return $('#edit-btn').DataTable().column(idx).visible();
                             }
                         }
@@ -154,13 +154,31 @@ var table= $('#edit-btn').DataTable({
                         className: 'btn btn-info',
                         action: function (e,dt, node, config) {
                             window.location= 'razas/create';
-                        } 
+                        }
                     }
-                    
+
                 ]
-            
+
             });
-        
+
     });
-    </script>
+</script>
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'La raza ha sido creada correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'La raza ha sido actualizada correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

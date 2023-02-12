@@ -10,8 +10,8 @@ SGB - Montas
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
-        
-        
+
+
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -78,7 +78,7 @@ SGB - Montas
 <!-- eCommerce Shop Page js -->
 
 <script>
- $(document).ready(function () {
+    $(document).ready(function () {
     $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
@@ -136,7 +136,7 @@ SGB - Montas
 };
 
     function load_data(from_date = '', to_date = '') {
-        
+
         var table= $('#edit-btn').DataTable({
             initComplete: function () {
             // Apply the search
@@ -180,7 +180,7 @@ SGB - Montas
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
@@ -194,13 +194,13 @@ SGB - Montas
                     className: 'btn btn-info',
                     action: function (e,dt, node, config) {
                         window.location= 'monta/create';
-                    } 
+                    }
                 }
             ]
-            
+
         });
     }
-    
+
     $('#filter').click(function () {
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
@@ -221,4 +221,84 @@ SGB - Montas
     });
 });
 </script>
+<script>
+    function finalizar1(event,data) {
+          event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea finalizar la monta '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Finalizar',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("embarazo.create",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+
+</script>
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'La monta ha sido creada correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'La monta ha sido actualizada correctamente.',
+      'success'
+    )
+</script>
+@endif
+<script>
+    function finalizar2(event,data) {
+          event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea finalizar la monta '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Finalizar',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("monta.fracaso",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+</script>
+@if (session('finalizacion')=='ok')
+<script>
+    Swal.fire(
+      'Finalización',
+      'La monta ha sido finalizada correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

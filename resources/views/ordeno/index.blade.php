@@ -11,7 +11,7 @@ SGB - Ordeño
 <div class="breadcrumbbar">
     <div class="row align-items-center">
 
-        
+
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -33,24 +33,24 @@ SGB - Ordeño
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
-                     
+
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
-            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
-        </div>
+                    <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
-                <tfoot>
-                    <th>Código</th>
-                    <th>Código Animal</th>
-                    <th>Litros de leche</th>
-                    <th>Cantidad de veces ordeñada</th>
-                    <th>Fecha de Ordeño</th>
-                    <th class="inv">Opciones</th>
-                </tfoot>
+                    <tfoot>
+                        <th>Código</th>
+                        <th>Código Animal</th>
+                        <th>Litros de leche</th>
+                        <th>Cantidad de veces ordeñada</th>
+                        <th>Fecha de Ordeño</th>
+                        <th class="inv">Opciones</th>
+                    </tfoot>
                     <thead>
                         <tr>
                             <th data-priority="1">Código</th>
@@ -62,7 +62,7 @@ SGB - Ordeño
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -78,7 +78,7 @@ SGB - Ordeño
 <script src="{{ asset('assets/plugins/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <!-- eCommerce Shop Page js -->
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     $('#edit-btn tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="buscar" />');
@@ -181,7 +181,7 @@ $(document).ready(function () {
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
@@ -191,11 +191,11 @@ $(document).ready(function () {
                     className: 'btn btn-info',
                     action: function (e,dt, node, config) {
                         window.location= 'ordeno/create';
-                    } 
+                    }
                 }
-                
+
             ]
-        
+
         });
     }
     $('#filter').click(function(){
@@ -216,7 +216,61 @@ $(document).ready(function () {
         $('#edit_btn').DataTable().destroy();
         load_data();
     });
-    
+
 });
 </script>
+<script>
+    function eliminar(event,data) {
+        console.log(data);    event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea eliminar el ordeño '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, bórralo',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("ordeno.delete",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+      'Eliminación',
+      'El registro de ordeño ha sido eliminado.',
+      'success'
+    )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'El registro de ordeño ha sido creado correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'El registro de ordeño ha sido actualizado correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

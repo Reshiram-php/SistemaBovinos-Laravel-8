@@ -50,12 +50,12 @@ class EmbarazoController extends Controller
             })
             ->addColumn('fin', function ($fin) {
                 if ($fin->embarazo_activo == true) {
-                    return '<a href="' . route('partos.create', $fin->embarazos_id) . '">
-                <button class="button btn btn-primary" onclick="return confirm(\'¿Seguro desea finalizar la gestación numero '.$fin->embarazos_id.'? esta opción es irreversible\')">Registrar Parto</button>
-            </a>
-            <a href="' . route('abortos.create', $fin->embarazos_id) . '">
-                <button class="button btn btn-primary" onclick="return confirm(\'¿Seguro desea finalizar la gestación numero '.$fin->embarazos_id.'? esta opción es irreversible\')">Registrar Aborto</button>
-            </a>';
+                    return '
+                    <button class="button btn btn-primary" onclick="finalizar1(event,\''.$fin->embarazos_id.'\')" >Registrar Parto
+                    </button>
+                    <button class="button btn btn-primary" onclick="finalizar2(event,\''.$fin->embarazos_id.'\')" >Registrar Aborto
+                    </button>
+                    ';
                 } else {
                     return '<a> <button class="button btn btn-primary" disabled >Registrar Parto</button>
                     </a>
@@ -131,6 +131,6 @@ class EmbarazoController extends Controller
             'embarazo_id'=> $embarazos2->embarazos_id,
         ]);
         event(new PostEvent($post));
-        return redirect('embarazo');
+        return redirect('embarazo')->with('c', 'ok');
     }
 }

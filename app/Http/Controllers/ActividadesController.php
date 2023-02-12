@@ -46,7 +46,22 @@ class ActividadesController extends Controller
         ->addColumn(
             'pdf',
             function ($pdf) {
-                return '<a href="' . route('actividades.individual', $pdf->registro_actividades_id) . '">
+                $us= Auth::user();
+                if ($us->can('actividades.delete')) {
+                    return '<a href="' . route('actividades.individual', $pdf->registro_actividades_id) . '">
+                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="Informe de la activdad"><i class="mdi mdi-file-pdf"></i>
+                    </button></a>
+                    <a href="' . route('actividades.edit', $pdf->registro_actividades_id) . '">
+                        <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                                title="editar"><i class="ti-pencil"></i>
+                            </button></a>
+                            <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_actividades_id.'\')" data-toggle="tooltip" data-placement="top"
+                            title="eliminar"><i class="ti-trash"></i>
+                        </button>
+                            ';
+                } else {
+                    return '<a href="' . route('actividades.individual', $pdf->registro_actividades_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe de la activdad"><i class="mdi mdi-file-pdf"></i>
             </button></a>
@@ -54,6 +69,7 @@ class ActividadesController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>';
+                }
             }
         )
         ->rawColumns(['pdf','proxima'])
@@ -101,7 +117,7 @@ class ActividadesController extends Controller
             ]);
             event(new PostEvent($post));
         }
-        return redirect('actividades');
+        return redirect('actividades')->with('creacion', 'ok');
     }
 
     protected function CalcFecha($fecha, $actividad)
@@ -178,7 +194,7 @@ class ActividadesController extends Controller
             ]);
             event(new PostEvent($post));
         }
-        return redirect('actividades');
+        return redirect('actividades')->with('actualizacion', 'ok');
     }
 
     /**
@@ -187,9 +203,14 @@ class ActividadesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $eventoid=Evento::where('actividades_id', $id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento', $eventoid->id)->delete();
+        $eventoid->delete();
+        $actividades = Actividades::findOrFail($id);
+        $actividades->delete();
+        return redirect('actividades')->with('eliminacion', 'ok');
     }
 
     public function SelectActividades($id)

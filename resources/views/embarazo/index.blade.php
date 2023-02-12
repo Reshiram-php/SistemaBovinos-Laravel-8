@@ -61,7 +61,7 @@ SGB - Gestaciones
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="edit-btn">
-                    
+
                     <thead>
                         <tr>
                             <th data-priority="1">Código</th>
@@ -174,7 +174,7 @@ SGB - Gestaciones
                     });
                 });
             },
-            
+
             language: { url: '{{asset('assets/es-Es.json')}}'},
             serverside: true,
             pageLength: 5,
@@ -206,7 +206,7 @@ SGB - Gestaciones
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
@@ -216,9 +216,9 @@ SGB - Gestaciones
                     columns: [':not(.noVis)'],
                 }
             ]
-           
+
         });
-    }   
+    }
     $('#filter').click(function(){
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
@@ -264,7 +264,69 @@ SGB - Gestaciones
         $('#edit_btn').DataTable().destroy();
         load_data();
     });
-    
+
 });
+
 </script>
+<script>
+    function finalizar2(event,data) {
+          event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea finalizar la gestación número '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Finalizar',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("abortos.create",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+</script>
+<script>
+    function finalizar1(event,data) {
+          event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea finalizar la gestación número '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Finalizar',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("partos.create",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+    /*Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    ) */
+  }
+})
+}
+</script>
+@if (session('c')=='ok')
+<script>
+    Swal.fire(
+      'Finalización y Creación',
+      'la monta ha sido finalizada y la gestación ha sido creada correctamente.',
+      'success'
+    )
+</script>
+@endif
 @endsection

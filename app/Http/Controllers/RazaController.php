@@ -17,7 +17,6 @@ class RazaController extends Controller
     }
     public function index()
     {
-
         return view('razas.index');
     }
     public function create()
@@ -31,11 +30,11 @@ class RazaController extends Controller
             'raza_nombre' => 'required|unique:raza,raza_nombre',
             'acronimo' => 'required|unique:raza,acr',
         ]);
-        $raza = new Raza;
+        $raza = new Raza();
         $raza->raza_nombre = $request->get('raza_nombre');
         $raza->acr = $request->get('acronimo');
         $raza->save();
-        return redirect('razas');
+        return redirect('razas')->with('creacion', 'ok');
     }
 
     public function edit($id)
@@ -70,25 +69,25 @@ class RazaController extends Controller
                 }
                 $ani->update();
             }
-
         }
         $raza->raza_nombre = $request->get('raza_nombre');
         $raza->acr = $request->get('acronimo');
         $raza->update();
-        return redirect('razas');
+        return redirect('razas')->with('actualizacion', 'ok');
     }
     public function datos()
     {
-
-        $raza = Raza::where('raza_id','!=',1)->get();
+        $raza = Raza::where('raza_id', '!=', 1)->get();
 
         return datatables()->of($raza)
-            ->addColumn('pdf', function ($pdf) {
-                return '<a href="' . route('razas.edit', $pdf->raza_id) . '">
+            ->addColumn(
+                'pdf',
+                function ($pdf) {
+                    return '<a href="' . route('razas.edit', $pdf->raza_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>';
-            }
+                }
             )
             ->rawColumns(['pdf'])
             ->toJson();

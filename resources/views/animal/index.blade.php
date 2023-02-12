@@ -33,13 +33,13 @@ SGB - Animales
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Hasta" readonly />
                 </div>
-                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
+                <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
                     <button type="button" name="filter" id="filter" class="button2 btn btn-primary">Filtrar</button>
-                     
+
                 </div>
                 <div class="col-lg-2 col-sm-2 col-md-2 col-xs-4">
-            <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
-        </div>
+                    <button type="button" name="refresh" id="refresh" class="button2 btn btn-primary">Limpiar</button>
+                </div>
 
             </div>
             <br>
@@ -149,7 +149,7 @@ SGB - Animales
 };
 
     function load_data(from_date = '', to_date = '') {
-        
+
         var table= $('#edit-btn').DataTable({
             initComplete: function () {
             // Apply the search
@@ -200,7 +200,7 @@ SGB - Animales
                         columns: function(idx, data, node) {
                             if ($(node).hasClass('noVis')) {
                                 return false;
-                            }           
+                            }
                             return $('#edit-btn').DataTable().column(idx).visible();
                         }
                     }
@@ -222,6 +222,7 @@ SGB - Animales
 
     }
 
+
     $('#filter').click(function () {
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
@@ -241,5 +242,56 @@ SGB - Animales
         load_data();
     });
 });
+</script>
+@if (session('eliminacion')=='ok')
+<script>
+    Swal.fire(
+      'Eliminación',
+      'El animal ha sido eliminado.',
+      'success'
+    )
+</script>
+@endif
+@if (session('creacion')=='ok')
+<script>
+    Swal.fire(
+      'Creación',
+      'El animal ha sido creado correctamente.',
+      'success'
+    )
+</script>
+@endif
+@if (session('actualizacion')=='ok')
+<script>
+    Swal.fire(
+      'Actualización',
+      'El animal ha sido actualizado correctamente.',
+      'success'
+    )
+</script>
+@endif
+
+<script>
+    function eliminar(event,data) {
+        console.log(data);    event.preventDefault();
+        Swal.fire({
+  title: 'Seguro desea eliminar el animal '+data,
+  text: "Esta acción es irreversible",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, bórralo',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) {
+    let url='{{ route("animal.delete",":id") }}'
+    url=url.replace(':id',data)
+    window.location.href=url;
+
+  }
+})
+}
+
 </script>
 @endsection

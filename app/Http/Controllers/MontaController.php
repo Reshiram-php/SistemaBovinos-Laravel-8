@@ -39,10 +39,11 @@ class MontaController extends Controller
                 ->addColumn('fin', function ($fin) {
                     {
                         if ($fin->monta_exitosa == null) {
-                            return '<a href="' . route('embarazo.create', $fin->monta_id) . '" >
-                    <button class="button btn btn-primary " onclick="return confirm(\'¿Seguro desea finalizar la monta numero '.$fin->monta_id.'? esta opción es irreversible\')">Exito</button> </a>
-                    <a href="' . route('monta.fracaso', $fin->monta_id) . '">
-                    <button class="button btn btn-primary " onclick="return confirm(\'¿Seguro desea finalizar la monta numero '.$fin->monta_id.'? esta opción es irreversible\')">Fracaso</button> </a>
+                            return '
+                             <button class="button btn btn-primary" onclick="finalizar1(event,\''.$fin->monta_id.'\')" >Exito
+                    </button>
+                    <button class="button btn btn-primary" onclick="finalizar2(event,\''.$fin->monta_id.'\')" >Fracaso
+                    </button>
                     ';
                         } else {
                             return '<a>
@@ -117,7 +118,7 @@ class MontaController extends Controller
         $madre = Animal::findOrFail($monta->monta_madre);
         $madre->animal_estado = 1;
         $madre->update();
-        return redirect('monta');
+        return redirect('monta')->with('finalizacion', 'ok');
     }
 
     public function store(MontaFormRequest $request)
@@ -151,7 +152,7 @@ class MontaController extends Controller
             'monta_id'=> $monta2->monta_id,
         ]);
         event(new PostEvent($post));
-        return redirect('monta');
+        return redirect('monta')->with('creacion', 'ok');
     }
 
     public function update(MontaFormRequest $request, $id)
@@ -193,7 +194,7 @@ class MontaController extends Controller
         $madre = Animal::findOrFail($request->get('código_madre'));
         $madre->animal_estado = 5;
         $madre->update();
-        return redirect('monta');
+        return redirect('monta')->with('actualizacion', 'ok');
     }
 
     public function montaevento()

@@ -37,10 +37,10 @@ class ListaEnfermedadesController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('listadoen.delete', $pdf->enfermedades_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar la enfermedad '.$pdf->enfermedades_nombre.'? todos los registros con esta enfermedad serán borrados, esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="eliminar"><i class="ti-trash"></i>
-                    </button></a>
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->enfermedades_id.'\',\''.$pdf->enfermedades_nombre.'\')" data-toggle="tooltip" data-placement="top"
+                    title="eliminar"><i class="ti-trash"></i>
+                </button>
+
                     ';
                     } else {
                         return '<a href="' . route('listadoen.edit', $pdf->enfermedades_id) . '">
@@ -62,7 +62,7 @@ class ListaEnfermedadesController extends Controller
         $enfermedades = new ListaEnfermedades();
         $enfermedades->enfermedades_nombre = $request->get('enfermedades_nombre');
         $enfermedades->save();
-        return redirect('listadoen');
+        return redirect('listadoen')->with('creacion', 'ok');
     }
 
     public function edit($id)
@@ -78,12 +78,12 @@ class ListaEnfermedadesController extends Controller
         $enfermedades = ListaEnfermedades::findOrFail($id);
         $enfermedades->enfermedades_nombre = $request->get('enfermedades_nombre');
         $enfermedades->update();
-        return redirect('listadoen');
+        return redirect('listadoen')->with('actualizacion', 'ok');
     }
     public function delete($id)
     {
         $enfermedades = ListaEnfermedades::findOrFail($id);
         $enfermedades->delete();
-        return redirect('listadoen');
+        return redirect('listadoen')->with('eliminacion', 'ok');
     }
 }

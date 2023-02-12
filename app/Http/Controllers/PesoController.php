@@ -40,10 +40,10 @@ class PesoController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    <a href="'.route('peso.delete', $pdf->registro_peso_id).'">
-                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de peso '.$pdf->registro_peso_id.'? el animal regresará al peso anterior registrado esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                    <button class="btn btn-warning btn-sm" onclick="eliminar(event,\''.$pdf->registro_peso_id.'\')" data-toggle="tooltip" data-placement="top"
                         title="eliminar"><i class="ti-trash"></i>
-                    </button></a>';
+                    </button>
+                    ';
                     } else {
                         return '<a href="' . route('peso.individual', $pdf->registro_peso_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
@@ -104,7 +104,7 @@ class PesoController extends Controller
         $peso->save();
         $animal->animal_peso=$request->get('peso');
         $animal->update();
-        return redirect('peso');
+        return redirect('peso')->with('creacion', 'ok');
     }
 
     /**
@@ -153,7 +153,7 @@ class PesoController extends Controller
         $peso->update();
         $animal->animal_peso=$request->get('peso');
         $animal->update();
-        return redirect('peso');
+        return redirect('peso')->with('actualizacion', 'ok');
     }
 
     /**
@@ -169,6 +169,6 @@ class PesoController extends Controller
         $animal2->animal_peso=$peso->peso_anterior;
         $animal2->update();
         $peso->delete();
-        return redirect('peso');
+        return redirect('peso')->with('eliminacion', 'ok');
     }
 }

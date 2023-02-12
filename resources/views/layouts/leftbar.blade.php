@@ -49,7 +49,11 @@
                                         class="img-fluid" alt="leads">Estado</a></li>
                             <li><a href="{{url('/notificaciones')}}"><img
                                         src="{{ asset('assets/images/svg-icon/notifications.svg') }}" class="img-fluid"
-                                        alt="leads">Notificaciones</a></li>
+                                        alt="leads">
+                                    <span class="badge badge-warning pull-right">{{
+                                        count(auth()->user()->unreadNotifications) }}</span>
+                                    Notificaciones
+                                </a></li>
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-ecommerce" role="tabpanel"

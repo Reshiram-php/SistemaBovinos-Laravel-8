@@ -35,26 +35,20 @@ SGB - Notificaciones
         <div class="col-lg-6">
             <div class="card m-b-30">
                 <div class="card-header">
-                    Notificaciones no leídas
+                    Notificación {{ $postnotifications->id }}
                 </div>
                 <div class="card-body">
 
                     @if (auth()->user())
-                    @forelse ($postnotifications as $n )
+
                     <div class="alert alert-warning">
-                        <p>titulo: {{ $n->data['title'] }}</p>
-                        <p>descripción: {{ $n->data['description'] }}</p>
-                        <p>fecha: {{date("Y-m-d", strtotime( $n->data['start']))}}</p>
-                        <a href="{{ route('individualmark', $n->id )}}" class="btn btn-sm btn-dark">marcar como
+                        <p>titulo: {{ $postnotifications->data['title'] }}</p>
+                        <p>descripción: {{ $postnotifications->data['description'] }}</p>
+                        <p>fecha: {{date("Y-m-d", strtotime( $postnotifications->data['start']))}}</p>
+                        <a href="{{ route('individualmarkb', $postnotifications->id )}}"
+                            class="btn btn-sm btn-dark">marcar como
                             leido</a>
                     </div>
-                    @if($loop->last)
-                    <a href="{{ route('markAsRead') }}">marcar todos como leidos</a>
-                    @endif
-                    @empty
-                    Sin notificaciones por leer
-                    @endforelse
-
                     @endif
                 </div>
             </div>

@@ -29,11 +29,21 @@ class HomeController extends Controller
     public function notifications()
     {
         $postnotifications= auth()->user()->unreadNotifications;
-        return view('notificaciones',compact('postnotifications'));        
+        return view('notificaciones', compact('postnotifications'));
+    }
+    public function notificationsb($id)
+    {
+        $postnotifications= auth()->user()->unreadNotifications->where('id', $id)->first();
+        return view('notificacionesi', compact('postnotifications'));
     }
     public function inotifications($id)
     {
         auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
-        return back();     
+        return back();
+    }
+    public function bnotifications($id)
+    {
+        auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
+        return redirect('home');
     }
 }

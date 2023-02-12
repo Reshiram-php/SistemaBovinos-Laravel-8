@@ -97,8 +97,11 @@ Route::resource('custom_chart_name', 'ChartsController');
 Route::get('/estado', [ChartsController::class, 'charts2'])->name('charts');
 
 Route::get('/notificaciones', 'HomeController@notifications')->name('notifications');
+Route::get('/notificacionesi/{id}', 'HomeController@notificationsb')->name('notificationsb');
 
 Route::get('/notificaciones/{id}', 'HomeController@inotifications')->name('individualmark');
+Route::get('/notificacionesb/{id}', 'HomeController@bnotifications')->name('individualmarkb');
+
 
 Route::get('/analisis', [ChartsController::class, 'charts'])->name('charts2');
 

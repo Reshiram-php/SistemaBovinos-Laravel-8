@@ -88,14 +88,17 @@
                                             @foreach (auth()->user()->unreadNotifications()->take(4)->get() as
                                             $notification )
                                             <li class="media dropdown-item">
-                                                <span class="action-icon badge badge-success-inverse">N</span>
-                                                <div class="media-body">
-                                                    <h5 class="action-title">{{ $notification->data['description'] }}
-                                                    </h5>
-                                                    <p><span class="timing">fecha {{
-                                                            date("Y-m-d", strtotime( $notification->data['start']));
-                                                            }}</span></p>
-                                                </div>
+                                                <a href="{{ route('notificationsb',$notification->id) }}">
+                                                    <span class="action-icon badge badge-success-inverse">N</span>
+                                                    <div class="media-body">
+                                                        <h5 class="action-title">{{ $notification->data['description']
+                                                            }}
+                                                        </h5>
+                                                        <p><span class="timing">fecha {{
+                                                                date("Y-m-d", strtotime( $notification->data['start']));
+                                                                }}</span></p>
+                                                    </div>
+                                                </a>
                                             </li>
                                             @endforeach
 

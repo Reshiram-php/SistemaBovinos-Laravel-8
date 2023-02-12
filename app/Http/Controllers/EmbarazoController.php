@@ -11,8 +11,8 @@ use App\Events\PostEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EmbarazoController extends Controller
 {
@@ -27,22 +27,18 @@ class EmbarazoController extends Controller
      */
     public function index(Request $request)
     {
-
         if (request()->ajax()) {
             if (!empty($request->from_date)) {
                 $embarazos = Embarazo::whereBetween('embarazos_fecha', array($request->from_date, $request->to_date))->get();
-            }
-            else{
-                if(!empty($request->from_date2)){
-                    
+            } else {
+                if (!empty($request->from_date2)) {
                     $embarazos = Embarazo::whereBetween('fecha_aproximada', array($request->from_date2, $request->to_date2))->get();
-                }else{
+                } else {
                     $embarazos = Embarazo::get();
                 }
-              
             }
             return datatables()->of($embarazos)
-        ->addcolumn('proxima',function($proxima){
+        ->addcolumn('proxima', function ($proxima) {
             return $proxima->fecha_aproximada->toDateString();
         })
             ->addColumn('activo', function ($activo) {
@@ -62,22 +58,23 @@ class EmbarazoController extends Controller
             </a>';
                 } else {
                     return '<a> <button class="button btn btn-primary" disabled >Registrar Parto</button>
-                    </a>  
+                    </a>
                     <a><button class=" button btn btn-primary" disabled >Registrar Aborto</button></a>';
                 }
             })
-            ->addColumn('pdf', function ($pdf) {
-                return '<a href="' . route('embarazo.individual', $pdf->embarazos_id) . '">
+            ->addColumn(
+                'pdf',
+                function ($pdf) {
+                    return '<a href="' . route('embarazo.individual', $pdf->embarazos_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                 </button></a>';
-            }
+                }
             )
             ->rawColumns(['activo','fin','proxima','pdf'])
             ->make(true);
-            }
+        }
         return view('embarazo.index');
-
     }
 
     public function create($id)
@@ -95,7 +92,7 @@ class EmbarazoController extends Controller
 
     public function store(EmbarazoFormRequest $request)
     {
-        $embarazos = new Embarazo;
+        $embarazos = new Embarazo();
         $monta = Monta::findOrFail($request->get('monta_id'));
         $madre = Animal::findOrFail($request->get('código_madre'));
         $embarazos->animal_madre = $request->get('código_madre');
@@ -106,7 +103,7 @@ class EmbarazoController extends Controller
         $fecha2=Carbon::parse($request->get('fecha'));
         $fecha2->addDays(60);
         $fecha->addDays(279);
-       
+
         $embarazos->fecha_aproximada = $fecha;
         $embarazos->embarazo_activo = 1;
         $embarazos->save();
@@ -136,5 +133,4 @@ class EmbarazoController extends Controller
         event(new PostEvent($post));
         return redirect('embarazo');
     }
-
 }

@@ -7,7 +7,7 @@ use App\Animal;
 use App\Partos;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class StartPeriodoSeco extends Command
@@ -44,19 +44,19 @@ class StartPeriodoSeco extends Command
     public function handle()
     {
         $fecha2=Carbon::now();
-        $partos=Partos::select('partos_madre',DB::raw('max(partos_fecha)as partos_fecha'))->groupBy('partos_madre');
-        $animal=Animal::joinSub($partos,'partos', function($join){$join->on('animal_id',"=","partos.partos_madre");})->where('animal_produccion',"=",2)->get();
-        
-        foreach($animal as $ani)
-        {
+        $partos=Partos::select('partos_madre', DB::raw('max(partos_fecha)as partos_fecha'))->groupBy('partos_madre');
+        $animal=Animal::joinSub($partos, 'partos', function ($join) {
+            $join->on('animal_id', "=", "partos.partos_madre");
+        })->where('animal_produccion', "=", 2)->get();
+
+        foreach ($animal as $ani) {
             $fecha=Carbon::parse($ani->partos_fecha);
-            $diff=$fecha->diffInDays($fecha2,false);
-            if($diff>300)
-            { 
+            $diff=$fecha->diffInDays($fecha2, false);
+            if ($diff>300) {
                 $ani->animal_produccion=3;
                 $ani->fecha_secado=$fecha->addDays(300);
                 $ani->save();
-            }    
+            }
         }
     }
 }

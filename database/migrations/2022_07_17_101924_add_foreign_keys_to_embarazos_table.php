@@ -14,9 +14,9 @@ class AddForeignKeysToEmbarazosTable extends Migration
     public function up()
     {
         Schema::table('embarazos', function (Blueprint $table) {
-            $table->foreign(['animal_madre'], 'embarazos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['animal_madre'], 'embarazos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
             $table->foreign(['monta_id'], 'embarazos_fk_2')->references(['monta_id'])->on('monta')->onUpdate('CASCADE');
-            $table->foreign(['animal_padre'], 'embarazos_fk_3')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['animal_padre'], 'embarazos_fk_3')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
         });
     }
 

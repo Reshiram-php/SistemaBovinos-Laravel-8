@@ -17,7 +17,7 @@ class AddForeignKeysToAnimalTable extends Migration
             $table->foreign(['animal_categoria'], 'animal_fk')->references(['categoria_id'])->on('categoria');
             $table->foreign(['animal_estado'], 'animal_fk_estado')->references(['estados_id'])->on('estados');
             $table->foreign(['animal_produccion'], 'animal_fk_produccion')->references(['produccion_id'])->on('produccion');
-            $table->foreign(['animal_raza'], 'animal_fk_raza')->references(['raza_id'])->on('raza');
+            $table->foreign(['animal_raza'], 'animal_fk_raza')->references(['raza_id'])->on('raza')->onDelete('set default');
         });
     }
 

@@ -15,7 +15,7 @@ class CreateRegistroPesoTable extends Migration
     {
         Schema::create('registro_peso', function (Blueprint $table) {
             $table->integer('registro_peso_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->date('registro_peso_fecha');
             $table->decimal('registro_peso_valor', 10, 0);
             $table->softDeletes();

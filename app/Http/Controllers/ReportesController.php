@@ -15,19 +15,17 @@ use App\Peso;
 use App\Vacunas;
 use Carbon\Carbon;
 use App\Ventas;
-use DB;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class ReportesController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
     public function animalreporteh($id)
     {
-
         $animales = Animal::join('categoria', 'animal.animal_categoria', '=', 'categoria.categoria_id')
             ->join('raza', 'animal.animal_raza', '=', 'raza.raza_id')
             ->join('produccion', 'animal.animal_produccion', '=', 'produccion.produccion_id')
@@ -71,12 +69,10 @@ class ReportesController extends Controller
             "partos" => $partos, "litros" => $litros, "periodo" => $periodo, "enfermedadescount" => $enfermedadescount,
             "enfermedades" => $enfermedades, "vacunas" => $vacunas, "actividades" => $actividades]);
         return $pdf->stream('reporte-animal-' . $id . '--' . $fecha . '.pdf');
-
     }
 
     public function animalreportem($id)
     {
-
         $animales = Animal::join('categoria', 'animal.animal_categoria', '=', 'categoria.categoria_id')
             ->join('raza', 'animal.animal_raza', '=', 'raza.raza_id')
             ->join('estados', 'animal.animal_estado', '=', 'estados.estados_id')
@@ -170,7 +166,7 @@ class ReportesController extends Controller
 
     public function enfermedadesindividual($id)
     {
-        $enfermedades = Enfermedades::join('enfermedades','registro_enfermedades.enfermedades_id','=','enfermedades.enfermedades_id')->where('registro_enfermedades_id', '=', $id)->first();
+        $enfermedades = Enfermedades::join('enfermedades', 'registro_enfermedades.enfermedades_id', '=', 'enfermedades.enfermedades_id')->where('registro_enfermedades_id', '=', $id)->first();
         $fecha = Carbon::now()->toDateString();
         $pdf = PDF::loadView('enfermedades.individual', ["monta" => $enfermedades]);
         return $pdf->stream('reporte-enfermedad-codigo-' . $id . '--' . $fecha . '.pdf');
@@ -198,5 +194,4 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('ventas.individual', ["monta" => $ventas]);
         return $pdf->stream('reporte-ventas-codigo-' . $id . '--' . $fecha . '.pdf');
     }
-
 }

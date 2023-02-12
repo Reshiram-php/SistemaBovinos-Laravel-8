@@ -15,7 +15,7 @@ class CreateAbortosTable extends Migration
     {
         Schema::create('abortos', function (Blueprint $table) {
             $table->integer('abortos_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->string('abortos_tipo');
             $table->date('abortos_fecha');
             $table->softDeletes();

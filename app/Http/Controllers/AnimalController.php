@@ -8,7 +8,7 @@ use App\Http\Requests\AnimalFormRequest;
 use App\Http\Requests\RazaFormRequest;
 use App\Raza;
 use DateTime;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -35,7 +35,7 @@ class AnimalController extends Controller
                     ->join('estados', 'animal.animal_estado', '=', 'estados.estados_id')
                     ->where('animal_estado', '!=', 2)
                     ->where('animal_estado', '!=', 3)
-                    ->where('animal_id','!=',"inseminación")
+                    ->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")
                     ->whereBetween('animal_nacimiento', array($request->from_date, $request->to_date))
                     ->get();
             } else {
@@ -45,7 +45,7 @@ class AnimalController extends Controller
                     ->join('estados', 'animal.animal_estado', '=', 'estados.estados_id')
                     ->where('animal_estado', '!=', 2)
                     ->where('animal_estado', '!=', 3)
-                    ->where('animal_id','!=',"inseminación")
+                    ->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")
                     ->get();
             }
             return datatables()
@@ -56,9 +56,13 @@ class AnimalController extends Controller
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                         title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                     </button></a>
-                    <a href="'.route('animal.edit',$user->animal_id).'">
+                    <a href="'.route('animal.edit', $user->animal_id).'">
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="'.route('animal.delete', $user->animal_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-trash"></i>
                     </button></a>
                     ';
                     } else {
@@ -70,8 +74,12 @@ class AnimalController extends Controller
                     <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
-                    ';}
-
+                    <a href="'.route('animal.delete', $user->animal_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-trash"></i>
+                    </button></a>
+                    ';
+                    }
                 })
                 ->addColumn('fecha', function ($fecha) {
                     return $fecha->animal_nacimiento->toDateString();
@@ -88,7 +96,6 @@ class AnimalController extends Controller
         }
 
         return view('animal.index');
-
     }
 
     /**
@@ -98,7 +105,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        $razas = Raza::where('raza_id','!=',1)->get();
+        $razas = Raza::where('raza_id', '!=', 1)->get();
 
         return view("animal.create", ["razas" => $razas]);
     }
@@ -111,7 +118,7 @@ class AnimalController extends Controller
      */
     public function store(AnimalFormRequest $request, RazaFormRequest $rrquest)
     {
-        $animales = new Animal;
+        $animales = new Animal();
 
         $animales->animal_madre = $request->get('animal_madre');
         $animales->animal_padre = $request->get('animal_padre');
@@ -120,7 +127,7 @@ class AnimalController extends Controller
         $animales->codigo_bien=$request->get('código');
         $animales->animal_arete=$request->get('arete');
         if ($request->get('raza') == "other") {
-            $razas = new Raza;
+            $razas = new Raza();
             $razas->raza_nombre = $rrquest->get('nueva_raza');
             $razas->acr = strtoupper($rrquest->get('acr'));
             $razas->save();
@@ -135,7 +142,7 @@ class AnimalController extends Controller
             $animales->animal_id = $id;
         }
 
-//output: INV-000001
+        //output: INV-000001
 
         $animales->animal_sexo = $request->get('sexo');
         $animales->animal_categoria = $this->calcategoria($request->get('sexo'), $request->get('nacimiento'), $request->get('nivel'));
@@ -144,21 +151,21 @@ class AnimalController extends Controller
         $animales->animal_estado = 1;
         $animales->animal_produccion = 1;
         $animales->animal_abierto = false;
-        if ($request->hasFile('imagen')){
+        if ($request->hasFile('imagen')) {
             $file=$request->file('imagen');
-            $file->move(public_path().'/imagenes/animales/','imagen-'.$id.'.'.$file->getClientOriginalExtension());
+            $file->move(public_path().'/imagenes/animales/', 'imagen-'.$id.'.'.$file->getClientOriginalExtension());
             $name='imagen-'.$id.'.'.$file->getClientOriginalExtension();
             $animales->animal_imagen=$name;
         }
         $animales->save();
-        
+
         return redirect('animal');
     }
 
 
     public function edit($id)
     {
-        $razas = Raza::where('raza_id','!=',1)->get();
+        $razas = Raza::where('raza_id', '!=', 1)->get();
         return view("animal.edit", ["animal" => Animal::findOrFail($id), "razas" => $razas]);
     }
 
@@ -171,7 +178,6 @@ class AnimalController extends Controller
      */
     public function update(AnimalFormRequest2 $request, RazaFormRequest $rrquest, $id)
     {
-
         $animales = Animal::findOrFail($id);
         if ($animales->codigo_bien == $request->get('código')) {
             $animales->codigo_bien= $request->get('código');
@@ -204,7 +210,7 @@ class AnimalController extends Controller
         $animales->animal_color = $request->get('color');
         $animales->animal_peso = $request->get('peso');
         if ($request->get('raza') == "other") {
-            $razas = new Raza;
+            $razas = new Raza();
             $razas->raza_nombre = $rrquest->get('nueva_raza');
             $razas->acr = strtoupper($rrquest->get('acr'));
             $razas->save();
@@ -214,31 +220,27 @@ class AnimalController extends Controller
             $animales->animal_id = $id2;
         } else {
             $raza3 = Raza::findorFail($request->get('raza'));
-            if($animales->animal_raza==$request->get('raza'))
-            {
+            if ($animales->animal_raza==$request->get('raza')) {
                 $animales->animal_raza = $request->get('raza');
+            } else {
+                $id2 = IdGenerator::generate(['table' => 'animal', 'field' => 'animal_id', 'length' => 7, 'prefix' => $raza3->acr, 'reset_on_prefix_change' => true]);
+                $animales->animal_raza = $request->get('raza');
+                $animales->animal_id = $id2;
             }
-            else{
-            $id2 = IdGenerator::generate(['table' => 'animal', 'field' => 'animal_id', 'length' => 7, 'prefix' => $raza3->acr, 'reset_on_prefix_change' => true]);
-            $animales->animal_raza = $request->get('raza');
-            $animales->animal_id = $id2;
-        }
-           
         }
         $animales->animal_sexo = $request->get('sexo');
         $animales->animal_categoria = $this->calcategoria($request->get('sexo'), $request->get('nacimiento'), $request->get('nivel'));
         $animales->animal_nacimiento = $request->get('nacimiento');
         $animales->animal_imagen = $request->get('animal_imagen');
         $animales->animal_estado = 1;
-        if ($request->hasFile('imagen')){
+        if ($request->hasFile('imagen')) {
             $file=$request->file('imagen');
-            $file->move(public_path().'/imagenes/animales/','imagen-'.$id.'.'.$file->getClientOriginalExtension());
+            $file->move(public_path().'/imagenes/animales/', 'imagen-'.$id.'.'.$file->getClientOriginalExtension());
             $name='imagen-'.$id.'.'.$file->getClientOriginalExtension();
             $animales->animal_imagen=$name;
         }
         $animales->update();
         return redirect('animal');
-
     }
 
     /**
@@ -247,7 +249,7 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $delete = Animal::findOrFail($id);
         $delete->delete();
@@ -262,23 +264,19 @@ class AnimalController extends Controller
         if ($diff->days <= 210) {
             return 1;
         } else {
-
             if ($sexo == "Hembra") {
                 if ($cat == 1) {
                     return 5;
                 } else {
                     return 3;
                 }
-
             } else {
                 if ($cat == 1) {
                     return 4;
                 } else {
                     return 2;
                 }
-
             }
         }
-
     }
 }

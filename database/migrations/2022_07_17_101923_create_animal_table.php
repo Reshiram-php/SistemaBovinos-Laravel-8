@@ -15,11 +15,11 @@ class CreateAnimalTable extends Migration
     {
         Schema::create('animal', function (Blueprint $table) {
             $table->string('animal_id')->primary();
-            $table->string('animal_madre')->nullable();
-            $table->string('animal_padre')->nullable();
+            $table->string('animal_madre')->nullable()->default('desconocido');
+            $table->string('animal_padre')->nullable()->default('desconocido');
             $table->string('animal_color');
             $table->decimal('animal_peso', 10, 0);
-            $table->integer('animal_raza');
+            $table->integer('animal_raza')->default(1);
             $table->string('animal_sexo');
             $table->integer('animal_categoria');
             $table->date('animal_nacimiento');

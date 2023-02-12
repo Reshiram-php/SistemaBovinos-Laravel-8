@@ -14,7 +14,7 @@ class AddForeignKeysToRegistroPesoTable extends Migration
     public function up()
     {
         Schema::table('registro_peso', function (Blueprint $table) {
-            $table->foreign(['animal_id'], 'registro_peso_fk_animal')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['animal_id'], 'registro_peso_fk_animal')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
         });
     }
 

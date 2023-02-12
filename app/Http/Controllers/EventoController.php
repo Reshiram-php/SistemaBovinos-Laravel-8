@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Evento;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 class EventoController extends Controller
@@ -74,7 +74,7 @@ class EventoController extends Controller
         $evento = Evento::find($id);
         $evento->startF=Carbon::createFromFormat('Y-m-d H:i:s', $evento->start)->format('Y-m-d');
         $evento->endF=Carbon::createFromFormat('Y-m-d H:i:s', $evento->end)->format('Y-m-d');
-        
+
         $evento->startH=Carbon::createFromFormat('Y-m-d H:i:s', $evento->start)->format('H:i:s');
         $evento->endH=Carbon::createFromFormat('Y-m-d H:i:s', $evento->end)->format('H:i:s');
         return response()->json($evento);

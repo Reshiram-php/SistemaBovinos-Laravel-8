@@ -15,7 +15,7 @@ class CreateRegistroOrdeOTable extends Migration
     {
         Schema::create('registro_ordeño', function (Blueprint $table) {
             $table->integer('registro_ordeño_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->decimal('registro_ordeño_litros', 10, 0);
             $table->integer('registro_ordeño_cantidad');
             $table->date('registro_ordeño_fecha');

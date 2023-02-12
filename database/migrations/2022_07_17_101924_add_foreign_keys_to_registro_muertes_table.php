@@ -14,7 +14,7 @@ class AddForeignKeysToRegistroMuertesTable extends Migration
     public function up()
     {
         Schema::table('registro_muertes', function (Blueprint $table) {
-            $table->foreign(['animal_id'], 'registro_muertes_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['animal_id'], 'registro_muertes_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
         });
     }
 

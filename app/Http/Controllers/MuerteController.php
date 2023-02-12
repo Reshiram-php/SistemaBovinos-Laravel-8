@@ -22,17 +22,12 @@ class MuerteController extends Controller
      */
     public function index(Request $request)
     {
-        if(request()->ajax())
-        {
-            if(!empty($request->from_date))
-            {
+        if (request()->ajax()) {
+            if (!empty($request->from_date)) {
                 $muerte = Muertes::join('animal', 'animal.animal_id', '=', 'registro_muertes.animal_id')
                 ->select('registro_muertes.*', 'animal.animal_sexo')->whereBetween('registro_muertes_fecha', array($request->from_date, $request->to_date))
                 ->get();
-    
-            }
-            else
-            {
+            } else {
                 $muerte = Muertes::join('animal', 'animal.animal_id', '=', 'registro_muertes.animal_id')
             ->select('registro_muertes.*', 'animal.animal_sexo')
             ->get();
@@ -49,9 +44,10 @@ class MuerteController extends Controller
                     return '<a href="' . route('animal.individualh', $user->animal_id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                         title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
-                    </button></a>';}
+                    </button></a>';
+                }
             })
-            ->addColumn('pdf', function($pdf){
+            ->addColumn('pdf', function ($pdf) {
                 return '<a href="' . route('muerte.individual', $pdf->registro_muertes_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe de la muerte"><i class="mdi mdi-file-pdf"></i>
@@ -71,7 +67,7 @@ class MuerteController extends Controller
 
         return view('muertes.index');
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,7 +76,7 @@ class MuerteController extends Controller
      */
     public function create()
     {
-        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
+        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")->orWhere('animal_estado', '>', 3)->get();
         return view('muertes.create', ["animales" => $animales]);
     }
 
@@ -92,7 +88,7 @@ class MuerteController extends Controller
      */
     public function store(MuerteFormRequest $request)
     {
-        $muertes = new Muertes;
+        $muertes = new Muertes();
         $animal = Animal::findOrFail($request->get('animal'));
         $muertes->animal_id = $request->get('animal');
         $muertes->registro_muertes_fecha = $request->get('fecha');
@@ -124,7 +120,7 @@ class MuerteController extends Controller
      */
     public function edit($id)
     {
-        $animales = Animal::where('animal_estado', '<', 2)->Where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
+        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")->orWhere('animal_estado', '>', 3)->get();
         return view('muertes.edit', ["animales" => $animales,"muerte"=>Muertes::findOrFail($id)]);
     }
 
@@ -139,9 +135,8 @@ class MuerteController extends Controller
     {
         $muertes = Muertes::findOrFail($id);
         $animal = Animal::findOrFail($request->get('animal'));
-        
-        if($muertes->animal_id!=$animal->animal_id)
-        {
+
+        if ($muertes->animal_id!=$animal->animal_id) {
             $animal2=Animal::findOrFail($muertes->animal_id);
             $animal2->animal_estado=$muertes->estado_anterior;
             $animal2->update();
@@ -150,7 +145,7 @@ class MuerteController extends Controller
         $muertes->registro_muertes_fecha = $request->get('fecha');
         $muertes->registro_muertes_causa = $request->get('causa');
         $muertes->update();
-       
+
         $animal->animal_estado = 2;
         $animal->update();
         return redirect('muertes');

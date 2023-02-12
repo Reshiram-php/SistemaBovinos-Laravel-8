@@ -14,7 +14,7 @@ class CreateRegistroActividadesTable extends Migration
     public function up()
     {
         Schema::create('registro_actividades', function (Blueprint $table) {
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->integer('actividades_id');
             $table->date('registro_actividades_fecha');
             $table->integer('registro_actividades_id', true);

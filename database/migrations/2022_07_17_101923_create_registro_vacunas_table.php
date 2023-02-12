@@ -15,7 +15,7 @@ class CreateRegistroVacunasTable extends Migration
     {
         Schema::create('registro_vacunas', function (Blueprint $table) {
             $table->integer('registro_vacunas_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->integer('vacuna_id');
             $table->date('registro_vacunas_fecha');
             $table->softDeletes();

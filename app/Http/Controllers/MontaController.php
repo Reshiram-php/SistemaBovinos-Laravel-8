@@ -7,9 +7,9 @@ use App\Http\Requests\MontaFormRequest;
 use App\Monta;
 use App\Evento;
 use App\Events\PostEvent;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,7 +21,6 @@ class MontaController extends Controller
     }
     public function index(Request $request)
     {
-
         if (request()->ajax()) {
             if (!empty($request->from_date)) {
                 $monta = Monta::whereBetween('monta_fecha', array($request->from_date, $request->to_date))->get();
@@ -51,12 +50,15 @@ class MontaController extends Controller
                 </a>
                 <a>
                     <button class="button btn btn-primary" disabled>Fracaso</button>
-                </a>';}
+                </a>';
+                        }
                     }
                 })
-                ->addColumn('pdf', function ($pdf) {
-                    if ($pdf->monta_exitosa == null) {
-                        return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
+                ->addColumn(
+                    'pdf',
+                    function ($pdf) {
+                        if ($pdf->monta_exitosa == null) {
+                            return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                 </button></a>
@@ -65,8 +67,8 @@ class MontaController extends Controller
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
                 ';
-                    } else {
-                        return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
+                        } else {
+                            return '<a href="' . route('monta.individual', $pdf->monta_id) . '">
                 <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                     title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                 </button></a>
@@ -75,15 +77,14 @@ class MontaController extends Controller
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>
                 ';
+                        }
                     }
-                }
                 )
                 ->rawColumns(['exito', 'fin', 'pdf'])
                 ->make(true);
         }
 
         return view('monta.index');
-
     }
 
     public function create()
@@ -121,7 +122,7 @@ class MontaController extends Controller
 
     public function store(MontaFormRequest $request)
     {
-        $monta = new Monta;
+        $monta = new Monta();
         $monta->monta_madre = $request->get('código_madre');
         $monta->monta_padre = $request->get('código_padre');
         $monta->monta_fecha = $request->get('fecha');
@@ -140,7 +141,7 @@ class MontaController extends Controller
         $monta2 = Monta::get()->last();
         $fecha = Carbon::parse($request->get('fecha'));
         $fecha->addDays(21);
-        
+
         $post=Evento::create([
             'id_user' => Auth::user()->id,
             'title' => "verificación de inseminación",
@@ -155,8 +156,8 @@ class MontaController extends Controller
 
     public function update(MontaFormRequest $request, $id)
     {
-        $eventoid=Evento::where('monta_id',$id)->first();
-        $notificaciones= DB::table('notifications')->where('data->evento',$eventoid->id)->delete();
+        $eventoid=Evento::where('monta_id', $id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento', $eventoid->id)->delete();
         $eventoid->delete();
         $monta = Monta::findOrFail($id);
         if ($monta->monta_madre == $request->get('código_madre')) {
@@ -193,7 +194,6 @@ class MontaController extends Controller
         $madre->animal_estado = 5;
         $madre->update();
         return redirect('monta');
-
     }
 
     public function montaevento()

@@ -15,9 +15,9 @@ class CreateEmbarazosTable extends Migration
     {
         Schema::create('embarazos', function (Blueprint $table) {
             $table->integer('embarazos_id', true);
-            $table->string('animal_madre');
+            $table->string('animal_madre')->default('desconocido');
             $table->date('embarazos_fecha');
-            $table->string('animal_padre');
+            $table->string('animal_padre')->default('desconocido');
             $table->boolean('embarazo_activo');
             $table->softDeletes();
             $table->timestamps();

@@ -18,17 +18,17 @@ class EnfermedadesController extends Controller
     public function index(Request $request)
     {
         if (request()->ajax()) {
-
             if (!empty($request->from_date)) {
-                $enfermedades = Enfermedades::join('enfermedades','registro_enfermedades.enfermedades_id','=','enfermedades.enfermedades_id')->whereBetween('enfermedad_fecha', array($request->from_date, $request->to_date))->get();
+                $enfermedades = Enfermedades::join('enfermedades', 'registro_enfermedades.enfermedades_id', '=', 'enfermedades.enfermedades_id')->whereBetween('enfermedad_fecha', array($request->from_date, $request->to_date))->get();
             } else {
-                $enfermedades = Enfermedades::join('enfermedades','registro_enfermedades.enfermedades_id','=','enfermedades.enfermedades_id')->get();
+                $enfermedades = Enfermedades::join('enfermedades', 'registro_enfermedades.enfermedades_id', '=', 'enfermedades.enfermedades_id')->get();
             }
             return datatables()->of($enfermedades)
             ->addColumn('enfermedad_nombre', function ($pdf) {
-                
             })
-                ->addColumn('pdf', function ($pdf) {
+                ->addColumn(
+                    'pdf',
+                    function ($pdf) {
                     return '<a href="' . route('enfermedades.individual', $pdf->registro_enfermedades_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
@@ -46,16 +46,16 @@ class EnfermedadesController extends Controller
     }
     public function create()
     {
-        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id','!=',"inseminación")
+        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")
             ->orWhere('animal_estado', '>', 3)->get();
-            $listado=ListaEnfermedades::get();
+        $listado=ListaEnfermedades::get();
         return view('enfermedades.create', ["animales" => $animales,"listado"=>$listado]);
     }
     public function edit($id)
     {
-        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id','!=',"inseminación")
+        $animales = Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")
 ->orWhere('animal_estado', '>', 2)->get();
-$listado=ListaEnfermedades::get();
+        $listado=ListaEnfermedades::get();
         return view('enfermedades.edit', ["animales" => $animales, "enfermedad" => Enfermedades::findOrFail($id),"listado"=>$listado]);
     }
 
@@ -67,21 +67,19 @@ $listado=ListaEnfermedades::get();
      */
     public function store(EnfermedadesFormRequest $request)
     {
-        $enfermedades = new Enfermedades;
+        $enfermedades = new Enfermedades();
         $enfermedades->animal_id = $request->get('animal');
         $enfermedades->enfermedad_fecha = $request->get('fecha');
-        if($request->get('enfermedad')=="nueva")
-        {
+        if ($request->get('enfermedad')=="nueva") {
             $validated = $request->validate([
                 'enfermedades_nombre' => 'unique:enfermedades,enfermedades_nombre',
             ]);
-            $listado= new ListaEnfermedades;
+            $listado= new ListaEnfermedades();
             $listado->enfermedades_nombre=$request->get('enfermedades_nombre');
             $listado->save();
             $listado= ListaEnfermedades::get()->last();
             $enfermedades->enfermedades_id=$listado->enfermedades_id;
-        }
-        else{
+        } else {
             $enfermedades->enfermedades_id = $request->get('enfermedad');
         }
         $enfermedades->enfermedad_estado = $request->get('estado');
@@ -98,34 +96,29 @@ $listado=ListaEnfermedades::get();
         $enfermedades = Enfermedades::findOrFail($id);
         $enfermedades->animal_id = $request->get('animal');
         $enfermedades->enfermedad_fecha = $request->get('fecha');
-        if($request->get('enfermedad')=="nueva")
-        {
+        if ($request->get('enfermedad')=="nueva") {
             $validated = $request->validate([
                 'enfermedades_nombre' => 'unique:enfermedades,enfermedades_nombre',
             ]);
-            $listado= new ListaEnfermedades;
+            $listado= new ListaEnfermedades();
             $listado->enfermedades_nombre=$request->get('enfermedades_nombre');
             $listado->save();
             $listado= ListaEnfermedades::get()->last();
             $enfermedades->enfermedades_id=$listado->enfermedades_id;
-        }
-        else{
+        } else {
             $enfermedades->enfermedades_id = $request->get('enfermedad');
         }
-        
-        if($request->get('estado')=="No Tratado")
-        {
+
+        if ($request->get('estado')=="No Tratado") {
             $enfermedades->enfermedad_fecha_tratamiento = null;
-        $enfermedades->enfermedad_tratamiento = null;
-        }
-        else{
+            $enfermedades->enfermedad_tratamiento = null;
+        } else {
             $enfermedades->enfermedad_fecha_tratamiento = $request->get('fecha_tratamiento');
             $enfermedades->enfermedad_tratamiento = $request->get('tratamiento');
         }
-        
+
         $enfermedades->enfermedad_estado = $request->get('estado');
         $enfermedades->update();
         return redirect('enfermedades');
     }
-
 }

@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Listeners;
+
 use App\User;
 use App\Notifications\Notificaciones;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
-
-class PostListener implements ShouldQueue
+class PostListener
 {
     /**
      * Create the event listener.
@@ -28,7 +28,7 @@ class PostListener implements ShouldQueue
      */
     public function handle($event)
     {
-        User::all()->each(function(User $user) use ($event){
+        User::all()->each(function (User $user) use ($event) {
             Notification::send($user, new Notificaciones($event->post));
         });
     }

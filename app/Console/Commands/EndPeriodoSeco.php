@@ -6,8 +6,9 @@ use Illuminate\Console\Command;
 use App\Animal;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
 class EndPeriodoSeco extends Command
 {
     /**
@@ -42,18 +43,16 @@ class EndPeriodoSeco extends Command
     public function handle()
     {
         $fecha2=Carbon::now();
-        $animal=Animal::where('animal_produccion','=',3)->get();
-        foreach($animal as $ani)
-        {
-        $fecha=Carbon::parse($ani->fecha_secado);
-       
-        $diff=$fecha->diffInDays($fecha2,false);
-        if($diff>60)
-            { 
-            $ani->animal_produccion=1;
-            $ani->fecha_secado=null;
-            $ani->save();
-            }    
+        $animal=Animal::where('animal_produccion', '=', 3)->get();
+        foreach ($animal as $ani) {
+            $fecha=Carbon::parse($ani->fecha_secado);
+
+            $diff=$fecha->diffInDays($fecha2, false);
+            if ($diff>60) {
+                $ani->animal_produccion=1;
+                $ani->fecha_secado=null;
+                $ani->save();
+            }
         }
     }
 }

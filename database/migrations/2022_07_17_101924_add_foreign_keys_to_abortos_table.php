@@ -14,7 +14,7 @@ class AddForeignKeysToAbortosTable extends Migration
     public function up()
     {
         Schema::table('abortos', function (Blueprint $table) {
-            $table->foreign(['animal_id'], 'abortos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['animal_id'], 'abortos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
             $table->foreign(['embarazo_id'], 'abortos_fk_1')->references(['embarazos_id'])->on('embarazos')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }

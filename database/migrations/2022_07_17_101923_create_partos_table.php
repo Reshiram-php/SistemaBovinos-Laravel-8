@@ -15,8 +15,8 @@ class CreatePartosTable extends Migration
     {
         Schema::create('partos', function (Blueprint $table) {
             $table->integer('partos_id', true);
-            $table->string('partos_madre');
-            $table->string('hijo_id');
+            $table->string('partos_madre')->default('desconocido');
+            $table->string('hijo_id')->default('desconocido');
             $table->date('partos_fecha');
             $table->string('partos_complicaciones');
             $table->string('partos_descripción')->nullable();

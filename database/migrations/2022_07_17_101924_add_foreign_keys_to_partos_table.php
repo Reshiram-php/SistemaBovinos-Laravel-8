@@ -14,8 +14,8 @@ class AddForeignKeysToPartosTable extends Migration
     public function up()
     {
         Schema::table('partos', function (Blueprint $table) {
-            $table->foreign(['hijo_id'], 'partos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
-            $table->foreign(['partos_madre'], 'partos_fk_1')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['hijo_id'], 'partos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
+            $table->foreign(['partos_madre'], 'partos_fk_1')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
             $table->foreign(['embarazo_id'], 'partos_fk_2')->references(['embarazos_id'])->on('embarazos')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }

@@ -14,8 +14,8 @@ class CreateMontaTable extends Migration
     public function up()
     {
         Schema::create('monta', function (Blueprint $table) {
-            $table->string('monta_madre');
-            $table->string('monta_padre')->nullable();
+            $table->string('monta_madre')->default('desconocido');
+            $table->string('monta_padre')->nullable()->default('desconocido');
             $table->date('monta_fecha');
             $table->string('monta_exitosa')->nullable();
             $table->softDeletes();

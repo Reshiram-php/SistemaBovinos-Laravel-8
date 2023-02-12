@@ -14,8 +14,8 @@ class AddForeignKeysToMontaTable extends Migration
     public function up()
     {
         Schema::table('monta', function (Blueprint $table) {
-            $table->foreign(['monta_madre'], 'monta_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
-            $table->foreign(['monta_padre'], 'monta_fk_2')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['monta_madre'], 'monta_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
+            $table->foreign(['monta_padre'], 'monta_fk_2')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
         });
     }
 

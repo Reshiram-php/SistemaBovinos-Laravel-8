@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\Request;    
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Vacunas;
 use Carbon\Carbon;
@@ -12,8 +12,8 @@ use App\Http\Requests\VacunasFormRequest;
 use App\Animal;
 use App\Evento;
 use App\Events\PostEvent;
-use DB;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use DateTime;
 
 class VacunasController extends Controller
@@ -28,30 +28,25 @@ class VacunasController extends Controller
         $this->middleware('auth');
     }
      public function index(Request $request)
-    {
-        if(request()->ajax()){
-       
-            if(!empty($request->from_date))
-            {
-                $data=Vacunas::join('vacunas','registro_vacunas.vacuna_id','=','vacunas.vacuna_id')->whereBetween('registro_vacunas_fecha', array($request->from_date, $request->to_date))->get();
-            }
-            else
-            {
-                $data=Vacunas::join('vacunas','registro_vacunas.vacuna_id','=','vacunas.vacuna_id')->get();
-           
-        }
-        return datatables()->of($data)
-        ->addColumn('proxima',function($proxima){
-            if($proxima->registro_vacunas_proxima==null)
-            {
-                return "Dosis Única";
-            }
-            else{
-               return $proxima->registro_vacunas_proxima->toDateString();
-            }
-        })
-        ->addColumn('pdf', function ($pdf) {
-            return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
+     {
+         if (request()->ajax()) {
+             if (!empty($request->from_date)) {
+                 $data=Vacunas::join('vacunas', 'registro_vacunas.vacuna_id', '=', 'vacunas.vacuna_id')->whereBetween('registro_vacunas_fecha', array($request->from_date, $request->to_date))->get();
+             } else {
+                 $data=Vacunas::join('vacunas', 'registro_vacunas.vacuna_id', '=', 'vacunas.vacuna_id')->get();
+             }
+             return datatables()->of($data)
+             ->addColumn('proxima', function ($proxima) {
+                 if ($proxima->registro_vacunas_proxima==null) {
+                     return "Dosis Única";
+                 } else {
+                     return $proxima->registro_vacunas_proxima->toDateString();
+                 }
+             })
+             ->addColumn(
+                 'pdf',
+                 function ($pdf) {
+                     return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
             </button></a>
@@ -59,18 +54,18 @@ class VacunasController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>';
-        }
-        )
-        ->rawColumns(['pdf','proxima'])
-        ->make(true);   
-    }
-    return view('vacunas.index');
-}
+                 }
+             )
+             ->rawColumns(['pdf','proxima'])
+             ->make(true);
+         }
+         return view('vacunas.index');
+     }
 
     public function create()
     {
-        $animales=Animal::where('animal_estado','<',2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
-        return view('vacunas.create',["animales"=>$animales]);
+        $animales=Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")->orWhere('animal_estado', '>', 3)->get();
+        return view('vacunas.create', ["animales"=>$animales]);
     }
 
     /**
@@ -81,15 +76,15 @@ class VacunasController extends Controller
      */
     public function store(VacunasFormRequest $request)
     {
-        $vacunas = new Vacunas;
+        $vacunas = new Vacunas();
         $vacunas->animal_id = $request->get('animal');
         $vacunas->vacuna_id=$request->get('vacuna');
         $vacunas->registro_vacunas_fecha=$request->get('fecha');
-        $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'),$request->get('vacuna'));
+        $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'), $request->get('vacuna'));
         $vacunas->save();
         $vacunas2 = Vacunas::get()->last();
         $nombre=ListaVacunas::findOrFail($vacunas2->vacuna_id);
-        if($vacunas2->registro_vacunas_proxima!=null){
+        if ($vacunas2->registro_vacunas_proxima!=null) {
             $post=Evento::create([
                 'id_user' => Auth::user()->id,
                 'title' => 'vacunación '.$nombre->vacuna_nombre,
@@ -100,22 +95,19 @@ class VacunasController extends Controller
             ]);
             event(new PostEvent($post));
         }
-        return redirect('vacunas'); 
+        return redirect('vacunas');
     }
 
-    protected function CalcFecha($fecha,$vacuna)
+    protected function CalcFecha($fecha, $vacuna)
     {
         $fecha=Carbon::parse($fecha);
-    
+
         $data= ListaVacunas::findOrFail($vacuna);
-        if($data->vacuna_dias==null)
-        {
-           return $fecha=null;
+        if ($data->vacuna_dias==null) {
+            return $fecha=null;
+        } else {
+            return $fecha->addDays($data->vacuna_dias);
         }
-        else{
-               return $fecha->addDays($data->vacuna_dias); 
-            }
-            
     }
     /**
      * Display the specified resource.
@@ -136,10 +128,10 @@ class VacunasController extends Controller
      */
     public function edit($id)
     {
-        $animales=Animal::where('animal_estado','<',2)->where('animal_id','!=',"inseminación")->orWhere('animal_estado','>',3)->get();
+        $animales=Animal::where('animal_estado', '<', 2)->where('animal_id', '!=', "inseminación")->where('animal_id', '!=', "desconocido")->orWhere('animal_estado', '>', 3)->get();
         $vacunas = Vacunas::findOrFail($id);
         $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
-        return view('vacunas.edit',["animales"=>$animales,"vacuna"=>$vacunas,"nombrev"=>$nombre]);
+        return view('vacunas.edit', ["animales"=>$animales,"vacuna"=>$vacunas,"nombrev"=>$nombre]);
     }
 
     /**
@@ -151,27 +143,26 @@ class VacunasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $eventoid=Evento::where('vacunas_id',$id)->first();
-        $notificaciones= DB::table('notifications')->where('data->evento',$eventoid->id)->delete();
+        $eventoid=Evento::where('vacunas_id', $id)->first();
+        $notificaciones= DB::table('notifications')->where('data->evento', $eventoid->id)->delete();
         $eventoid->delete();
         $vacunas = Vacunas::findOrFail($id);
         $vacunas->animal_id = $request->get('animal');
         $vacunas->vacuna_id=$request->get('vacuna');
         $vacunas->registro_vacunas_fecha=$request->get('fecha');
-        $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'),$request->get('vacuna'));
+        $vacunas->registro_vacunas_proxima=$this->CalcFecha($request->get('fecha'), $request->get('vacuna'));
         $vacunas->update();
         $nombre=ListaVacunas::findOrFail($vacunas->vacuna_id);
-        if($vacunas->registro_vacunas_proxima!=null){
+        if ($vacunas->registro_vacunas_proxima!=null) {
             $post=Evento::create([
                 'id_user' => Auth::user()->id,
-                'title' => 'vacunación '.$nombre->vacuna_nombre, 
+                'title' => 'vacunación '.$nombre->vacuna_nombre,
                 'descripcion' => 'vacunación '.$nombre->vacuna_nombre.' de '.$request->get('animal'),
                 'start' => $vacunas->registro_vacunas_proxima,
                 'end' =>$vacunas->registro_vacunas_proxima,
                 'vacunas_id'=> $vacunas->registro_vacunas_id,
             ]);
             event(new PostEvent($post));
-
         }
         return redirect('vacunas');
     }
@@ -191,20 +182,14 @@ class VacunasController extends Controller
     {
         $animales=Animal::findOrFail($id);
         $cat=$animales->animal_categoria;
-        if($cat==1)
-        {
-            return ListaVacunas::where('vacuna_descripcion','=',1)->orWhere('vacuna_descripcion','=',2)->orWhere('vacuna_descripcion','=',5)->orWhere('vacuna_descripcion','=',6)->get();
-        }
-        else{
-            if($cat<4)
-            {
-                return ListaVacunas::where('vacuna_descripcion',1)->orWhere('vacuna_descripcion','=',3)->orWhere('vacuna_descripcion','=',5)->orWhere('vacuna_descripcion','=',7)->get();
-            }
-            else{
-                return ListaVacunas::where('vacuna_descripcion',1)->orWhere('vacuna_descripcion','=',4)->orWhere('vacuna_descripcion','=',6)->orWhere('vacuna_descripcion','=',7)->get();
+        if ($cat==1) {
+            return ListaVacunas::where('vacuna_descripcion', '=', 1)->orWhere('vacuna_descripcion', '=', 2)->orWhere('vacuna_descripcion', '=', 5)->orWhere('vacuna_descripcion', '=', 6)->get();
+        } else {
+            if ($cat<4) {
+                return ListaVacunas::where('vacuna_descripcion', 1)->orWhere('vacuna_descripcion', '=', 3)->orWhere('vacuna_descripcion', '=', 5)->orWhere('vacuna_descripcion', '=', 7)->get();
+            } else {
+                return ListaVacunas::where('vacuna_descripcion', 1)->orWhere('vacuna_descripcion', '=', 4)->orWhere('vacuna_descripcion', '=', 6)->orWhere('vacuna_descripcion', '=', 7)->get();
             }
         }
-        
-
     }
 }

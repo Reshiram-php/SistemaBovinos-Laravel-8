@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Animal;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class UpdateVacona extends Command
@@ -43,18 +43,16 @@ class UpdateVacona extends Command
     public function handle()
     {
         $fecha2=Carbon::now();
-        $animal=Animal::where('animal_categoria','=',1)->where('animal_sexo','=','Hembra')->get();
+        $animal=Animal::where('animal_categoria', '=', 1)->where('animal_sexo', '=', 'Hembra')->get();
 
-        foreach($animal as $ani)
-        {
-        $fecha=Carbon::parse($ani->animal_nacimiento);
-       
-        $diff=$fecha->diffInDays($fecha2,false);
-        if($diff>210)
-            { 
-            $ani->animal_categoria=3;
-            $ani->save();
-            }    
+        foreach ($animal as $ani) {
+            $fecha=Carbon::parse($ani->animal_nacimiento);
+
+            $diff=$fecha->diffInDays($fecha2, false);
+            if ($diff>210) {
+                $ani->animal_categoria=3;
+                $ani->save();
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ class AddForeignKeysToRegistroActividadesTable extends Migration
     public function up()
     {
         Schema::table('registro_actividades', function (Blueprint $table) {
-            $table->foreign(['animal_id'], 'registro_eventos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE');
+            $table->foreign(['animal_id'], 'registro_eventos_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
             $table->foreign(['actividades_id'], 'registro_eventos_fk_1')->references(['actividades_id'])->on('actividades')->onUpdate('CASCADE');
         });
     }

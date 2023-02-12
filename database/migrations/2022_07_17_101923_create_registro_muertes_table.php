@@ -15,7 +15,7 @@ class CreateRegistroMuertesTable extends Migration
     {
         Schema::create('registro_muertes', function (Blueprint $table) {
             $table->integer('registro_muertes_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->date('registro_muertes_fecha');
             $table->softDeletes();
             $table->timestamps();

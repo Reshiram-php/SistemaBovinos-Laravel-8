@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 /*rutas eliminación */
 Route::get('muertes/delete/{id}', 'MuerteController@delete')->name('muertes.delete');
+Route::get('animal/delete/{id}', 'AnimalController@delete')->name('animal.delete');
 Route::get('ventas/delete/{id}', 'VentasController@delete')->name('ventas.delete');
 Route::get('usuarios/delete/{id}', 'UserController@delete')->name('usuarios.delete');
 /*rutas ciclica reproducción*/
@@ -50,11 +51,11 @@ Route::get('vacunas/individual/{id}', 'ReportesController@vacunasindividual')->n
 Route::get('actividades/individual/{id}', 'ReportesController@actividadesindividual')->name('actividades.individual');
 Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
 //Rutas get data
-Route::get('razas/datos','RazaController@datos')->name('razas.datos');
-Route::get('listadoen/datos','ListaEnfermedadesController@datos')->name('listadoen.datos');
-Route::get('listadova/datos','ListaVacunasController@datos')->name('listadova.datos');
-Route::get('peso/data','PesoController@data')->name('peso.data');
-Route::get('ordeno/data','OrdeñoController@data')->name('ordeno.data');
+Route::get('razas/datos', 'RazaController@datos')->name('razas.datos');
+Route::get('listadoen/datos', 'ListaEnfermedadesController@datos')->name('listadoen.datos');
+Route::get('listadova/datos', 'ListaVacunasController@datos')->name('listadova.datos');
+Route::get('peso/data', 'PesoController@data')->name('peso.data');
+Route::get('ordeno/data', 'OrdeñoController@data')->name('ordeno.data');
 
 
 
@@ -63,7 +64,7 @@ Route::get('ordeno/data','OrdeñoController@data')->name('ordeno.data');
 Route::resource('monta', 'MontaController');
 Route::resource('animal', 'AnimalController');
 Route::resource('ordeno', 'OrdeñoController');
-Route::resource('peso', 'PesoController');  
+Route::resource('peso', 'PesoController');
 Route::resource('nutricion', 'NutricionController');
 Route::resource('enfermedades', 'EnfermedadesController');
 Route::resource('vacunas', 'VacunasController');
@@ -89,14 +90,14 @@ Route::get('/notificaciones/{id}', 'HomeController@inotifications')->name('indiv
 
 Route::get('/analisis', [ChartsController::class, 'charts'])->name('charts2');
 
-Route::get('markAsRead',function(){
+Route::get('markAsRead', function () {
     auth()->user()->unreadNotifications->markAsRead();
     return redirect()->back();
 })->name('markAsRead');
 
 /*Rutas ciclicas exepciones*/
 
-Route::resource('embarazo', 'EmbarazoController',['except' => ['create']]);
+Route::resource('embarazo', 'EmbarazoController', ['except' => ['create']]);
 Route::resource('partos', 'PartosController', ['except' => ['create']]);
 Route::resource('abortos', 'AbortosController', ['except' => ['create']]);
 Auth::routes();
@@ -112,8 +113,7 @@ Route::get('{id}/actividades', 'ActividadesController@SelectActividades');
 
 
 //RUTAS CALENDARIO
-Route::group(['middleware' => ['auth']], function(){
-
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/evento', [App\Http\Controllers\EventoController::class, 'index']);
     Route::get('/evento/mostrar', [App\Http\Controllers\EventoController::class, 'show']);
     Route::post('/evento/agregar', [App\Http\Controllers\EventoController::class, 'store']);

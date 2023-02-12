@@ -11,9 +11,9 @@ use App\Partos;
 use App\Raza;
 use App\Evento;
 use App\Events\PostEvent;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -38,8 +38,10 @@ class PartosController extends Controller
                 $partos = Partos::get();
             }
             return datatables()->of($partos)
-                ->addColumn('pdf', function ($pdf) {
-                    return '<a href="' . route('partos.individual', $pdf->partos_id) . '">
+                ->addColumn(
+                    'pdf',
+                    function ($pdf) {
+                        return '<a href="' . route('partos.individual', $pdf->partos_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
             </button></a>
@@ -47,13 +49,12 @@ class PartosController extends Controller
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>';
-                }
+                    }
                 )
                 ->rawColumns(['pdf'])
                 ->make(true);
         }
         return view('partos.index');
-
     }
 
     public function create($id)
@@ -70,7 +71,7 @@ class PartosController extends Controller
     }
     public function store(AnimalFormRequest $request, RazaFormRequest $request2, PartosFormRequest $request3)
     {
-        $animales = new Animal;
+        $animales = new Animal();
 
         $animales->animal_madre = $request->get('animal_madre');
         $animales->animal_padre = $request->get('animal_padre');
@@ -79,7 +80,7 @@ class PartosController extends Controller
         $animales->codigo_bien = $request->get('código');
         $animales->animal_arete = $request->get('arete');
         if ($request->get('raza') == "other") {
-            $razas = new Raza;
+            $razas = new Raza();
             $razas->raza_nombre = $request2->get('nueva_raza');
             $razas->acr = strtoupper($request2->get('acr'));
             $razas->save();
@@ -102,15 +103,14 @@ class PartosController extends Controller
         $animales->animal_produccion = 1;
         $animales->save();
 
-        $partos = new Partos;
+        $partos = new Partos();
         $partos->partos_madre = $request3->get('animal_madre');
         $partos->hijo_id = $id;
         $partos->partos_fecha = $request3->get('nacimiento');
         $partos->partos_complicaciones = $request3->get('complicaciones');
-        if($request3->get('complicaciones')=="SI"){
-        $partos->partos_descripción = $request3->get('descripción');
-        }
-        else{
+        if ($request3->get('complicaciones')=="SI") {
+            $partos->partos_descripción = $request3->get('descripción');
+        } else {
             $partos->partos_descripción = "Ninguno";
         }
         $partos->embarazo_id = $request3->get('embarazo_id');
@@ -137,7 +137,7 @@ class PartosController extends Controller
 
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Inicio días abiertos",  
+            'title' => "Inicio días abiertos",
             'descripcion' => 'inicio dias abiertos de : ' . $partos2->partos_madre,
             'start' => $fecha,
             'end' =>$fecha,
@@ -146,7 +146,7 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Fin días abiertos", 
+            'title' => "Fin días abiertos",
             'descripcion' => 'final dias abiertos de : ' . $partos2->partos_madre,
             'start' => $fecha2,
             'end' =>$fecha2,
@@ -155,7 +155,7 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Inicio periodo seco", 
+            'title' => "Inicio periodo seco",
             'descripcion' => 'inicio periodo seco de : ' . $partos2->partos_madre,
             'start' => $fecha3,
             'end' =>$fecha3,
@@ -164,7 +164,7 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Fin periodo seco",  
+            'title' => "Fin periodo seco",
             'descripcion' => 'final periodo seco de : ' . $partos2->partos_madre,
             'start' => $fecha4,
             'end' =>$fecha4,
@@ -174,15 +174,15 @@ class PartosController extends Controller
 
         return redirect('partos');
     }
-    
+
 
     public function update(PartosFormRequest $request3, $id1)
     {
-        $eventosdelete= Evento::where('partos_id',$id1)->get();
-       
-        foreach($eventosdelete as $eventazo){
-        $notificaciones= DB::table('notifications')->where('data->evento',$eventazo->id)->delete();
-        $eventazo->delete();
+        $eventosdelete= Evento::where('partos_id', $id1)->get();
+
+        foreach ($eventosdelete as $eventazo) {
+            $notificaciones= DB::table('notifications')->where('data->evento', $eventazo->id)->delete();
+            $eventazo->delete();
         }
         $partos = Partos::findOrFail($id1);
         $animales = Animal::findOrFail($partos->hijo_id);
@@ -190,12 +190,11 @@ class PartosController extends Controller
         $animales->update();
         $partos->partos_fecha = $request3->get('nacimiento');
         $partos->partos_complicaciones = $request3->get('complicaciones');
-        if($request3->get('complicaciones')=="SI"){
+        if ($request3->get('complicaciones')=="SI") {
             $partos->partos_descripción = $request3->get('descripción');
-            }
-            else{
+        } else {
             $partos->partos_descripción = "Ninguno";
-            }
+        }
         $partos->embarazo_id = $request3->get('embarazo_id');
         $partos->update();
         $fecha = Carbon::parse($request3->get('nacimiento'));
@@ -207,7 +206,7 @@ class PartosController extends Controller
         $fecha4->addDays(360);
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Inicio días abiertos",  
+            'title' => "Inicio días abiertos",
             'descripcion' => 'inicio dias abiertos de : ' . $partos->partos_madre,
             'start' => $fecha,
             'end' =>$fecha,
@@ -216,7 +215,7 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Fin días abiertos", 
+            'title' => "Fin días abiertos",
             'descripcion' => 'final dias abiertos de : ' . $partos->partos_madre,
             'start' => $fecha2,
             'end' =>$fecha2,
@@ -225,7 +224,7 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Inicio periodo seco", 
+            'title' => "Inicio periodo seco",
             'descripcion' => 'inicio periodo seco de : ' . $partos->partos_madre,
             'start' => $fecha3,
             'end' =>$fecha3,
@@ -234,13 +233,13 @@ class PartosController extends Controller
         event(new PostEvent($post));
         $post=Evento::create([
             'id_user' => Auth::user()->id,
-            'title' => "Fin periodo seco",  
+            'title' => "Fin periodo seco",
             'descripcion' => 'final periodo seco de : ' . $partos->partos_madre,
             'start' => $fecha4,
             'end' =>$fecha4,
             'partos_id'=> $partos->partos_id,
         ]);
         event(new PostEvent($post));
-       return redirect('partos');
+        return redirect('partos');
     }
 }

@@ -15,7 +15,7 @@ class AddForeignKeysToRegistroVacunasTable extends Migration
     {
         Schema::table('registro_vacunas', function (Blueprint $table) {
             $table->foreign(['animal_id'], 'registro_vacunas_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
-            $table->foreign(['vacuna_id'], 'registro_vacunas_fk_1')->references(['vacuna_id'])->on('vacunas')->onUpdate('CASCADE');
+            $table->foreign(['vacuna_id'], 'registro_vacunas_fk_1')->references(['vacuna_id'])->on('vacunas')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

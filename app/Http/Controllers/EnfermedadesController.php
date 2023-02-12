@@ -7,6 +7,7 @@ use App\Enfermedades;
 use App\Http\Requests\EnfermedadesFormRequest;
 use App\ListaEnfermedades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class EnfermedadesController extends Controller
@@ -29,15 +30,32 @@ class EnfermedadesController extends Controller
                 ->addColumn(
                     'pdf',
                     function ($pdf) {
-                    return '<a href="' . route('enfermedades.individual', $pdf->registro_enfermedades_id) . '">
+                        $us=Auth::user();
+                        if ($us->can('enfermedades.delete')) {
+                            return '<a href="' . route('enfermedades.individual', $pdf->registro_enfermedades_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
             </button></a>
             <a href="' . route('enfermedades.edit', $pdf->registro_enfermedades_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="'.route('enfermedades.delete', $pdf->registro_enfermedades_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de enfermedad '.$pdf->registro_enfermedades_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="eliminar"><i class="ti-trash"></i>
                     </button></a>';
-                }
+                        } else {
+                            return '<a href="' . route('enfermedades.individual', $pdf->registro_enfermedades_id) . '">
+                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                                title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
+                            </button></a>
+                            <a href="' . route('enfermedades.edit', $pdf->registro_enfermedades_id) . '">
+                                <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="editar"><i class="ti-pencil"></i>
+                                    </button></a>
+                                    ';
+                        }
+                    }
                 )
                 ->rawColumns(['pdf'])
                 ->make(true);
@@ -119,6 +137,12 @@ class EnfermedadesController extends Controller
 
         $enfermedades->enfermedad_estado = $request->get('estado');
         $enfermedades->update();
+        return redirect('enfermedades');
+    }
+    public function delete($id)
+    {
+        $enfermedades = Enfermedades::findOrFail($id);
+        $enfermedades->delete();
         return redirect('enfermedades');
     }
 }

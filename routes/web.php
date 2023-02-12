@@ -23,8 +23,18 @@ Route::get('/', function () {
 });
 
 /*rutas eliminación */
+Route::group(['middleware' => ['role:Admin']], function () {
+    Route::get('animal/delete/{id}', 'AnimalController@delete')->name('animal.delete');
+    Route::get('peso/delete/{id}', 'PesoController@delete')->name('peso.delete');
+    Route::get('ordeno/delete/{id}', 'OrdeñoController@delete')->name('ordeno.delete');
+    Route::get('listadoen/delete/{id}', 'ListaEnfermedadesController@delete')->name('listadoen.delete');
+    Route::get('listadova/delete/{id}', 'ListaVacunasController@delete')->name('listadova.delete');
+    Route::get('enfermedades/delete/{id}', 'EnfermedadesController@delete')->name('enfermedades.delete');
+    Route::get('vacunas/delete/{id}', 'VacunasController@delete')->name('vacunas.delete');
+});
+
+Route::get('clientes/delete/{id}', 'ClienteController@delete')->name('clientes.delete');
 Route::get('muertes/delete/{id}', 'MuerteController@delete')->name('muertes.delete');
-Route::get('animal/delete/{id}', 'AnimalController@delete')->name('animal.delete');
 Route::get('ventas/delete/{id}', 'VentasController@delete')->name('ventas.delete');
 Route::get('usuarios/delete/{id}', 'UserController@delete')->name('usuarios.delete');
 /*rutas ciclica reproducción*/
@@ -36,10 +46,13 @@ Route::get('{id}/monta', 'MontaController@MontaFracaso')->name('monta.fracaso');
 
 
 /*rutas PDF*/
-
+Route::group(['middleware' => ['role:Admin']], function () {
+    Route::get('muertes/individual/{id}', 'ReportesController@muerteindividual')->name('muerte.individual');
+    Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
+});
 Route::get('animal/individualm/{id}', 'ReportesController@animalreportem')->name('animal.individualm');
 Route::get('animal/individualh/{id}', 'ReportesController@animalreporteh')->name('animal.individualh');
-Route::get('muertes/individual/{id}', 'ReportesController@muerteindividual')->name('muerte.individual');
+
 Route::get('monta/individual/{id}', 'ReportesController@montaindividual')->name('monta.individual');
 Route::get('embarazo/individual/{id}', 'ReportesController@gestacionindividual')->name('embarazo.individual');
 Route::get('partos/individual/{id}', 'ReportesController@partoindividual')->name('partos.individual');
@@ -49,7 +62,6 @@ Route::get('peso/individual/{id}', 'ReportesController@pesoindividual')->name('p
 Route::get('enfermedades/individual/{id}', 'ReportesController@enfermedadesindividual')->name('enfermedades.individual');
 Route::get('vacunas/individual/{id}', 'ReportesController@vacunasindividual')->name('vacunas.individual');
 Route::get('actividades/individual/{id}', 'ReportesController@actividadesindividual')->name('actividades.individual');
-Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
 //Rutas get data
 Route::get('razas/datos', 'RazaController@datos')->name('razas.datos');
 Route::get('listadoen/datos', 'ListaEnfermedadesController@datos')->name('listadoen.datos');

@@ -15,12 +15,12 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->integer('ventas_id', true);
-            $table->string('animal_id');
+            $table->string('animal_id')->default('desconocido');
             $table->decimal('ventas_valor', 10, 0);
             $table->date('ventas_fecha');
             $table->softDeletes();
             $table->timestamps();
-            $table->string('cedula_cliente', 10);
+            $table->string('cedula_cliente', 10)->default('1111111111');
             $table->integer('estado_anterior')->nullable();
         });
     }

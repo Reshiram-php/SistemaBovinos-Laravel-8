@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ListaVacunas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class ListaVacunasController extends Controller
@@ -27,20 +28,37 @@ class ListaVacunasController extends Controller
         $listado = ListaVacunas::join('descripciones', 'vacunas.vacuna_descripcion', '=', 'descripciones.descripcion_id')->get();
 
         return datatables()->of($listado)
-            ->addColumn('periodicidad', function ($pdf) {
-                if ($pdf->vacuna_dias == null) {
-                    return 'Dosis Única';
-                } else {
-                    return $pdf->vacuna_dias.' días';
+            ->addColumn(
+                'periodicidad',
+                function ($pdf) {
+                    if ($pdf->vacuna_dias == null) {
+                        return 'Dosis Única';
+                    } else {
+                        return $pdf->vacuna_dias.' días';
+                    }
                 }
-            }
             )
-            ->addColumn('pdf', function ($pdf) {
-                return '<a href="' . route('listadova.edit', $pdf->vacuna_id) . '">
+            ->addColumn(
+                'pdf',
+                function ($pdf) {
+                    $us=Auth::user();
+                    if ($us->can('listadova.delete')) {
+                        return '<a href="' . route('listadova.edit', $pdf->vacuna_id) . '">
+                <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="'.route('listadova.delete', $pdf->vacuna_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar la vacuna '.$pdf->vacuna_nombre.'? todos los registros con esta vacuna serán borrados, esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="eliminar"><i class="ti-trash"></i>
+                    </button></a>
+                    ';
+                    } else {
+                        return '<a href="' . route('listadova.edit', $pdf->vacuna_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
                     </button></a>';
-            }
+                    }
+                }
             )
             ->rawColumns(['pdf'])
             ->toJson();
@@ -53,14 +71,12 @@ class ListaVacunasController extends Controller
             'categoria'=>'required',
             'periodicidad'=>'required_if:dosis,cada_cierto_tiempo',
         ]);
-        $vacuna = new ListaVacunas;
+        $vacuna = new ListaVacunas();
         $vacuna->vacuna_nombre = $request->get('vacuna_nombre');
         $vacuna->tipo_dosis=$request->get('dosis');
-        if($request->get('dosis')=="unica")
-        {
+        if ($request->get('dosis')=="unica") {
             $vacuna->vacuna_dias=null;
-        }
-        else{
+        } else {
             $vacuna->vacuna_dias=$request->get('periodicidad');
         }
         $vacuna->vacuna_descripcion= $request->get('categoria');
@@ -83,17 +99,21 @@ class ListaVacunasController extends Controller
         ]);
 
         $vacuna = ListaVacunas::findOrFail($id);
-      $vacuna->vacuna_nombre = $request->get('vacuna_nombre');
-      $vacuna->tipo_dosis=$request->get('dosis');
-        if($request->get('dosis')=="unica")
-        {
+        $vacuna->vacuna_nombre = $request->get('vacuna_nombre');
+        $vacuna->tipo_dosis=$request->get('dosis');
+        if ($request->get('dosis')=="unica") {
             $vacuna->vacuna_dias=null;
-        }
-        else{
+        } else {
             $vacuna->vacuna_dias=$request->get('periodicidad');
         }
         $vacuna->vacuna_descripcion= $request->get('categoria');
-        $enfermedades->update();
-        return redirect('listadoen');
+        $vacuna->update();
+        return redirect('listadova');
+    }
+    public function delete($id)
+    {
+        $vacuna= ListaVacunas::findOrFail($id);
+        $vacuna->delete();
+        return redirect('listadova');
     }
 }

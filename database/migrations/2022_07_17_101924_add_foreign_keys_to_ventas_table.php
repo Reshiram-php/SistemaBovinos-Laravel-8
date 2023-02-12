@@ -15,7 +15,7 @@ class AddForeignKeysToVentasTable extends Migration
     {
         Schema::table('ventas', function (Blueprint $table) {
             $table->foreign(['animal_id'], 'ventas_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
-            $table->foreign(['cedula_cliente'], 'ventas_fk_2')->references(['cedula'])->on('cliente')->onUpdate('CASCADE');
+            $table->foreign(['cedula_cliente'], 'ventas_fk_2')->references(['cedula'])->on('cliente')->onUpdate('CASCADE')->onDelete('set default');
         });
     }
 

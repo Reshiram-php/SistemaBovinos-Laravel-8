@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
 
@@ -51,8 +52,10 @@ class AnimalController extends Controller
             return datatables()
                 ->of($animales)
                 ->addColumn('btn', function ($user) {
-                    if ($user->animal_sexo == "Macho") {
-                        return '<a href="' . route('animal.individualm', $user->animal_id) . '">
+                    $us=Auth::user();
+                    if ($us->can('animal.delete')) {
+                        if ($user->animal_sexo == "Macho") {
+                            return '<a href="' . route('animal.individualm', $user->animal_id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                         title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                     </button></a>
@@ -62,11 +65,11 @@ class AnimalController extends Controller
                     </button></a>
                     <a href="'.route('animal.delete', $user->animal_id).'">
                     <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="editar"><i class="ti-trash"></i>
+                        title="eliminar"><i class="ti-trash"></i>
                     </button></a>
                     ';
-                    } else {
-                        return '<a href="' . route('animal.individualh', $user->animal_id) . '">
+                        } else {
+                            return '<a href="' . route('animal.individualh', $user->animal_id) . '">
                     <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                         title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
                     </button></a>
@@ -76,9 +79,32 @@ class AnimalController extends Controller
                     </button></a>
                     <a href="'.route('animal.delete', $user->animal_id).'">
                     <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el animal '.$user->animal_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
-                        title="editar"><i class="ti-trash"></i>
+                        title="eliminar"><i class="ti-trash"></i>
                     </button></a>
                     ';
+                        }
+                    } else {
+                        if ($user->animal_sexo == "Macho") {
+                            return '<a href="' . route('animal.individualm', $user->animal_id) . '">
+                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
+                    </button></a>
+                    <a href="'.route('animal.edit', $user->animal_id).'">
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    ';
+                        } else {
+                            return '<a href="' . route('animal.individualh', $user->animal_id) . '">
+                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="Informe Individual del animal"><i class="mdi mdi-file-pdf"></i>
+                    </button></a>
+                    <a href="' . route('animal.edit', $user->animal_id) . '">
+                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    ';
+                        }
                     }
                 })
                 ->addColumn('fecha', function ($fecha) {

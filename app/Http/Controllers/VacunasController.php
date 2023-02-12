@@ -46,14 +46,31 @@ class VacunasController extends Controller
              ->addColumn(
                  'pdf',
                  function ($pdf) {
-                     return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
+                     $us=Auth::user();
+                     if ($us->can('vacunas.delete')) {
+                         return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
             </button></a>
             <a href="' . route('vacunas.edit', $pdf->registro_vacunas_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="'.route('vacunas.delete', $pdf->registro_vacunas_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de vacunación '.$pdf->registro_vacunas_id.'? esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="eliminar"><i class="ti-trash"></i>
                     </button></a>';
+                     } else {
+                         return '<a href="' . route('vacunas.individual', $pdf->registro_vacunas_id) . '">
+                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                            title="Informe del parto"><i class="mdi mdi-file-pdf"></i>
+                        </button></a>
+                        <a href="' . route('vacunas.edit', $pdf->registro_vacunas_id) . '">
+                            <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                                    title="editar"><i class="ti-pencil"></i>
+                                </button></a>
+                                ';
+                     }
                  }
              )
              ->rawColumns(['pdf','proxima'])
@@ -173,9 +190,11 @@ class VacunasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $vacunas = Vacunas::findOrFail($id);
+        $vacunas->delete();
+        return redirect('vacunas');
     }
 
     public function SelectVacunas($id)

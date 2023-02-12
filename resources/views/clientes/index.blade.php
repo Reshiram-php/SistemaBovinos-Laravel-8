@@ -114,9 +114,18 @@ SGB - Clientes
                                 data-target="#exampleModalCenter2-{{ $cliente->cedula }}">Editar</button>
 
                         </div>
+                        @can('clientes.delete')
                         <div class="col-6">
+
                             <h4><i class="ti-trash"></i></h4>
-                            <p class="my-2">Eliminar</p>
+
+
+
+                            <a href="{{ route('clientes.delete',$cliente->cedula) }}">
+                                <button type="button" class="btn btn-primary-rgba"
+                                    onclick="return confirm('¿Seguro desea eliminar el cliente con cédula {{ $cliente->cedula }}')">Eliminar</button>
+                            </a>
+                            @endcan
                         </div>
                     </div>
                 </div>

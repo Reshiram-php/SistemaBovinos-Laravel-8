@@ -15,6 +15,7 @@ class AddForeignKeysToRegistroEnfermedadesTable extends Migration
     {
         Schema::table('registro_enfermedades', function (Blueprint $table) {
             $table->foreign(['animal_id'], 'registro_enfermedades_fk')->references(['animal_id'])->on('animal')->onUpdate('CASCADE')->onDelete('set default');
+            $table->foreign(['enfermedades_id'], 'registro_enfermedades_fk1')->references(['enfermedades_id'])->on('enfermedades')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

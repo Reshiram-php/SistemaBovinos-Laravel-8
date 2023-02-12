@@ -10,6 +10,7 @@ use App\Http\Requests\PesoFormRequest;
 use App\Animal;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class PesoController extends Controller
 {
@@ -29,14 +30,31 @@ class PesoController extends Controller
             ->addColumn(
                 'pdf',
                 function ($pdf) {
-                    return '<a href="' . route('peso.individual', $pdf->registro_peso_id) . '">
+                    $us=Auth::user();
+                    if ($us->can('peso.delete')) {
+                        return '<a href="' . route('peso.individual', $pdf->registro_peso_id) . '">
             <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
                 title="Informe del peso"><i class="mdi mdi-file-pdf"></i>
             </button></a>
             <a href="' . route('peso.edit', $pdf->registro_peso_id) . '">
                 <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
                         title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    <a href="'.route('peso.delete', $pdf->registro_peso_id).'">
+                    <button class="btn btn-warning btn-sm" onclick="return confirm(\'¿Seguro desea eliminar el registro de peso '.$pdf->registro_peso_id.'? el animal regresará al peso anterior registrado esta opción es irreversible\')" data-toggle="tooltip" data-placement="top"
+                        title="eliminar"><i class="ti-trash"></i>
                     </button></a>';
+                    } else {
+                        return '<a href="' . route('peso.individual', $pdf->registro_peso_id) . '">
+            <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                title="Informe del peso"><i class="mdi mdi-file-pdf"></i>
+            </button></a>
+            <a href="' . route('peso.edit', $pdf->registro_peso_id) . '">
+                <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                        title="editar"><i class="ti-pencil"></i>
+                    </button></a>
+                    ';
+                    }
                 }
             )
             ->rawColumns(['pdf'])
@@ -144,8 +162,13 @@ class PesoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $peso= Peso::findOrFail($id);
+        $animal2=Animal::findOrFail($peso->animal_id);
+        $animal2->animal_peso=$peso->peso_anterior;
+        $animal2->update();
+        $peso->delete();
+        return redirect('peso');
     }
 }

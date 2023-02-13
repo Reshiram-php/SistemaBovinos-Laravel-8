@@ -13,7 +13,10 @@ class MuerteController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:muertes.index');
+        $this->middleware('can:muertes.index')->only('index');
+        $this->middleware('can:muertes.create')->only('create');
+        $this->middleware('can:muertes.edit')->only('edit');
+        $this->middleware('can:muertes.delete')->only('delete');
     }
     /**
      * Display a listing of the resource.

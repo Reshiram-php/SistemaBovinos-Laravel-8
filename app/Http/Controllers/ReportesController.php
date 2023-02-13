@@ -23,6 +23,8 @@ class ReportesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:muerte.individual')->only('muerteindividual');
+        $this->middleware('can:ventas.individual')->only('ventasindividual');
     }
     public function animalreporteh($id)
     {

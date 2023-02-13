@@ -17,12 +17,12 @@
                         role="tab" aria-controls="v-pills-ecommerce" aria-selected="false"><img
                             src="{{ asset('assets/images/svg-icon/insertar.svg') }}" class="img-fluid" alt="eCommerce"
                             data-toggle="tooltip" data-placement="top" title="Gestión del Ganado"></a>
-                    @can('usuarios.index')
+
                     <a class="nav-link" id="v-pills-hospital-tab" data-toggle="pill" href="#v-pills-hospital" role="tab"
                         aria-controls="v-pills-hospital" aria-selected="false"><img
                             src="{{ asset('assets/images/svg-icon/ventas.svg') }}" class="img-fluid" alt="Hospital"
                             data-toggle="tooltip" data-placement="top" title="Administración"></a>
-                    @endcan
+
 
 
 
@@ -142,18 +142,23 @@
                         aria-labelledby="v-pills-hospital-tab">
                         <ul class="vertical-menu">
                             <li>
-                                <h5 class="menu-title">Gestiones</h5>
+                                <h5 class="menu-title">Control Personas</h5>
                             </li>
-
+                            @can('ventas.index')
                             <li><a href="{{url('/ventas')}}"><img
                                         src="{{ asset('assets/images/svg-icon/calender.svg') }}" class="img-fluid"
                                         alt="appointments">Ventas</a></li>
+                            @endcan
+                            @can('clientes.index')
                             <li><a href="{{url('/clientes')}}"><img
                                         src="{{ asset('assets/images/svg-icon/doctor.svg') }}" class="img-fluid"
                                         alt="doctors">Clientes</a></li>
+                            @endcan
+                            @can('usuarios.index')
                             <li><a href="{{url('/usuarios')}}"><img
                                         src="{{ asset('assets/images/svg-icon/doctor.svg') }}" class="img-fluid"
                                         alt="doctors">Usuarios</a></li>
+                            @endcan
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="v-pills-uikits" role="tabpanel" aria-labelledby="v-pills-uikits-tab">

@@ -26,6 +26,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'listadova.delete'])->assignRole($role1);
         Permission::create(['name'=>'vacunas.delete'])->assignRole($role1);
         Permission::create(['name'=>'actividades.delete'])->assignRole($role1);
+        Permission::create(['name'=>'permisos.index'])->assignRole($role1);
 
 
         Permission::create(['name'=>'muertes.index'])->assignRole($role1);

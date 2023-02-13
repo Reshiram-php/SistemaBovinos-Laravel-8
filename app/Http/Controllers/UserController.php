@@ -13,7 +13,10 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:usuarios.index');
+        $this->middleware('can:usuarios.index')->only('index');
+        $this->middleware('can:usuarios.create')->only('create');
+        $this->middleware('can:usuarios.edit')->only('edit');
+        $this->middleware('can:usuarios.delete')->only('delete');
     }
 
     public function index(Request $request)

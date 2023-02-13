@@ -12,6 +12,7 @@ class ListaEnfermedadesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:listandoen.delete')->only('delete');
     }
 
     public function index()

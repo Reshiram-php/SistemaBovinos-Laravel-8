@@ -15,6 +15,7 @@ class EnfermedadesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:enfermedades.delete')->only('delete');
     }
     public function index(Request $request)
     {

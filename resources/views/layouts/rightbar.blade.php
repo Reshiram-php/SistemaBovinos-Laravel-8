@@ -58,15 +58,6 @@
                     <ul class="list-inline mb-0">
 
                         <li class="list-inline-item">
-                            <div class="settingbar">
-                                <a href="javascript:void(0)" id="infobar-settings-open" class="infobar-icon">
-                                    <img src="{{ asset('assets/images/svg-icon/settings.svg') }}" class="img-fluid"
-                                        alt="settings">
-                                    <span class="live-icon">3</span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="list-inline-item">
                             <div class="notifybar">
                                 <div class="dropdown">
                                     <a class="dropdown-toggle infobar-icon" href="#" role="button" id="notoficationlink"

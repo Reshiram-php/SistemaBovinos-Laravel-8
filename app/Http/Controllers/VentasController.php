@@ -20,7 +20,10 @@ class VentasController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:ventas.index');
+        $this->middleware('can:ventas.index')->only('index');
+        $this->middleware('can:ventas.create')->only('create');
+        $this->middleware('can:ventas.edit')->only('edit');
+        $this->middleware('can:ventas.delete')->only('delete');
     }
     public function index(Request $request)
     {

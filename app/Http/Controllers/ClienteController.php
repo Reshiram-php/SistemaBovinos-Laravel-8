@@ -13,7 +13,10 @@ class ClienteController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:clientes.index');
+        $this->middleware('can:clientes.index')->only('index');
+        $this->middleware('can:clientes.store')->only('store');
+        $this->middleware('can:clientes.update')->only('update');
+        $this->middleware('can:clientes.delete')->only('delete');
     }
     public function Index()
     {

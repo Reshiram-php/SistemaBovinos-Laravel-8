@@ -23,16 +23,16 @@ Route::get('/', function () {
 });
 
 /*rutas eliminación */
-Route::group(['middleware' => ['role:Admin']], function () {
-    Route::get('animal/delete/{id}', 'AnimalController@delete')->name('animal.delete');
-    Route::get('peso/delete/{id}', 'PesoController@delete')->name('peso.delete');
-    Route::get('ordeno/delete/{id}', 'OrdeñoController@delete')->name('ordeno.delete');
-    Route::get('listadoen/delete/{id}', 'ListaEnfermedadesController@delete')->name('listadoen.delete');
-    Route::get('listadova/delete/{id}', 'ListaVacunasController@delete')->name('listadova.delete');
-    Route::get('enfermedades/delete/{id}', 'EnfermedadesController@delete')->name('enfermedades.delete');
-    Route::get('vacunas/delete/{id}', 'VacunasController@delete')->name('vacunas.delete');
-    Route::get('actividades/delete/{id}', 'ActividadesController@delete')->name('actividades.delete');
-});
+
+Route::get('animal/delete/{id}', 'AnimalController@delete')->name('animal.delete');
+Route::get('peso/delete/{id}', 'PesoController@delete')->name('peso.delete');
+Route::get('ordeno/delete/{id}', 'OrdeñoController@delete')->name('ordeno.delete');
+Route::get('listadoen/delete/{id}', 'ListaEnfermedadesController@delete')->name('listadoen.delete');
+Route::get('listadova/delete/{id}', 'ListaVacunasController@delete')->name('listadova.delete');
+Route::get('enfermedades/delete/{id}', 'EnfermedadesController@delete')->name('enfermedades.delete');
+Route::get('vacunas/delete/{id}', 'VacunasController@delete')->name('vacunas.delete');
+Route::get('actividades/delete/{id}', 'ActividadesController@delete')->name('actividades.delete');
+
 
 Route::get('clientes/delete/{id}', 'ClienteController@delete')->name('clientes.delete');
 Route::get('muertes/delete/{id}', 'MuerteController@delete')->name('muertes.delete');
@@ -47,10 +47,10 @@ Route::get('{id}/monta', 'MontaController@MontaFracaso')->name('monta.fracaso');
 
 
 /*rutas PDF*/
-Route::group(['middleware' => ['role:Admin']], function () {
-    Route::get('muertes/individual/{id}', 'ReportesController@muerteindividual')->name('muerte.individual');
-    Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
-});
+
+Route::get('muertes/individual/{id}', 'ReportesController@muerteindividual')->name('muerte.individual');
+Route::get('ventas/individual/{id}', 'ReportesController@ventasindividual')->name('ventas.individual');
+
 Route::get('animal/individualm/{id}', 'ReportesController@animalreportem')->name('animal.individualm');
 Route::get('animal/individualh/{id}', 'ReportesController@animalreporteh')->name('animal.individualh');
 
@@ -73,7 +73,7 @@ Route::get('ordeno/data', 'OrdeñoController@data')->name('ordeno.data');
 
 
 /*rutas Controllers*/
-
+Route::resource('permisos', 'PermisosController');
 Route::resource('monta', 'MontaController');
 Route::resource('animal', 'AnimalController');
 Route::resource('ordeno', 'OrdeñoController');
@@ -125,6 +125,8 @@ Route::get('{id}/nutricion', 'NutricionController@Calculo');
 Route::get('{id}/ordeno', 'OrdeñoController@FechaOrdeño');
 Route::get('{id}/actividades', 'ActividadesController@SelectActividades');
 
+Route::post('permisos/revoke-permission-to-role', 'PermisosController@revokePermissionToRole');
+Route::post('permisos/give-permission-to-role', 'PermisosController@givePermissionToRole');
 
 
 

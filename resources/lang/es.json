@@ -785,6 +785,7 @@
     "usuarios.create": "Crear Nuevo Usuario ",
     "usuarios.edit": "Editar Usuarios",
     "usuarios.delete": "Eliminar Usuarios",
-    "Permission": "Permisos"
+    "Permission": "Permisos",
+    "permisos.index": "Ver y Otorgar Permisos"
 
 }

@@ -24,7 +24,7 @@ Los siguientes pasos son para computadoras personales, en caso de instalación e
 1) Ejecutar el comando:
 ```bash
 composer install
-```bash
+```
 2) Crear una base de datos en su SGBD
  
 3) En la carpeta raíz crear un archivo .env y pegar el siguiente contenido, modificando los valores entre parentesis por los correspondientes a sus servicios.

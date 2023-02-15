@@ -91,30 +91,141 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
     php artisan schedule:work
 ```
  
-# Que ofrece el sistema
+# QUE OFRECE EL SISTEMA
 
 El sistema cuenta con las siguientes carcterísticas:
+
 ## SECCIÓN GANADO
 ### Gestión de razas
 - Ver listado de razas
 - Ingreso de nuevas razas
 - Editar razas
-- 
+
 ### Gestión de Bovinos
 - Ver el listado de bovinos
 - ingresar animal
 - editar animal
 - eliminar animal
+- reporte general del animal
+
+### Cambio autómatico
+- Cambio de categoría (ternero,torete,toro,vacona,vaca) dependiendo de la edad del animal.
+- Finalización de días abiertos (100 días despues del parto)
+- Inicio de periodo seco (300 días después del parto)
+- Finalización de periodo seco (60 días después del inicio del periodo seco)
+- 
 ## SECCIÓN REPRODUCTIVA
+### Gestión de montas
+- Ver listado de montas
+- Ingreso de Montas ->(solo permite el ingreso de animales aptos para la monta, es decir hembras vaconas o vacas que no se encuentren inseminadas, gestando o en sus                          días abiertos; y machos toretes o toros y la posibilidad de escoger inseminación como reemplazo del macho)
+- Editar montas -> (Solo mientras la monta no haya sido finalizada)
+- Finalización de montas
+- Reporte de la monta
+- Notificación de verificación de inseminación.
 
-## Code of Conduct
+### Gestión de gestaciones
+- Ver listado de gestaciones
+- Finalización de gestaciones
+- Reporte de la gestación
+- Notificación de revisión ginecológica y fecha aproximada de parto (solo si la monta fue finalizada con éxito)
+### Gestión de partos
+- Ver listado de partos
+- Editar parto
+- Reporte de parto
+- inicio de días abiertos y cambio al estado productivo: Lactando automático.
+### Gestión de abortos
+- Ver listado de abortos
+- Editar aborto
+- Reporte de aborto
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## SECCIÓN PRODUCTIVA 
+### Gestión de ordeños
+- Ver listado de registro de ordeños
+- Ingreso de ordeños ->(Solo vacas que tengan el estado productivo lactando, fecha limites de ingreso: desde el parto hasta 300 días después del mismo)
+- Editar Ordeño
+- Eliminar Ordeño
+- Reporte de Ordeño
 
-## Security Vulnerabilities
+## SECCIÓN NUTRICIÓN
+### Gestión de pesos
+- Ver listado de registro de pesos
+- Ingreso de nuevo registro
+- Editar registro de peso
+- Eliminar registro de peso
+- Reporte de peso
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Cálculos de alimentación
+- Cálculo de materia seca y pasto dependiendo del peso del animal
 
-## License
+## SECCIÓN SANITARIA
+### Gestión de enfermedades
+- Ver listado de enfermedades
+- Ingreso de nueva enfermedad
+- Editar enfermedad
+- Eliminar enfermedad
+### Gestión de registros de enfermedades
+- Ver listado de registro de enfermedades
+- Ingresar nuevo registro
+- Editar nuevo registro
+- Eliminar registro
+- Reporte de registro de enfermedad
+### Gestión de vacunas
+- Ver listado de vacunas
+- Ingresar nueva vacuna
+- Editar vacuna
+- Eliminar vacuna
+### Gestión de registro de vacunas
+- Ver listado de registro de vacunas
+- Ingresar nuevo registro
+- Editar nuevo registro
+- Eliminar registro
+- Reporte de registro de vacunas
+- Notificación de proxima vacuna si esta tiene periodicidad
+### Gestión de Actividades
+- Ver listado de registro de actividades
+- Ingresar nuevo registro
+- Editar nuevo registro
+- Eliminar registro
+- Reporte de registro de actividades
+- Notificación de proxima actividad si esta tiene periodicidad
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## SECCIÓN DE MORTALIDAD
+### Gestión de muerte
+- Ver listado de muertes
+- Ingreso de nueva muerte
+- Editar muerte
+- Eliminar muerte->(Solo se elimina el estado muerto, el animal regresa al lisstado principal con su anterior estado).
+- Reporte de muerte
+- Reporte del animal
+## SECCIÓN ADMINISTRATIVA
+### Gestión de ventas
+- Ver listado de ventas
+- Ingreso de nueva venta
+- Editar venta
+- Eliminar venta->(Solo se elimina el estado vendido, el animal regresa al lisstado principal con su anterior estado).
+- Reporte de venta
+
+### Gestión de clientes
+- Ver listado de clientes
+- Ingreso de clientes
+- Editar clientes
+- Eliminar cliente->(Si el cliente tenía ventas a su nombre,estas pasan a nombre de "desconocido")
+
+### Gestión de Usuarios
+- Ver listado de usuarios
+- Ingreso de usuario
+- Editar usuario
+- Eliminar usuario
+
+### Gestión de permisos
+-Ver listado de permisos
+-asignar o revocar permisos de acuerdo al rol del usuario
+### OTRAS FUNCIONES
+- Calendario para eventos y sistema de notificaciones
+- Recuperación de Usuarios por medio de correo
+- Gráficos estadisticos de ordeño y peso
+- Gráficos estadisticos sobre el estado general del ganado.
+- Sistema responsive para adaptarse a cualquier tipo de pantalla.
+
+<div align="center">REALIZADO POR KEVIN PACHECO Y WILSON GARCÍA</div>
+

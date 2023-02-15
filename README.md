@@ -227,5 +227,7 @@ El sistema cuenta con las siguientes carcterísticas:
 - Gráficos estadisticos sobre el estado general del ganado.
 - Sistema responsive para adaptarse a cualquier tipo de pantalla.
 
+
+
 <div align="center">Realizado por Kevin Pacheco y Wilson García</div>
 

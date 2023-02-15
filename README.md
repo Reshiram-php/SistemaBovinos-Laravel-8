@@ -11,7 +11,7 @@
 
 Para la utilización de este sistema, la pc o el servidor necesita los siguientes elementos:
 
-Se incluyen los enlaces oficiales para la descarga:
+*Se incluyen los enlaces oficiales para la descarga:*
 
 Composer: <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a>
 
@@ -21,14 +21,14 @@ PHP versión 8.1 en adelante : <a href="https://www.php.net/downloads.php">https
 
 Los siguientes pasos son para computadoras personales, en caso de instalación en un servidor dedicado guiarse con la documentación de dicho servidor.
 
-1) Ejecutar el comando:
+**1) Ejecutar el comando:**
 ```bash
 composer install
 ```
-2) Crear una base de datos en su SGBD
+**2) Crear una base de datos en su SGBD**
  
-3) En la carpeta raíz crear un archivo .env y pegar el siguiente contenido, modificando los valores entre parentesis por los correspondientes a sus servicios.
-   En caso de no contar con un servicio de correo puede utilizar el servicio de gmail <a href="https://noted.lol/setup-gmail-smtp-sending-2023/"> aquí un artículo que indica como</a>
+**3) En la carpeta raíz crear un archivo .env y pegar el siguiente contenido, modificando los valores entre parentesis por los correspondientes a sus servicios.
+   En caso de no contar con un servicio de correo puede utilizar el servicio de gmail <a href="https://noted.lol/setup-gmail-smtp-sending-2023/"> aquí un artículo que indica como</a>**
 ```bash
 APP_NAME=Laravel
 APP_ENV=local
@@ -78,15 +78,15 @@ MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
 
-4) Ejecutar las migraciones a la base de datos con el siguiente comando:
+**4) Ejecutar las migraciones a la base de datos con el siguiente comando:**
 ```bash
     php artisan migrate:fresh --seed
 ```
-5) Ejecutar el proyecto con el siguiente comando:
+**5) Ejecutar el proyecto con el siguiente comando:**
 ```bash
     php artisan serve
 ```
-6) Para la actualización automática de categorías periodo seco y demás mientras el sistema este activo ejecutar el siguiente comando
+**6) Para la actualización automática de categorías periodo seco y demás mientras el sistema este activo ejecutar el siguiente comando**
 ```bash
     php artisan schedule:work
 ```

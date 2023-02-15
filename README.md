@@ -76,20 +76,20 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
-```bash
+```
 
 4) Ejecutar las migraciones a la base de datos con el siguiente comando:
     ```bash
     php artisan migrate:fresh --seed
-        ```bash
+        ```
 5) Ejecutar el proyecto con el siguiente comando:
     ```bash
     php artisan serve
-        ```bash
+        ```
 6) Para la actualización automática de categorías periodo seco y demás mientras el sistema este activo ejecutar el siguiente comando
     ```bash
     php artisan schedule:work
-        ```bash
+        ```
  
 
 ## Laravel Sponsors

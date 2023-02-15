@@ -213,6 +213,9 @@ El sistema cuenta con las siguientes carcterísticas:
 ### Gestión de permisos
 - Ver listado de permisos
 - Asignar o revocar permisos de acuerdo al rol del usuario
+
+*el sistema tiene dos roles: Admin y User, el rol user no tiene permitido ningún tipo de eliminación, iteractuar con la gestión de muertes, ventas, clientes, usuarios y permisos *
+
 ### OTRAS FUNCIONES
 - Calendario para eventos y sistema de notificaciones
 - Recuperación de Usuarios por medio de correo

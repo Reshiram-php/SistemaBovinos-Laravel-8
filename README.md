@@ -126,9 +126,10 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - [Appoly](https://www.appoly.co.uk)
 - [OP.GG](https://op.gg)
 
-## Contributing
+## Que ofrece el sistema
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+El sistema cuenta con las siguientes carcterísticas:
+##
 
 ## Code of Conduct
 

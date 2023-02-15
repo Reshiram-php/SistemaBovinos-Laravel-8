@@ -13,9 +13,9 @@ Para la utilización de este sistema, la pc o el servidor necesita los siguiente
 
 Se incluyen los enlaces oficiales para la descarga:
 
-Composer: <a href="https://getcomposer.org/download/"></a>
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-PHP versión 8.1 en adelante : <a href="https://www.php.net/downloads.php"></a>
+Composer: <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a>
+
+PHP versión 8.1 en adelante : <a href="https://www.php.net/downloads.php">https://www.php.net/downloads.php</a>
 
 ## INSTALACIÓN
 

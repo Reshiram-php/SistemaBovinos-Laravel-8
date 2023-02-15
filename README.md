@@ -22,9 +22,9 @@ PHP versión 8.1 en adelante : <a href="https://www.php.net/downloads.php">https
 Los siguientes pasos son para computadoras personales, en caso de instalación en un servidor dedicado guiarse con la documentación de dicho servidor.
 
 1) Ejecutar el comando:
-    ```bash
+```bash
 composer install
-    ```bash
+```bash
 2) Crear una base de datos en su SGBD
  
 3) En la carpeta raíz crear un archivo .env y pegar el siguiente contenido, modificando los valores entre parentesis por los correspondientes a sus servicios.

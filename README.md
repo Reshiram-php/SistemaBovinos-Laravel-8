@@ -113,7 +113,7 @@ El sistema cuenta con las siguientes carcterísticas:
 - Finalización de días abiertos (100 días despues del parto)
 - Inicio de periodo seco (300 días después del parto)
 - Finalización de periodo seco (60 días después del inicio del periodo seco)
-- 
+
 ## SECCIÓN REPRODUCTIVA
 ### Gestión de montas
 - Ver listado de montas
@@ -218,8 +218,8 @@ El sistema cuenta con las siguientes carcterísticas:
 - Eliminar usuario
 
 ### Gestión de permisos
--Ver listado de permisos
--asignar o revocar permisos de acuerdo al rol del usuario
+- Ver listado de permisos
+- Asignar o revocar permisos de acuerdo al rol del usuario
 ### OTRAS FUNCIONES
 - Calendario para eventos y sistema de notificaciones
 - Recuperación de Usuarios por medio de correo
@@ -227,5 +227,5 @@ El sistema cuenta con las siguientes carcterísticas:
 - Gráficos estadisticos sobre el estado general del ganado.
 - Sistema responsive para adaptarse a cualquier tipo de pantalla.
 
-<div align="center">REALIZADO POR KEVIN PACHECO Y WILSON GARCÍA</div>
+<div align="center">Realizado por Kevin Pacheco y Wilson García</div>
 

@@ -42,8 +42,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'ventas.individual'])->assignRole($role1);
 
         Permission::create(['name'=>'clientes.index'])->assignRole($role1);
-        Permission::create(['name'=>'clientes.create'])->assignRole($role1);
-        Permission::create(['name'=>'clientes.edit'])->assignRole($role1);
+        Permission::create(['name'=>'clientes.store'])->assignRole($role1);
+        Permission::create(['name'=>'clientes.update'])->assignRole($role1);
         Permission::create(['name'=>'clientes.delete'])->assignRole($role1);
 
         Permission::create(['name'=>'usuarios.index'])->assignRole($role1);

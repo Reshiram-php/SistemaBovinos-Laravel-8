@@ -143,11 +143,21 @@ SGB - Clientes
 <!-- FIN Contentbar -->
 @endsection
 @section('script')
+@if (session('error')=='1')
 <script>
-    @if (count($errors) > 0)
     $('#exampleModalCenter').modal('show');
-    @endif
 </script>
+@endif
+
+@if (session('error')=='0')
+<script>
+    a= {{ Session::get('ids') }};
+    $('#exampleModalCenter2-'+a+'').modal('show');
+
+</script>
+@endif
+
+
 @if (session('eliminacion')=='ok')
 <script>
     Swal.fire(

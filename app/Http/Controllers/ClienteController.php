@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Cliente;
 use App\Http\Requests\ClienteFormRequest2;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
@@ -23,24 +24,35 @@ class ClienteController extends Controller
         $cliente=Cliente::where('cedula', '!=', '1111111111')->get();
         return view("clientes.index", ["clientes" => $cliente]);
     }
-    public function store(ClienteFormRequest2 $request)
+    public function store(Request $request)
     {
+        $validator= Validator::make($request->all(), ['cedula'=>'required|min:10|max:10',
+        'nombre'=>'required',]);
+        if ($validator->fails()) {
+            return redirect()->back()->with(['error'=>'1'])->withErrors($validator)->withInput();
+        }
+
         $cliente= new Cliente();
         $cliente->nombre=$request->get('nombre');
         $cliente->cedula=$request->get('cedula');
         $cliente->teléfono= $request->get('telefono');
         $cliente->save();
-        return redirect()->back()->with('creacion', 'ok');
+        return redirect()->back()->with(['creacion'=> 'ok']);
     }
 
-    public function update(ClienteFormRequest2 $request, $id)
+    public function update(Request $request, $id)
     {
+        $validator= Validator::make($request->all(), ['cedula'=>'required|min:10|max:10',
+        'nombre'=>'required',]);
+        if ($validator->fails()) {
+            return redirect()->back()->with(['error'=>'0','ids'=>$id])->withErrors($validator)->withInput();
+        }
         $cliente= Cliente::findOrFail($id);
         $cliente->nombre=$request->get('nombre');
         $cliente->cedula=$request->get('cedula');
         $cliente->teléfono= $request->get('telefono');
         $cliente->update();
-        return redirect()->back()->with('actualizacion', 'ok');
+        return redirect()->back()->with(['actualizacion'=>'ok']);
     }
 
     public function delete($id)

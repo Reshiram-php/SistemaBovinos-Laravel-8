@@ -75,7 +75,7 @@ SGB - Ordeño
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
                     <label>Cantidad de veces Ordeñada</label>
-                    <input type="number" name="cantidad"  class="form-control" value="{{ old('cantidad') }}" placeholder="veces ordeñada"
+                    <input type="number" min="1" name="cantidad"  class="form-control" value="{{ old('cantidad') }}" placeholder="veces ordeñada"
                         data-toggle="tooltip" data-placement="top" title="Veces ordeñada en el día">
                 </div>
             </div>

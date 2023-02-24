@@ -110,7 +110,7 @@ SGB - Analisis
             </div>
           </div>
           <div class="card-body">
-            <div id="chart_ruega"></div>
+            <div id="grafico-leche"></div>
           </div>
         </div>
       </div>
@@ -137,9 +137,7 @@ SGB - Analisis
             </table>
 
           </div>
-          <div class="card-body">
-            <div id="grafico-leche"></div>
-          </div>
+          
         </div>
       </div>
 

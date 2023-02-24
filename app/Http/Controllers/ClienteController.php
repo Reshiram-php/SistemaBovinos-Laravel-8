@@ -13,6 +13,7 @@ class ClienteController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:clientes.index')->only('index');
         $this->middleware('can:clientes.store')->only('store');

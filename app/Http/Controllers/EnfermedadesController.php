@@ -14,6 +14,7 @@ class EnfermedadesController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:enfermedades.delete')->only('delete');
     }

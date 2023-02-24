@@ -22,6 +22,7 @@ class ReportesController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:muerte.individual')->only('muerteindividual');
         $this->middleware('can:ventas.individual')->only('ventasindividual');

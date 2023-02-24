@@ -19,6 +19,7 @@ class VentasController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:ventas.index')->only('index');
         $this->middleware('can:ventas.create')->only('create');

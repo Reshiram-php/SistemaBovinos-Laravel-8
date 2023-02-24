@@ -25,6 +25,7 @@ class VacunasController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:vacunas.delete')->only('delete');
     }

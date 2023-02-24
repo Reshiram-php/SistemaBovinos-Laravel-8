@@ -7,6 +7,9 @@ SGB - Peso
 <link href="{{ asset('assets/plugins/ion-rangeSlider/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('rightbar-content')
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 <!-- Start Breadcrumbbar -->
 <div class="breadcrumbbar">
     <div class="row align-items-center">
@@ -250,6 +253,8 @@ SGB - Peso
       'success'
     )
 </script>
+
+Session::save();
 @endif
 @if (session('creacion')=='ok')
 <script>
@@ -258,6 +263,7 @@ SGB - Peso
       'El registro de peso ha sido creado correctamente.',
       'success'
     )
+   
 </script>
 @endif
 @if (session('actualizacion')=='ok')
@@ -267,6 +273,7 @@ SGB - Peso
       'El registro de peso ha sido actualizado correctamente.',
       'success'
     )
+   
 </script>
 @endif
 @endsection

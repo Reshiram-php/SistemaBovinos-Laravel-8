@@ -11,6 +11,7 @@ class NutricionController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
     }
     public function index()

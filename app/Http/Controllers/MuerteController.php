@@ -12,6 +12,7 @@ class MuerteController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:muertes.index')->only('index');
         $this->middleware('can:muertes.create')->only('create');

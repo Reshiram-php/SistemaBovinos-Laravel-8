@@ -20,6 +20,7 @@ class ActividadesController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('preventBackHistory');
         $this->middleware('auth');
         $this->middleware('can:actividades.delete')->only('delete');
     }
